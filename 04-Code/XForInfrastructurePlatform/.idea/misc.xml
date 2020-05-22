@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/XFor.Passport.Manage/pom.xml" />
+        <option value="$PROJECT_DIR$/XFor.Payment.Manage/pom.xml" />
+        <option value="$PROJECT_DIR$/XFor.Infrastructure.Core/pom.xml" />
+        <option value="$PROJECT_DIR$/XFor.Order.Manage/pom.xml" />
+        <option value="$PROJECT_DIR$/XFor.Product.Manage/pom.xml" />
+        <option value="$PROJECT_DIR$/XFor.File.Manage/pom.xml" />
+        <option value="$PROJECT_DIR$/XFor.Email.Manage/pom.xml" />
+        <option value="$PROJECT_DIR$/XFor.Sms.Manage/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="false" project-jdk-name="14" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

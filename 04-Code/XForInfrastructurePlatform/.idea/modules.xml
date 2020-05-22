@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/XFor.Email.Manage/XFor.Email.Manage.iml" filepath="$PROJECT_DIR$/XFor.Email.Manage/XFor.Email.Manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.File.Manage/XFor.File.Manage.iml" filepath="$PROJECT_DIR$/XFor.File.Manage/XFor.File.Manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Infrastructure.Core/XFor.Infrastructure.Core.iml" filepath="$PROJECT_DIR$/XFor.Infrastructure.Core/XFor.Infrastructure.Core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Order.Manage/XFor.Order.Manage.iml" filepath="$PROJECT_DIR$/XFor.Order.Manage/XFor.Order.Manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Passport.Manage/XFor.Passport.Manage.iml" filepath="$PROJECT_DIR$/XFor.Passport.Manage/XFor.Passport.Manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Payment.Manage/XFor.Payment.Manage.iml" filepath="$PROJECT_DIR$/XFor.Payment.Manage/XFor.Payment.Manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Product.Manage/XFor.Product.Manage.iml" filepath="$PROJECT_DIR$/XFor.Product.Manage/XFor.Product.Manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Sms.Manage/XFor.Sms.Manage.iml" filepath="$PROJECT_DIR$/XFor.Sms.Manage/XFor.Sms.Manage.iml" />
+    </modules>
+  </component>
+</project>
