@@ -20,8 +20,10 @@ public interface IProductRepository {
 
     boolean existsProductBySID(ServiceContext sctx, String sid);
 
-    void saveProduct(ServiceContext sctx, Product product);
+    boolean saveProduct(ServiceContext sctx, Product product);
 
-    void deleteProductBySID(ServiceContext sctx, String sid);
+    boolean saveProductPicturesContent(ServiceContext sctx, String sid, String productPicturesContent);
+
+    boolean deleteProductBySID(ServiceContext sctx, String sid);
 }
 

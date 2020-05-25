@@ -23,31 +23,51 @@ public class MyBatisProductRepository implements IProductRepository {
 
     @Override
     public Product getProductBySID(ServiceContext sctx, String sid) {
-        return null;
+        Product result = this.productMyBatisDAO.findFirstBySID(sid);
+        return result;
     }
 
     @Override
     public List<Product> getProductsByFilter(ServiceContext sctx, String filter) {
-        return null;
+        List<Product> result = this.productMyBatisDAO.findAllByFilter(filter);
+        return result;
     }
 
     @Override
     public String getProductPicturesContentByProductSID(ServiceContext sctx, String productSID) {
-        return null;
+        String result = this.productMyBatisDAO.findPicturesBySID((productSID));
+        return result;
     }
 
     @Override
     public boolean existsProductBySID(ServiceContext sctx, String sid) {
-        return false;
+        boolean result = this.productMyBatisDAO.existsBySID(sid);
+        return result;
     }
 
     @Override
-    public void saveProduct(ServiceContext sctx, Product product) {
-
+    public boolean saveProduct(ServiceContext sctx, Product product) {
+        int result = this.productMyBatisDAO.updateById(product);
+        if(result <= 0) {
+            result = this.productMyBatisDAO.insert(product);
+        }
+        return result > 0;
     }
 
     @Override
-    public void deleteProductBySID(ServiceContext sctx, String sid) {
+    public boolean saveProductPicturesContent(ServiceContext sctx, String sid, String productPicturesContent) {
+        Product product = this.productMyBatisDAO.findFirstBySID(sid);
+        if (product == null) {
+            return false;
+        }
+        product.setPictures(productPicturesContent);
+        int result = this.productMyBatisDAO.updateById(product);
+        return result > 0;
+    }
 
+    @Override
+    public boolean deleteProductBySID(ServiceContext sctx, String sid) {
+        int result = this.productMyBatisDAO.deleteBySID(sid);
+        return result > 0;
     }
 }

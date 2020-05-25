@@ -2,18 +2,32 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="XFor.Infrastructure.Core" />
+        <module name="xfor-infrastructure-core" />
+        <module name="xfor-email-manage" />
         <module name="XFor.Product.Manage" />
+        <module name="xfor-file-manage" />
         <module name="XFor.Email.Manage" />
         <module name="XFor.File.Manage" />
         <module name="XFor.Sms.Manage" />
+        <module name="xfor-product-manage" />
+        <module name="xfor-sms-manage" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="xfor-email-manage" target="13" />
+      <module name="xfor-file-manage" target="13" />
+      <module name="xfor-infrastructure-core" target="13" />
+      <module name="xfor-order-manage" target="13" />
+      <module name="xfor-passport-manage" target="13" />
+      <module name="xfor-payment-manage" target="13" />
+      <module name="xfor-product-manage" target="13" />
+      <module name="xfor-sms-manage" target="13" />
       <module name="XFor.Email.Manage" target="13" />
       <module name="XFor.File.Manage" target="13" />
       <module name="XFor.Infrastructure.Core" target="13" />
@@ -34,6 +48,11 @@
       <module name="XFor.Payment.Manage" options="" />
       <module name="XFor.Product.Manage" options="-parameters" />
       <module name="XFor.Sms.Manage" options="-parameters" />
+      <module name="xfor-email-manage" options="-parameters" />
+      <module name="xfor-file-manage" options="-parameters" />
+      <module name="xfor-infrastructure-core" options="-parameters" />
+      <module name="xfor-product-manage" options="-parameters" />
+      <module name="xfor-sms-manage" options="-parameters" />
     </option>
   </component>
 </project>

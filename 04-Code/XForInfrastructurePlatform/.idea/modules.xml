@@ -10,6 +10,14 @@
       <module fileurl="file://$PROJECT_DIR$/XFor.Payment.Manage/XFor.Payment.Manage.iml" filepath="$PROJECT_DIR$/XFor.Payment.Manage/XFor.Payment.Manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/XFor.Product.Manage/XFor.Product.Manage.iml" filepath="$PROJECT_DIR$/XFor.Product.Manage/XFor.Product.Manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/XFor.Sms.Manage/XFor.Sms.Manage.iml" filepath="$PROJECT_DIR$/XFor.Sms.Manage/XFor.Sms.Manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Email.Manage/xfor-email-manage.iml" filepath="$PROJECT_DIR$/XFor.Email.Manage/xfor-email-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.File.Manage/xfor-file-manage.iml" filepath="$PROJECT_DIR$/XFor.File.Manage/xfor-file-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Infrastructure.Core/xfor-infrastructure-core.iml" filepath="$PROJECT_DIR$/XFor.Infrastructure.Core/xfor-infrastructure-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Order.Manage/xfor-order-manage.iml" filepath="$PROJECT_DIR$/XFor.Order.Manage/xfor-order-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Passport.Manage/xfor-passport-manage.iml" filepath="$PROJECT_DIR$/XFor.Passport.Manage/xfor-passport-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Payment.Manage/xfor-payment-manage.iml" filepath="$PROJECT_DIR$/XFor.Payment.Manage/xfor-payment-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Product.Manage/xfor-product-manage.iml" filepath="$PROJECT_DIR$/XFor.Product.Manage/xfor-product-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Sms.Manage/xfor-sms-manage.iml" filepath="$PROJECT_DIR$/XFor.Sms.Manage/xfor-sms-manage.iml" />
     </modules>
   </component>
 </project>
