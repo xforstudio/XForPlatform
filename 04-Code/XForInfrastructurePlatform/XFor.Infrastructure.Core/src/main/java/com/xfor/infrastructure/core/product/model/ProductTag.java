@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 商品标签
  */
@@ -22,6 +24,8 @@ public class ProductTag {
     private String name;
     @TableField("PARENT_CODE")
     private int parentCode;
+
+    private List<ProductTag> subTags;
 
     public ProductTag() {
     }

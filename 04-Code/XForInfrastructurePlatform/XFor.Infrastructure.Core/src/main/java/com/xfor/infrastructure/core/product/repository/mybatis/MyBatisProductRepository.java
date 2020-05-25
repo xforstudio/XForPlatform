@@ -34,8 +34,8 @@ public class MyBatisProductRepository implements IProductRepository {
     }
 
     @Override
-    public String getProductPicturesContentByProductSID(ServiceContext sctx, String productSID) {
-        String result = this.productMyBatisDAO.findPicturesBySID((productSID));
+    public String getProductPicturesContentBySID(ServiceContext sctx, String sid) {
+        String result = this.productMyBatisDAO.findPicturesBySID(sid);
         return result;
     }
 

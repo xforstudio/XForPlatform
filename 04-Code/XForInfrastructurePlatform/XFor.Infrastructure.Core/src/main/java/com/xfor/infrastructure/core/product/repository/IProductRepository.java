@@ -16,7 +16,7 @@ public interface IProductRepository {
 
     List<Product> getProductsByFilter(ServiceContext sctx, String filter);
 
-    String getProductPicturesContentByProductSID(ServiceContext sctx, String productSID);
+    String getProductPicturesContentBySID(ServiceContext sctx, String sid);
 
     boolean existsProductBySID(ServiceContext sctx, String sid);
 
