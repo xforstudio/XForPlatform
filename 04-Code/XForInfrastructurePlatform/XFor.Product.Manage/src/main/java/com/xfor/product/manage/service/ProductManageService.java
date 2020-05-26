@@ -32,7 +32,7 @@ public class ProductManageService {
         throw new UnsupportedOperationException();
     }
 
-    public List<Product> getProductsByFilter(String filter) {
+    public List<Product> getProductsByFilter(String productStoreSID, String filter) {
         throw new UnsupportedOperationException();
     }
 }

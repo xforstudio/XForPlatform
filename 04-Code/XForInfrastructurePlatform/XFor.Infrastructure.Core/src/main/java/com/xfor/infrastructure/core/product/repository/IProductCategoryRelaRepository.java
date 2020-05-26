@@ -12,11 +12,13 @@ import java.util.List;
 @Component
 public interface IProductCategoryRelaRepository {
 
-    List<ProductCategoryRela> getProductCategoryRelasByCategoryCode(ServiceContext sctx, int categoryCode);
+    List<ProductCategoryRela> getProductCategoryRelasByCategoryCode(
+            ServiceContext sctx, String productStoreSID, int categoryCode);
 
-    List<ProductCategoryRela> getProductCategoryRelasByProductCode(ServiceContext sctx, String productCode);
+    List<ProductCategoryRela> getProductCategoryRelasByProductCode(
+            ServiceContext sctx, String productStoreSID, String productCode);
 
-    void saveProductCategoryRela(ServiceContext sctx, ProductCategoryRela productCategoryRela);
+    boolean saveProductCategoryRela(ServiceContext sctx, ProductCategoryRela productCategoryRela);
 
     boolean deleteProductCategoryRelaBySID(ServiceContext sctx, String sid);
 }

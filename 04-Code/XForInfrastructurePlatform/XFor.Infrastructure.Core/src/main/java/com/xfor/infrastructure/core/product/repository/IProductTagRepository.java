@@ -16,7 +16,7 @@ public interface IProductTagRepository {
 
     ProductTag getProductTagByCode(ServiceContext sctx, String productStoreSID, int code);
 
-    void saveProductTag(ServiceContext sctx, ProductTag productTag);
+    boolean saveProductTag(ServiceContext sctx, ProductTag productTag);
 
     boolean deleteProductTagBySID(ServiceContext sctx, String sid);
 

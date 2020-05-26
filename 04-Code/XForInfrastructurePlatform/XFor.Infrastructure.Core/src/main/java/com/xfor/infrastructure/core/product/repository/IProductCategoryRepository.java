@@ -16,7 +16,7 @@ public interface IProductCategoryRepository {
 
     ProductCategory getProductCategoryByCode(ServiceContext sctx, String productStoreSID, int code);
 
-    void saveProductCategory(ServiceContext sctx, ProductCategory productCategory);
+    boolean saveProductCategory(ServiceContext sctx, ProductCategory productCategory);
 
     boolean deleteProductCategoryBySID(ServiceContext sctx, String sid);
 

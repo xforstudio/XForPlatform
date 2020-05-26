@@ -1,5 +1,6 @@
 package com.xfor.infrastructure.core.product.repository.mybatis;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xfor.infrastructure.core.common.service.ServiceContext;
 import com.xfor.infrastructure.core.product.model.ProductStore;
 import com.xfor.infrastructure.core.product.repository.IProductStoreRepository;
@@ -22,26 +23,39 @@ public class MyBatisProductStoreRepository implements IProductStoreRepository {
 
     @Override
     public ProductStore getProductStoreBySID(ServiceContext sctx, String sid) {
-        return null;
+        ProductStore result = this.productStoreMyBatisDAO.selectById(sid);
+        return result;
     }
 
     @Override
     public List<ProductStore> getProductStoresByOwner(ServiceContext sctx, String owner) {
-        return null;
+        QueryWrapper<ProductStore> wrapper = new QueryWrapper<>();
+        wrapper.eq("OWNER", owner);
+        List<ProductStore> result = this.productStoreMyBatisDAO.selectList(wrapper);
+        return result;
     }
 
     @Override
     public List<ProductStore> getProductStoresByFilter(ServiceContext sctx, String owner, String filter) {
-        return null;
+        QueryWrapper<ProductStore> wrapper = new QueryWrapper<>();
+        wrapper.eq("OWNER", owner)
+                .and(w -> w.like("NAME", filter).or().like("DESC", filter));
+        List<ProductStore> result = this.productStoreMyBatisDAO.selectList(wrapper);
+        return result;
     }
 
     @Override
-    public void saveProductStore(ServiceContext sctx, ProductStore productStore) {
-
+    public boolean saveProductStore(ServiceContext sctx, ProductStore productStore) {
+        int result = this.productStoreMyBatisDAO.updateById(productStore);
+        if(result <= 0) {
+            result = this.productStoreMyBatisDAO.insert(productStore);
+        }
+        return result > 0;
     }
 
     @Override
     public boolean deleteProductStoreBySID(ServiceContext sctx, String sid) {
-        return false;
+        int result = this.productStoreMyBatisDAO.deleteById(sid);
+        return result > 0;
     }
 }

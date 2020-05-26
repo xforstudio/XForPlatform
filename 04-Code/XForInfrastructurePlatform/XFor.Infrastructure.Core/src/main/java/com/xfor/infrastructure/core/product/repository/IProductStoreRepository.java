@@ -18,7 +18,7 @@ public interface IProductStoreRepository {
 
     List<ProductStore> getProductStoresByFilter(ServiceContext sctx, String owner, String filter);
 
-    void saveProductStore(ServiceContext sctx, ProductStore productStore);
+    boolean saveProductStore(ServiceContext sctx, ProductStore productStore);
 
     boolean deleteProductStoreBySID(ServiceContext sctx, String sid);
 }
