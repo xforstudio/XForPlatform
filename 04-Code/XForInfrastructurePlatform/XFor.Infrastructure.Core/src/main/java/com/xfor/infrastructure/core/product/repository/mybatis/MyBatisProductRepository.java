@@ -24,15 +24,15 @@ public class MyBatisProductRepository implements IProductRepository {
 
 
     @Override
-    public Product getProductBySID(ServiceContext sctx, String sid) {
+    public Product getProductBySid(ServiceContext sctx, String sid) {
         Product result = this.productMyBatisDAO.selectById(sid);
         return result;
     }
 
     @Override
-    public List<Product> getProductsByFilter(ServiceContext sctx, String productStoreSID, String filter) {
+    public List<Product> getProductsByFilter(ServiceContext sctx, String productStoreSid, String filter) {
         QueryWrapper<Product> wrapper = new QueryWrapper<>();
-        wrapper.eq("PRODUCT_STORE_SID", productStoreSID)
+        wrapper.eq("PRODUCT_STORE_SID", productStoreSid)
                 .and(w -> w.like("CODE", filter).or().like("NAME", filter).or().like("DESC", filter));
         List<Product> result = this.productMyBatisDAO.selectList(wrapper);
         return result;
@@ -48,9 +48,25 @@ public class MyBatisProductRepository implements IProductRepository {
     }
 
     @Override
-    public boolean deleteProductBySID(ServiceContext sctx, String sid) {
+    public boolean deleteProductBySid(ServiceContext sctx, String sid) {
         int result = this.productMyBatisDAO.deleteById(sid);
         return result > 0;
+    }
+
+    @Override
+    public int getProductCountByCode(ServiceContext sctx, String productStoreSid, String code) {
+        QueryWrapper<Product> wrapper = new QueryWrapper<>();
+        wrapper.eq("PRODUCT_STORE_SID", productStoreSid).eq("CODE", code);
+        int result = this.productMyBatisDAO.selectCount(wrapper);
+        return result;
+    }
+
+    @Override
+    public int getProductCountByName(ServiceContext sctx, String productStoreSid, String name) {
+        QueryWrapper<Product> wrapper = new QueryWrapper<>();
+        wrapper.eq("PRODUCT_STORE_SID", productStoreSid).eq("NAME", name);
+        int result = this.productMyBatisDAO.selectCount(wrapper);
+        return result;
     }
 
     @Override

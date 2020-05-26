@@ -15,7 +15,7 @@ public class ProductCategory {
     @TableId("SID")
     private String sid;
     @TableField("PRODUCT_STORE_SID")
-    private String productStoreSID;
+    private String productStoreSid;
     @TableField("CODE")
     private int code;
     @TableField("NAME")

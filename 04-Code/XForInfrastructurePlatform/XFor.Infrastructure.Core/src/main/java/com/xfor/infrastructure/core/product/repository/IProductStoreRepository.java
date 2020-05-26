@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public interface IProductStoreRepository {
 
-    ProductStore getProductStoreBySID(ServiceContext sctx, String sid);
+    ProductStore getProductStoreBySid(ServiceContext sctx, String sid);
 
     List<ProductStore> getProductStoresByOwner(ServiceContext sctx, String owner);
 
@@ -20,5 +20,5 @@ public interface IProductStoreRepository {
 
     boolean saveProductStore(ServiceContext sctx, ProductStore productStore);
 
-    boolean deleteProductStoreBySID(ServiceContext sctx, String sid);
+    boolean deleteProductStoreBySid(ServiceContext sctx, String sid);
 }

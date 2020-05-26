@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.xfor.infrastructure.core.common.model.SID;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,6 +17,23 @@ import java.util.List;
 @TableName("PRODUCT")
 public class Product {
 
+    public static String _newSID() {
+        return SID._newSID();
+    }
+
+    public static Product _create(String productStoreSid, String code, String name, String desc,
+                                  float price, int saleState) {
+        Product product = new Product();
+        product.setSid(_newSID());
+        product.setName(name);
+        product.setDesc(desc);
+        product.setCode(code);
+        product.setPrice(price);
+        product.setSaleState(saleState);
+        product.setProductStoreSid(productStoreSid);
+        return product;
+    }
+
     @TableId("SID")
     private String sid;
     @TableField("CODE")
@@ -24,10 +42,10 @@ public class Product {
     private String name;
     @TableField("DESC")
     private String desc;
-    @TableField("PICTURES")
-    private String pictures;
     @TableField("PRICE")
     private float price;
+    @TableField("PICTURES")
+    private String pictures;
     @TableField("SALE_STATE")
     private int saleState;
     @TableField("CREATE_TIME")
@@ -36,8 +54,12 @@ public class Product {
     @TableField("TAGS")
     private List<String> tags;
     @TableField("PRODUCT_STORE_SID")
-    private String productStoreSID;
+    private String productStoreSid;
 
     public Product() {
+    }
+
+    public void validate() {
+        return;
     }
 }

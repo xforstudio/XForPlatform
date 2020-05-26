@@ -12,7 +12,8 @@
     <artifactId>xfor-product-manage</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>xfor-product-manage</name>
-    <description>Demo project for Spring Boot</description>
+    <packaging>pom</packaging>
+    <description></description>
 
     <properties>
         <java.version>14</java.version>

@@ -1,6 +1,7 @@
 package com.xfor.product.manage.controller.api;
 
 import com.xfor.infrastructure.core.product.model.Product;
+import com.xfor.infrastructure.core.product.model.ProductException;
 import com.xfor.product.manage.service.ProductManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,33 +25,34 @@ public class ProductManageApiController {
 
     @PostMapping(value = "/createProduct", produces = "application/json;charset=UTF-8")
     public Product createProduct(
-            @RequestParam String category,
+            @RequestParam String productStoreSID,
+            @RequestParam String code,
             @RequestParam String name,
             @RequestParam String desc,
-            @RequestParam List<String> pictures,
-            @RequestParam float price) {
-        return this.productManageService.createProduct(category, name, desc, pictures, price);
+            @RequestParam float price,
+            @RequestParam int saleState) throws ProductException {
+        return this.productManageService.createProduct(productStoreSID, code, name, desc, price, saleState);
     }
 
     @PostMapping(value = "/saveProduct", produces = "application/json;charset=UTF-8")
-    public Product saveProduct(@RequestBody Product product) {
+    public Product saveProduct(@RequestBody Product product) throws ProductException {
         return this.productManageService.saveProduct(product);
     }
 
-    @PostMapping(value = "/removeProduct", produces = "application/json;charset=UTF-8")
-    public boolean removeProduct(@RequestParam String productSID) {
-        return this.productManageService.removeProduct(productSID);
+    @PostMapping(value = "/removeProductBySid", produces = "application/json;charset=UTF-8")
+    public boolean removeProductBySid(@RequestParam String productSid) {
+        return this.productManageService.removeProductBySid(productSid);
     }
 
-    @PostMapping(value = "/getProductBySID", produces = "application/json;charset=UTF-8")
-    public Product getProductBySID(@RequestParam String productSID) {
-        return this.productManageService.getProductBySID(productSID);
+    @PostMapping(value = "/getProductBySid", produces = "application/json;charset=UTF-8")
+    public Product getProductBySid(@RequestParam String productSid) {
+        return this.productManageService.getProductBySid(productSid);
     }
 
     @PostMapping(value = "/getProductsByFilter", produces = "application/json;charset=UTF-8")
     public List<Product> getProductsByFilter(
-            @RequestParam String productStoreSID,
+            @RequestParam String productStoreSid,
             @RequestParam String filter) {
-        return this.productManageService.getProductsByFilter(productStoreSID, filter);
+        return this.productManageService.getProductsByFilter(productStoreSid, filter);
     }
 }

@@ -24,9 +24,9 @@ public class MyBatisProductCategoryRelaRepository implements IProductCategoryRel
 
     @Override
     public List<ProductCategoryRela> getProductCategoryRelasByCategoryCode(
-            ServiceContext sctx, String productStoreSID, int categoryCode) {
+            ServiceContext sctx, String productStoreSid, int categoryCode) {
         QueryWrapper<ProductCategoryRela> wrapper = new QueryWrapper<>();
-        wrapper.eq("PRODUCT_STORE_SID", productStoreSID)
+        wrapper.eq("PRODUCT_STORE_SID", productStoreSid)
                 .eq("CATEGORY_CODE", categoryCode);
         List<ProductCategoryRela> result = this.productCategoryRelaMyBatisDAO.selectList(wrapper);
         return result;
@@ -34,9 +34,9 @@ public class MyBatisProductCategoryRelaRepository implements IProductCategoryRel
 
     @Override
     public List<ProductCategoryRela> getProductCategoryRelasByProductCode(
-            ServiceContext sctx, String productStoreSID, String productCode) {
+            ServiceContext sctx, String productStoreSid, String productCode) {
         QueryWrapper<ProductCategoryRela> wrapper = new QueryWrapper<>();
-        wrapper.eq("PRODUCT_STORE_SID", productStoreSID)
+        wrapper.eq("PRODUCT_STORE_SID", productStoreSid)
                 .eq("PRODUCT_CODE", productCode);
         List<ProductCategoryRela> result = this.productCategoryRelaMyBatisDAO.selectList(wrapper);
         return result;
@@ -52,7 +52,7 @@ public class MyBatisProductCategoryRelaRepository implements IProductCategoryRel
     }
 
     @Override
-    public boolean deleteProductCategoryRelaBySID(ServiceContext sctx, String sid) {
+    public boolean deleteProductCategoryRelaBySid(ServiceContext sctx, String sid) {
         int result = this.productCategoryRelaMyBatisDAO.deleteById(sid);
         return result > 0;
     }

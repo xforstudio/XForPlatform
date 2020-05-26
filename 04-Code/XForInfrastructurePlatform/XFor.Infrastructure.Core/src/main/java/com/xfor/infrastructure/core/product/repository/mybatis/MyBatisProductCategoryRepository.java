@@ -23,17 +23,17 @@ public class MyBatisProductCategoryRepository implements IProductCategoryReposit
     }
 
     @Override
-    public List<ProductCategory> getProductCategoriesByStoreSID(ServiceContext sctx, String productStoreSID) {
+    public List<ProductCategory> getProductCategoriesByStoreSid(ServiceContext sctx, String productStoreSid) {
         QueryWrapper<ProductCategory> wrapper = new QueryWrapper<>();
-        wrapper.eq("PRODUCT_STORE_SID", productStoreSID);
+        wrapper.eq("PRODUCT_STORE_SID", productStoreSid);
         List<ProductCategory> result = this.productCategoryMyBatisDAO.selectList(wrapper);
         return result;
     }
 
     @Override
-    public ProductCategory getProductCategoryByCode(ServiceContext sctx, String productStoreSID, int code) {
+    public ProductCategory getProductCategoryByCode(ServiceContext sctx, String productStoreSid, int code) {
         QueryWrapper<ProductCategory> wrapper = new QueryWrapper<>();
-        wrapper.eq("PRODUCT_STORE_SID", productStoreSID).eq("CODE", code);
+        wrapper.eq("PRODUCT_STORE_SID", productStoreSid).eq("CODE", code);
         ProductCategory result = this.productCategoryMyBatisDAO.selectOne(wrapper);
         return result;
     }
@@ -48,15 +48,15 @@ public class MyBatisProductCategoryRepository implements IProductCategoryReposit
     }
 
     @Override
-    public boolean deleteProductCategoryBySID(ServiceContext sctx, String sid) {
+    public boolean deleteProductCategoryBySid(ServiceContext sctx, String sid) {
         int result = this.productCategoryMyBatisDAO.deleteById(sid);
         return result > 0;
     }
 
     @Override
-    public boolean deleteProductCategoryByCode(ServiceContext sctx, String productStoreSID, int code) {
+    public boolean deleteProductCategoryByCode(ServiceContext sctx, String productStoreSid, int code) {
         QueryWrapper<ProductCategory> wrapper = new QueryWrapper<>();
-        wrapper.eq("PRODUCT_STORE_SID", productStoreSID).eq("CODE", code);
+        wrapper.eq("PRODUCT_STORE_SID", productStoreSid).eq("CODE", code);
         int result = this.productCategoryMyBatisDAO.delete(wrapper);
         return result > 0;
     }

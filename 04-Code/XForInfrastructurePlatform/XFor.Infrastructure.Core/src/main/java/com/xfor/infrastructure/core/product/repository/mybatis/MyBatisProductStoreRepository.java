@@ -22,7 +22,7 @@ public class MyBatisProductStoreRepository implements IProductStoreRepository {
     }
 
     @Override
-    public ProductStore getProductStoreBySID(ServiceContext sctx, String sid) {
+    public ProductStore getProductStoreBySid(ServiceContext sctx, String sid) {
         ProductStore result = this.productStoreMyBatisDAO.selectById(sid);
         return result;
     }
@@ -54,7 +54,7 @@ public class MyBatisProductStoreRepository implements IProductStoreRepository {
     }
 
     @Override
-    public boolean deleteProductStoreBySID(ServiceContext sctx, String sid) {
+    public boolean deleteProductStoreBySid(ServiceContext sctx, String sid) {
         int result = this.productStoreMyBatisDAO.deleteById(sid);
         return result > 0;
     }
