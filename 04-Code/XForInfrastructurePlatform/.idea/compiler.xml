@@ -10,12 +10,11 @@
         <module name="XFor.Infrastructure.Core" />
         <module name="xfor-infrastructure-core" />
         <module name="xfor-email-manage" />
-        <module name="XFor.Product.Manage" />
         <module name="xfor-file-manage" />
         <module name="XFor.Email.Manage" />
         <module name="XFor.File.Manage" />
         <module name="XFor.Sms.Manage" />
-        <module name="xfor-product-manage" />
+        <module name="XFor.Product.Manage" />
         <module name="xfor-sms-manage" />
       </profile>
     </annotationProcessing>
@@ -51,7 +50,7 @@
       <module name="xfor-email-manage" options="-parameters" />
       <module name="xfor-file-manage" options="-parameters" />
       <module name="xfor-infrastructure-core" options="-parameters" />
-      <module name="xfor-product-manage" options="-parameters" />
+      <module name="xfor-product-manage" options="" />
       <module name="xfor-sms-manage" options="-parameters" />
     </option>
   </component>

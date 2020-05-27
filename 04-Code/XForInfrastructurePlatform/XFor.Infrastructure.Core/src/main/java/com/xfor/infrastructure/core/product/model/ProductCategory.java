@@ -20,8 +20,8 @@ public class ProductCategory {
     private int code;
     @TableField("NAME")
     private String name;
-    @TableField("DESC")
-    private String desc;
+    @TableField("MEMO")
+    private String memo;
     @TableField("PARENT_CODE")
     private int parentCode;
 

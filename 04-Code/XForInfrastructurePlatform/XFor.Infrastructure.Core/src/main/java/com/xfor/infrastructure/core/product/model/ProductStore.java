@@ -19,8 +19,8 @@ public class ProductStore {
     private String sid;
     @TableField("NAME")
     private String name;
-    @TableField("DESC")
-    private String desc;
+    @TableField("MEMO")
+    private String memo;
     @TableField("CREATE_TIME")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") // 日期格式自动化
     private Date createTime;

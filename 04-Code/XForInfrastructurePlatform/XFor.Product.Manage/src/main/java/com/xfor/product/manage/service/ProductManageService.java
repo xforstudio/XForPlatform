@@ -1,5 +1,6 @@
 package com.xfor.product.manage.service;
 
+import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import com.xfor.infrastructure.core.common.service.BaseService;
 import com.xfor.infrastructure.core.common.service.ServiceContext;
 import com.xfor.infrastructure.core.common.util.StringUtil;
@@ -16,6 +17,8 @@ public class ProductManageService extends BaseService {
 
     @Autowired
     private IProductRepository productRepository;
+    @Autowired
+    private IDateTimeProvider dateTimeProvider;
 
     public ProductManageService() {
         super();
@@ -34,19 +37,25 @@ public class ProductManageService extends BaseService {
 
     /* Product */
 
-    public Product createProduct(String productStoreSID, String code, String name,
-            String desc, float price, int saleState) throws ProductException {
+    public Product createProduct(Product fields) throws ProductException {
         ServiceContext sctx = this.doGetServiceContext();
-        Product product = Product._create(productStoreSID, code, name, desc, price, saleState);
+        Product product = Product._create(
+                fields.getProductStoreSid(),
+                fields.getCode(),
+                fields.getName(),
+                fields.getMemo(),
+                fields.getPrice(),
+                fields.getSaleState(),
+                this.dateTimeProvider);
         product.validate();
         boolean result = false;
         result = this.doExistsProductByCode(sctx, product);
         if (result) {
-            throw new ProductException("商品代码【" + code + "】已存在");
+            throw new ProductException("商品代码【" + product.getCode() + "】已存在");
         }
         result = this.doExistsProductByName(sctx, product);
         if (result) {
-            throw new ProductException("商品名称【" + name + "】已存在");
+            throw new ProductException("商品名称【" + product.getName() + "】已存在");
         }
         result = this.productRepository.saveProduct(sctx, product);
         if (!result) {
@@ -64,7 +73,7 @@ public class ProductManageService extends BaseService {
         //设置&验证
         product.setCode(fields.getCode());
         product.setName(fields.getName());
-        product.setDesc(fields.getDesc());
+        product.setMemo(fields.getMemo());
         product.setPrice(fields.getPrice());
         product.setSaleState(fields.getSaleState());
         product.validate();

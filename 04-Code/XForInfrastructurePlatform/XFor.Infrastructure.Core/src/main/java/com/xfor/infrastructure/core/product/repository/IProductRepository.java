@@ -24,6 +24,6 @@ public interface IProductRepository {
 
     int getProductCountByName(ServiceContext sctx, String productStoreSid, String name);
 
-    boolean saveProductPicturesContent(ServiceContext sctx, String sid, String productPicturesContent);
+    boolean saveProductPicturesContent(ServiceContext sctx, String sid, String picturesContent);
 }
 

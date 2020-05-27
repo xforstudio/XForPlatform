@@ -24,19 +24,13 @@ public class ProductManageApiController {
     }
 
     @PostMapping(value = "/createProduct", produces = "application/json;charset=UTF-8")
-    public Product createProduct(
-            @RequestParam String productStoreSID,
-            @RequestParam String code,
-            @RequestParam String name,
-            @RequestParam String desc,
-            @RequestParam float price,
-            @RequestParam int saleState) throws ProductException {
-        return this.productManageService.createProduct(productStoreSID, code, name, desc, price, saleState);
+    public Product createProduct(@RequestBody Product fields) throws ProductException {
+        return this.productManageService.createProduct(fields);
     }
 
     @PostMapping(value = "/saveProduct", produces = "application/json;charset=UTF-8")
-    public Product saveProduct(@RequestBody Product product) throws ProductException {
-        return this.productManageService.saveProduct(product);
+    public Product saveProduct(@RequestBody Product fields) throws ProductException {
+        return this.productManageService.saveProduct(fields);
     }
 
     @PostMapping(value = "/removeProductBySid", produces = "application/json;charset=UTF-8")

@@ -4,10 +4,10 @@ import com.xfor.infrastructure.core.payment.repository.IPaymentOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class MyBatisPaymentOrderRepository implements IPaymentOrderRepository {
 
-    @Autowired
+    //@Autowired
     private IPaymentOrderMyBatisDAO paymentOrderMyBatisDAO;
 
     public MyBatisPaymentOrderRepository(){

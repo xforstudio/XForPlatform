@@ -70,12 +70,12 @@ public class MyBatisProductRepository implements IProductRepository {
     }
 
     @Override
-    public boolean saveProductPicturesContent(ServiceContext sctx, String sid, String productPicturesContent) {
+    public boolean saveProductPicturesContent(ServiceContext sctx, String sid, String picturesContent) {
         Product product = this.productMyBatisDAO.selectById(sid);
         if (product == null) {
             return false;
         }
-        product.setPictures(productPicturesContent);
+        product.setPicturesContent(picturesContent);
         int result = this.productMyBatisDAO.updateById(product);
         return result > 0;
     }
