@@ -3,11 +3,9 @@ package com.xfor.product.manage.controller.api;
 import com.xfor.infrastructure.core.product.model.Product;
 import com.xfor.infrastructure.core.product.model.ProductException;
 import com.xfor.product.manage.service.ProductManageService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,12 +13,20 @@ import java.util.List;
  * 商品管理API控制器
  */
 @RestController
+@RequestMapping("/productmanage")
 public class ProductManageApiController {
 
     @Autowired
     private ProductManageService productManageService;
 
     public ProductManageApiController() {
+    }
+
+    @PostMapping(value = "/login", produces = "application/json;charset=UTF-8")
+    public String login(@RequestBody String requestBody) {
+        JSONObject jsonObject = JSONObject.parseObject(requestBody);
+        //return productSid + "-" + productName;
+        return productSid;
     }
 
     @PostMapping(value = "/createProduct", produces = "application/json;charset=UTF-8")

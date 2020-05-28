@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class ProductManageServiceTest {
+class ProductManageServiceTests {
 
     @Autowired
     private ProductManageService productManageService;
@@ -46,18 +48,39 @@ class ProductManageServiceTest {
     }
 
     @Test
-    void saveProduct() {
+    void saveProduct() throws ProductException {
+        Product fields = new Product();
+        fields.setSid("");
+        fields.setCode("PD00000002");
+        fields.setName("商品0002");
+        fields.setMemo("商品备注0002");
+        fields.setPrice(102);
+        fields.setSaleState(ProductSaleStateEnum.Normal);
+        fields.setProductStoreSid("pds0001");
+        //
+        Product product = this.productManageService.saveProduct(fields);
+        Assert.notNull(product, "");
     }
 
     @Test
     void removeProductBySid() {
+        String productSid = "";
+        boolean result = this.productManageService.removeProductBySid(productSid);
+        Assert.isTrue(result, "");
     }
 
     @Test
     void getProductBySid() {
+        String productSid = "";
+        Product product = this.productManageService.getProductBySid(productSid);
+        Assert.notNull(product, "");
     }
 
     @Test
     void getProductsByFilter() {
+        String productStoreSid = "";
+        String filter = "";
+        List<Product> products = this.productManageService.getProductsByFilter(productStoreSid, filter);
+        Assert.notNull(products, "");
     }
 }
