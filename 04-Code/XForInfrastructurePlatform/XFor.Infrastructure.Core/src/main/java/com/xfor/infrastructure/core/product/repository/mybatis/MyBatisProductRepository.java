@@ -33,7 +33,7 @@ public class MyBatisProductRepository implements IProductRepository {
     public List<Product> getProductsByFilter(ServiceContext sctx, String productStoreSid, String filter) {
         QueryWrapper<Product> wrapper = new QueryWrapper<>();
         wrapper.eq("PRODUCT_STORE_SID", productStoreSid)
-                .and(w -> w.like("CODE", filter).or().like("NAME", filter).or().like("DESC", filter));
+                .and(w -> w.like("CODE", filter).or().like("NAME", filter).or().like("MEMO", filter));
         List<Product> result = this.productMyBatisDAO.selectList(wrapper);
         return result;
     }
