@@ -1,5 +1,9 @@
 package com.xfor.product.manage.controller.api;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.xfor.infrastructure.core.product.model.Product;
 import com.xfor.infrastructure.core.product.model.ProductException;
 import com.xfor.product.manage.service.ProductManageService;
@@ -24,9 +28,11 @@ public class ProductManageApiController {
 
     @PostMapping(value = "/login", produces = "application/json;charset=UTF-8")
     public String login(@RequestBody String requestBody) {
-        JSONObject jsonObject = JSONObject.parseObject(requestBody);
-        //return productSid + "-" + productName;
-        return productSid;
+        JsonObject returnData = new JsonParser().parse(requestBody).getAsJsonObject();
+        String productSid = returnData.get("productSid").getAsString();
+        String productName = returnData.get("productName").getAsString();
+        return productSid + "<>" + productName;
+        //return productSid;
     }
 
     @PostMapping(value = "/createProduct", produces = "application/json;charset=UTF-8")
