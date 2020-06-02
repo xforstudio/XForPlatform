@@ -12,7 +12,6 @@
         <module name="xfor-infrastructure-core" />
         <module name="xfor-email-manage" />
         <module name="xfor-file-manage" />
-        <module name="XFor.File.Manage" />
         <module name="XFor.Sms.Manage" />
         <module name="xfor-sms-manage" />
       </profile>
@@ -39,7 +38,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="XFor.Email.Manage" options="-parameters" />
-      <module name="XFor.File.Manage" options="-parameters" />
+      <module name="XFor.File.Manage" options="" />
       <module name="XFor.Infrastructure.Core" options="-parameters" />
       <module name="XFor.Order.Manage" options="" />
       <module name="XFor.Passport.Manage" options="" />

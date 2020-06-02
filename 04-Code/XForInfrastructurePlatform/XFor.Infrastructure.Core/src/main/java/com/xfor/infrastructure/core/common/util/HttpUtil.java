@@ -1,4 +1,4 @@
-package com.xfor.product.manage.util;
+package com.xfor.infrastructure.core.common.util;
 
 import org.apache.http.HttpHost;
 import org.apache.http.NameValuePair;

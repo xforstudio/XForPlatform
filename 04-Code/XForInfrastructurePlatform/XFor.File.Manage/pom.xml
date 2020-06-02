@@ -12,7 +12,8 @@
     <artifactId>xfor-file-manage</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>xfor-file-manage</name>
-    <description>Demo project for Spring Boot</description>
+    <description></description>
+    <packaging>pom</packaging>
 
     <properties>
         <java.version>14</java.version>
@@ -54,6 +55,18 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.xfor</groupId>
+            <artifactId>xfor-infrastructure-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.xfor</groupId>
+            <artifactId>xfor-infrastructure-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

@@ -4,19 +4,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xfor.infrastructure.core.product.model.Product;
 import com.xfor.infrastructure.core.product.model.ProductSaleStateEnum;
-import com.xfor.product.manage.util.HttpUtil;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import com.xfor.infrastructure.core.common.util.HttpUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
-import java.net.http.HttpClient;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ProductManageApiControllerTests {
 

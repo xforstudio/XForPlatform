@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import com.xfor.infrastructure.core.common.model.SID;
 import lombok.Data;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 import java.util.List;
