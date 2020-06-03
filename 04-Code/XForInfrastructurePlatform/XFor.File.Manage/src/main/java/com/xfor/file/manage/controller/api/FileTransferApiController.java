@@ -5,6 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xfor.file.manage.service.FileTransferService;
 import com.xfor.infrastructure.core.file.model.FileException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,13 +32,13 @@ public class FileTransferApiController {
     @PostMapping("/UploadFile")
     @ResponseBody
     public void uploadFile(
-            @RequestParam("path") String path,
-            @RequestParam("file") MultipartFile file)
+            @RequestParam String dirPath,
+            @RequestParam MultipartFile file)
             throws FileException {
         if (file.isEmpty()) {
             throw new FileException("上传失败，请选择文件");
         }
-        this.fileTransferService.uploadFile(path, file);
+        this.fileTransferService.uploadFile(dirPath, file);
     }
 
     @PostMapping("/DownloadFile")
@@ -59,6 +64,32 @@ public class FileTransferApiController {
 //            FileCopyUtils.copy(inputStream, outputStream);
 //        } catch (Exception e) {
 //            e.printStackTrace();
+//        }
+    }
+
+    @GetMapping("/DownloadFile2")
+    public ResponseEntity<InputStreamResource> downloadFile2(@RequestParam String path)
+            throws FileException, IOException {
+        //
+        File file = this.fileTransferService.downloadFile(path);
+        FileSystemResource fsr = new FileSystemResource(file.getPath());
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", fsr.getFilename()));
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+
+        return ResponseEntity.ok().headers(headers)
+                .contentLength(fsr.contentLength())
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(new InputStreamResource(fsr.getInputStream()));
+
+//        try (InputStream inputStream = new FileInputStream(file)) {
+//            byte[] bytes = inputStream.readAllBytes();
+//            return bytes;
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            throw new FileException(ex.getMessage());
 //        }
     }
 

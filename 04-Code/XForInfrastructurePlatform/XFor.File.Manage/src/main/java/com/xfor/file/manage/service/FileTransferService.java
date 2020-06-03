@@ -23,9 +23,9 @@ public class FileTransferService {
     @Autowired
     private FileConfig fileConfig;
 
-    public boolean uploadFile(String path, MultipartFile file_src) throws FileException {
+    public boolean uploadFile(String dirPath, MultipartFile file_src) throws FileException {
         //判断目录是否存在
-        String dirPath_dest = Paths.get(this.fileConfig.getRootPath(), path).toString();
+        String dirPath_dest = Paths.get(this.fileConfig.getRootPath(), dirPath).toString();
         File directory_dest = new File(dirPath_dest);
         if (!directory_dest.exists()) {
             directory_dest.mkdir();

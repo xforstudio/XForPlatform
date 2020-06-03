@@ -1,19 +1,24 @@
 package com.xfor.infrastructure.core.common.util;
 
-import org.apache.http.HttpHost;
-import org.apache.http.NameValuePair;
+import org.apache.http.*;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.FileEntity;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.springframework.core.io.InputStreamSource;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
@@ -271,4 +276,59 @@ public class HttpUtil {
 
         return resultString;
     }
+
+    public static String _post(String url, MultipartEntity entity){
+        // 创建Httpclient对象
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpResponse response = null;
+        String result = null;
+        try {
+            //创建Post请求
+            HttpPost httpPost = new HttpPost(url);
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setConnectTimeout(5000)						// 设置连接超时时间,单位毫秒。
+                    .setConnectionRequestTimeout(1000)  			// 从连接池获取到连接的超时,单位毫秒。
+                    .setSocketTimeout(30000).build();    	// 请求获取数据的超时时间,单位毫秒; 如果访问一个接口,多少时间内无法返回数据,就直接放弃此次调用。
+            httpPost.setConfig(requestConfig);
+            httpPost.setEntity(entity);
+            //发送Post请求
+            response = httpClient.execute(httpPost);
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode != HttpStatus.SC_OK) {
+                throw new Exception(response.toString());
+            }
+            //
+            HttpEntity resEntity = response.getEntity();
+            result = EntityUtils.toString(resEntity, "utf-8");
+            //resultString = EntityUtils.toString(resEntity, "utf-8");
+            EntityUtils.consume(resEntity);
+            return result;
+
+//                System.out.println(EntityUtils.toString(resEntity));//httpclient自带的工具类读取返回数据
+//                System.out.println(resEntity.getContent());
+//                JSONObject json = new JSONObject(EntityUtils.toString(resEntity).toString());
+//                System.out.println(json.getString("returnResult"));
+//                System.out.println(EntityUtils.toString(resEntity));//httpclient自带的工具类读取返回数据
+//                System.out.println(resEntity.getContent());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            // 释放资源
+            try {
+                if (httpClient != null) {
+                    httpClient.close();
+                }
+                if (response != null) {
+                    response.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        //
+        return result;
+    }
+
 }
