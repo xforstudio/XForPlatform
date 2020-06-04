@@ -6,7 +6,7 @@ package com.xfor.infrastructure.core.file.model;
 public class PathUnitTypeEnum {
 
     public static final int NONE = 0;
-    public static final int FILE = 0;
-    public static final int DIRECTORY = 0;
+    public static final int FILE = 1;
+    public static final int DIRECTORY = 2;
 }
 

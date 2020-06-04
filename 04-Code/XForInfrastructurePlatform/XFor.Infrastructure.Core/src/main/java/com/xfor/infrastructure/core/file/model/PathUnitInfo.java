@@ -17,7 +17,7 @@ public abstract class PathUnitInfo {
     private String fullName;
     private Date createTime;
     private Date modifyTime;
-    private PathUnitTypeEnum type;
+    private int type;
 
     public abstract List<PathUnitInfo> getSubUnitInfos();
 

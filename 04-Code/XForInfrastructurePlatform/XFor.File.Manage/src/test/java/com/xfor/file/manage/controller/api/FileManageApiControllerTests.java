@@ -30,8 +30,8 @@ class FileManageApiControllerTests {
     @Test
     void createDirectory() throws JsonProcessingException {
         //
-        String path = "";
-        String dirName = "";
+        String path = "/Account0001";
+        String dirName = "Folder0001";
         //
         Map<String, Object> params =  new HashMap<>();
         params.put("path", path);
@@ -44,8 +44,8 @@ class FileManageApiControllerTests {
     @Test
     void removeDirectory() throws JsonProcessingException {
         //
-        String path = "";
-        String dirName = "";
+        String path = "/Account0001";
+        String dirName = "Folder0001";
         //
         Map<String, Object> params =  new HashMap<>();
         params.put("path", path);
@@ -58,8 +58,11 @@ class FileManageApiControllerTests {
     @Test
     void removeDirectories() throws JsonProcessingException {
         //
-        String path = "";
+        String path = "/Account0001";
         List<String> dirNames = new ArrayList<>();
+        dirNames.add("Folder0001");
+        dirNames.add("Folder0002");
+        dirNames.add("Folder0003");
         //
         Map<String, Object> params =  new HashMap<>();
         params.put("path", path);
@@ -72,24 +75,24 @@ class FileManageApiControllerTests {
     @Test
     void renameDirectory() throws JsonProcessingException {
         //
-        String path = "";
-        String dirName = "";
-        String dirNameNew = "";
+        String path = "/Account0001";
+        String dirName = "Folder0001";
+        String dirNameNew = "Folder0002";
         //
         Map<String, Object> params =  new HashMap<>();
         params.put("path", path);
         params.put("dirName", dirName);
         params.put("dirNameNew", dirNameNew);
         String jsonParams = new ObjectMapper().writeValueAsString(params);
-        String result = HttpUtil._postJson(this.rootUrl + "/RemoveDirectories", 30000, jsonParams);
+        String result = HttpUtil._postJson(this.rootUrl + "/RenameDirectory", 30000, jsonParams);
         Assert.notNull(result, "");
     }
 
     @Test
     void listDirectory() throws JsonProcessingException {
         //
-        String path = "";
-        String dirName = "";
+        String path = "/Account0001";
+        String dirName = "Folder0001";
         //
         Map<String, Object> params =  new HashMap<>();
         params.put("path", path);
@@ -102,8 +105,8 @@ class FileManageApiControllerTests {
     @Test
     void removeFile() throws JsonProcessingException {
         //
-        String path = "";
-        String fileName = "";
+        String path = "/Account0001";
+        String fileName = "File0001.txt";
         //
         Map<String, Object> params =  new HashMap<>();
         params.put("path", path);
@@ -116,8 +119,11 @@ class FileManageApiControllerTests {
     @Test
     void removeFiles() throws JsonProcessingException {
         //
-        String path = "";
+        String path = "/Account0001";
         List<String> fileNames = new ArrayList<>();
+        fileNames.add("File0001.txt");
+        fileNames.add("File0002.txt");
+        fileNames.add("File0003.txt");
         //
         Map<String, Object> params =  new HashMap<>();
         params.put("path", path);
@@ -130,9 +136,9 @@ class FileManageApiControllerTests {
     @Test
     void renameFile() throws JsonProcessingException {
         //
-        String path = "";
-        String fileName = "";
-        String fileNameNew = "";
+        String path = "/Account0001";
+        String fileName = "File0001.txt";
+        String fileNameNew = "File0002.txt";
         //
         Map<String, Object> params =  new HashMap<>();
         params.put("path", path);

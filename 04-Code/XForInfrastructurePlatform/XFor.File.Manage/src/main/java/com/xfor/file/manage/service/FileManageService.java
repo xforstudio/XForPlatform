@@ -1,9 +1,11 @@
 package com.xfor.file.manage.service;
 
+import com.xfor.file.manage.manager.FileConfig;
 import com.xfor.infrastructure.core.file.model.DirectoryInfo;
 import com.xfor.infrastructure.core.file.model.FileException;
 import com.xfor.infrastructure.core.file.model.FileInfo;
 import com.xfor.infrastructure.core.file.model.PathUnitInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -14,35 +16,38 @@ import java.util.List;
 @Component
 public class FileManageService {
 
+    @Autowired
+    private FileConfig fileConfig;
+
     public FileManageService() {
     }
 
-    protected DirectoryInfo doCreateDirectoryInfo(String dirPath) {
-        return null;
+    protected String doGetActualPath(String path) {
+        String result = Paths.get(this.fileConfig.getRootPath(), path).toString();
+        return result;
     }
 
     protected DirectoryInfo doCreateDirectoryInfo(File directory) {
-        return null;
-    }
-
-    protected FileInfo doCreateFileInfo(String filePath) {
-        return null;
+        DirectoryInfo result = DirectoryInfo._loadFromFile(directory);
+        return result;
     }
 
     protected FileInfo doCreateFileInfo(File file) {
-        return null;
+        FileInfo result = FileInfo._loadFromFile(file);
+        return result;
     }
 
     //目录操作
 
     public DirectoryInfo createDirectory(String path, String dirName) throws FileException {
+        String actualPath = this.doGetActualPath(path);
         //检查路径
-        File directory_sup = new File(path);
+        File directory_sup = new File(actualPath);
         if (!directory_sup.exists()) {
             throw new FileException("路径不存在");
         }
         //检查目录
-        String dirPath = Paths.get(path, dirName).toString();
+        String dirPath = Paths.get(actualPath, dirName).toString();
         File directory = new File(dirPath);
         if (directory.exists()) {
             throw new FileException("目录已存在");
@@ -56,13 +61,14 @@ public class FileManageService {
     }
 
     public DirectoryInfo removeDirectory(String path, String dirName) throws FileException {
+        String actualPath = this.doGetActualPath(path);
         //检查路径
-        File directory_sup = new File(path);
+        File directory_sup = new File(actualPath);
         if (!directory_sup.exists()) {
             throw new FileException("路径不存在");
         }
         //检查目录
-        String dirPath = Paths.get(path, dirName).toString();
+        String dirPath = Paths.get(actualPath, dirName).toString();
         File directory = new File(dirPath);
         if (!directory.exists()) {
             throw new FileException("目录不存在");
@@ -77,8 +83,9 @@ public class FileManageService {
     }
 
     public List<DirectoryInfo> removeDirectories(String path, List<String> dirNames) throws FileException {
+        String actualPath = this.doGetActualPath(path);
         //检查路径
-        File directory_sup = new File(path);
+        File directory_sup = new File(actualPath);
         if (!directory_sup.exists()) {
             throw new FileException("路径不存在");
         }
@@ -86,7 +93,7 @@ public class FileManageService {
         List<DirectoryInfo> result = new ArrayList<>();
         for (String dirName: dirNames) {
             //检查目录
-            String dirPath = Paths.get(path, dirName).toString();
+            String dirPath = Paths.get(actualPath, dirName).toString();
             File directory = new File(dirPath);
             if (!directory.exists()) {
                 continue;
@@ -102,18 +109,19 @@ public class FileManageService {
     }
 
     public DirectoryInfo renameDirectory(String path, String dirName, String dirNameNew) throws FileException {
+        String actualPath = this.doGetActualPath(path);
         //检查路径
-        File directory_sup = new File(path);
+        File directory_sup = new File(actualPath);
         if (!directory_sup.exists()) {
             throw new FileException("路径不存在");
         }
         //检查目录
-        String dirPath = Paths.get(path, dirName).toString();
+        String dirPath = Paths.get(actualPath, dirName).toString();
         File directory = new File(dirPath);
         if (!directory.exists()) {
             throw new FileException("目录["+ dirName +"]不存在");
         }
-        String dirPathNew = Paths.get(path, dirNameNew).toString();
+        String dirPathNew = Paths.get(actualPath, dirNameNew).toString();
         File directoryNew = new File(dirPathNew);
         if (directoryNew.exists()) {
             throw new FileException("目录["+ dirNameNew +"]已存在");
@@ -126,13 +134,14 @@ public class FileManageService {
     }
 
     public List<PathUnitInfo> listDirectory(String path, String dirName) throws FileException {
+        String actualPath = this.doGetActualPath(path);
         //检查路径
-        File directory_sup = new File(path);
+        File directory_sup = new File(actualPath);
         if (!directory_sup.exists()) {
             throw new FileException("路径不存在");
         }
         //检查目录
-        String dirPath = Paths.get(path, dirName).toString();
+        String dirPath = Paths.get(actualPath, dirName).toString();
         File directory = new File(dirPath);
         if (!directory.exists()) {
             throw new FileException("目录["+ dirName +"]不存在");
@@ -156,13 +165,14 @@ public class FileManageService {
     //文件操作
 
     public FileInfo removeFile(String path, String fileName) throws FileException {
+        String actualPath = this.doGetActualPath(path);
         //检查路径
-        File directory_sup = new File(path);
+        File directory_sup = new File(actualPath);
         if (!directory_sup.exists()) {
             throw new FileException("路径不存在");
         }
         //检查文件
-        String filePath = Paths.get(path, fileName).toString();
+        String filePath = Paths.get(actualPath, fileName).toString();
         File file = new File(filePath);
         if (!file.exists()) {
             throw new FileException("文件不存在");
@@ -177,8 +187,9 @@ public class FileManageService {
     }
 
     public List<FileInfo> removeFiles(String path, List<String> fileNames) throws FileException {
+        String actualPath = this.doGetActualPath(path);
         //检查路径
-        File directory_sup = new File(path);
+        File directory_sup = new File(actualPath);
         if (!directory_sup.exists()) {
             throw new FileException("路径不存在");
         }
@@ -186,7 +197,7 @@ public class FileManageService {
         List<FileInfo> result = new ArrayList<>();
         for (String fileName: fileNames) {
             //检查文件
-            String filePath = Paths.get(path, fileName).toString();
+            String filePath = Paths.get(actualPath, fileName).toString();
             File file = new File(filePath);
             if (!file.exists()) {
                 continue;
@@ -202,18 +213,19 @@ public class FileManageService {
     }
 
     public FileInfo renameFile(String path, String fileName, String fileNameNew) throws FileException {
+        String actualPath = this.doGetActualPath(path);
         //检查路径
-        File directory_sup = new File(path);
+        File directory_sup = new File(actualPath);
         if (!directory_sup.exists()) {
             throw new FileException("路径不存在");
         }
         //检查文件
-        String filePath = Paths.get(path, fileName).toString();
+        String filePath = Paths.get(actualPath, fileName).toString();
         File file = new File(filePath);
         if (!file.exists()) {
             throw new FileException("文件["+ fileName +"]不存在");
         }
-        String filePathNew = Paths.get(path, fileNameNew).toString();
+        String filePathNew = Paths.get(actualPath, fileNameNew).toString();
         File fileNew = new File(filePathNew);
         if (fileNew.exists()) {
             throw new FileException("文件["+ fileNameNew +"]已存在");
