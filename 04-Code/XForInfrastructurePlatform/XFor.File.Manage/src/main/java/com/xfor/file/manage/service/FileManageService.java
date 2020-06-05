@@ -1,6 +1,7 @@
 package com.xfor.file.manage.service;
 
 import com.xfor.file.manage.manager.FileConfig;
+import com.xfor.infrastructure.core.common.util.IOUtil;
 import com.xfor.infrastructure.core.file.model.DirectoryInfo;
 import com.xfor.infrastructure.core.file.model.FileException;
 import com.xfor.infrastructure.core.file.model.FileInfo;
@@ -75,9 +76,12 @@ public class FileManageService {
         }
         DirectoryInfo result = this.doCreateDirectoryInfo(directory);
         //删除目录
-        if (!directory.delete()) {
+        if (!IOUtil._deleteDirWithDeep(directory)) {
             throw new FileException("目录删除失败");
         }
+//        if (!directory.delete()) {
+//            throw new FileException("目录删除失败");
+//        }
         //
         return result;
     }
