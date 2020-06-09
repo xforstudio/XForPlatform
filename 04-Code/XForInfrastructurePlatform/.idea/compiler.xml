@@ -9,7 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="XFor.Infrastructure.Core" />
         <module name="xfor-infrastructure-core" />
-        <module name="xfor-email-manage" />
+        <module name="XFor.Lab" />
         <module name="XFor.Email.Manage" />
         <module name="XFor.Sms.Manage" />
         <module name="xfor-sms-manage" />
@@ -27,6 +27,7 @@
       <module name="XFor.Email.Manage" target="13" />
       <module name="XFor.File.Manage" target="13" />
       <module name="XFor.Infrastructure.Core" target="13" />
+      <module name="XFor.Lab" target="13" />
       <module name="XFor.Order.Manage" target="13" />
       <module name="XFor.Passport.Manage" target="13" />
       <module name="XFor.Payment.Manage" target="13" />
@@ -39,12 +40,13 @@
       <module name="XFor.Email.Manage" options="-parameters" />
       <module name="XFor.File.Manage" options="" />
       <module name="XFor.Infrastructure.Core" options="-parameters" />
+      <module name="XFor.Lab" options="-parameters" />
       <module name="XFor.Order.Manage" options="" />
       <module name="XFor.Passport.Manage" options="" />
       <module name="XFor.Payment.Manage" options="" />
       <module name="XFor.Product.Manage" options="" />
       <module name="XFor.Sms.Manage" options="-parameters" />
-      <module name="xfor-email-manage" options="-parameters" />
+      <module name="xfor-email-manage" options="" />
       <module name="xfor-file-manage" options="" />
       <module name="xfor-infrastructure-core" options="-parameters" />
       <module name="xfor-product-manage" options="" />

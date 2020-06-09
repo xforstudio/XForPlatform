@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailConfig {
 
-    //@Value("${mail.fromMail.addr}")
+    //@Value("${xfor.email.from.addr}")
     private String mailFrom = "597834341@qq.com";
 }

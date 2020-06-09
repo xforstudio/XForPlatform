@@ -2,9 +2,11 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/XFor.Email.Manage/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XFor.Email.Manage/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XFor.File.Manage/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XFor.File.Manage/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XFor.Infrastructure.Core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XFor.Lab/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XFor.Order.Manage/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XFor.Order.Manage/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XFor.Passport.Manage/src/main/java" charset="UTF-8" />
