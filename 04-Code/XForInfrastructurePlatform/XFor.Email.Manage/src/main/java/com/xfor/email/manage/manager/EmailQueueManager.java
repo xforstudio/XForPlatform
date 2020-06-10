@@ -1,5 +1,7 @@
 package com.xfor.email.manage.manager;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.xfor.infrastructure.core.common.util.JsonUtil;
 import com.xfor.infrastructure.core.email.model.EmailMessage;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -21,13 +23,17 @@ public class EmailQueueManager {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-    public void sendEmail(EmailMessage emailMessage) {
+    public void sendEmail(EmailMessage emailMessage) throws JsonProcessingException {
         System.out.println("Sender: " + emailMessage.getSid());
-        this.rabbitTemplate.convertAndSend(rabbitConfig.getEmailQueueName(), emailMessage);
+        String queueName = rabbitConfig.getEmailQueueName();
+        String content = JsonUtil._objectToString(emailMessage);
+        this.rabbitTemplate.convertAndSend(queueName, content);
     }
 
     @RabbitHandler
-    public void onReceiveEmail(EmailMessage emailMessage) {
+    public void onReceiveEmail(String emailMessageContent) throws JsonProcessingException {
+        System.out.println("Receiver: " + emailMessageContent);
+        EmailMessage emailMessage = JsonUtil._stringToObject(emailMessageContent, EmailMessage.class);
         System.out.println("Receiver: " + emailMessage.getSid());
     }
 }

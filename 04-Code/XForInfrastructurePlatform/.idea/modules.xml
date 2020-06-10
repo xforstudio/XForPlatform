@@ -14,6 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/XFor.Email.Manage/xfor-email-manage.iml" filepath="$PROJECT_DIR$/XFor.Email.Manage/xfor-email-manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/XFor.File.Manage/xfor-file-manage.iml" filepath="$PROJECT_DIR$/XFor.File.Manage/xfor-file-manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/XFor.Infrastructure.Core/xfor-infrastructure-core.iml" filepath="$PROJECT_DIR$/XFor.Infrastructure.Core/xfor-infrastructure-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XFor.Lab/xfor-lab.iml" filepath="$PROJECT_DIR$/XFor.Lab/xfor-lab.iml" />
       <module fileurl="file://$PROJECT_DIR$/XFor.Order.Manage/xfor-order-manage.iml" filepath="$PROJECT_DIR$/XFor.Order.Manage/xfor-order-manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/XFor.Passport.Manage/xfor-passport-manage.iml" filepath="$PROJECT_DIR$/XFor.Passport.Manage/xfor-passport-manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/XFor.Payment.Manage/xfor-payment-manage.iml" filepath="$PROJECT_DIR$/XFor.Payment.Manage/xfor-payment-manage.iml" />

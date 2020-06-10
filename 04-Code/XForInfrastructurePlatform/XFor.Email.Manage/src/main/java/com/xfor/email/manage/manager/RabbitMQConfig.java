@@ -13,7 +13,7 @@ public class RabbitMQConfig {
     //@Value("${xfor.email.mq.name}")
     private String emailQueueName = "XFor.Email.MQ";
 
-    //@Bean
+    @Bean
     public Queue Queue() {
         return new Queue(this.emailQueueName);
     }
