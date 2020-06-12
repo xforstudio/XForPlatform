@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataConfig>
+  <dataSource
+        type="JdbcDataSource" 
+        driver="com.mysql.cj.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/xfor_tcp?serverTimezone=UTC" 
+        user="root" 
+		password="admin"/>
+  <document>
+      <entity name="PRODUCT" query="select * from PRODUCT">
+        <field column="SID" name="Product_Sid"/>
+        <field column="CODE" name="Product_Code"/>
+        <field column="NAME" name="Product_Name"/>
+        <field column="MEMO" name="Product_Memo"/>
+      </entity>
+  </document>
+</dataConfig>
