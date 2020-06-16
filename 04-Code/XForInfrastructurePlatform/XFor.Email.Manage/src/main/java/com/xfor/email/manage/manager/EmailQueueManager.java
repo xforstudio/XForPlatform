@@ -1,6 +1,7 @@
 package com.xfor.email.manage.manager;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.xfor.email.manage.config.RabbitMQConfig;
 import com.xfor.infrastructure.core.common.util.JsonUtil;
 import com.xfor.infrastructure.core.email.model.EmailMessage;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -8,8 +9,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 /**
  *

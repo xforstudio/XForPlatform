@@ -1,6 +1,6 @@
 package com.xfor.email.manage.service;
 
-import com.xfor.email.manage.manager.EmailConfig;
+import com.xfor.email.manage.config.EmailConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

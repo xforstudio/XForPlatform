@@ -1,0 +1,18 @@
+cd C:\ProgramDeploy\Redis-x64-3.2.100
+
+临时服务安装
+启动Redis临时服务：redis-server.exe  redis.windows.conf
+
+
+默认服务安装
+安装Redis服务：redis-server.exe --service-install redis.windows.conf --loglevel verbose
+启动Redis服务：redis-server.exe --service-start
+停止Redis服务：redis-server.exe --service-stop
+卸载Redis服务：redis-server.exe --service-uninstall
+
+
+自定义服务安装（所谓自定义服务安装，就是将服务重命名）
+安装Redis自定义服务：redis-server.exe --service-install redis.windows.conf --Service-name [RedisServer1] --loglevel verbose
+启动Redis自定义服务：redis-server.exe --service-start --Service-name [RedisServer1]
+停止Redis自定义服务：redis-server.exe --service-stop --Service-name [RedisServer1]
+卸载Redis自定义服务：redis-server.exe --service-uninstall --Service-name [RedisServer1]
