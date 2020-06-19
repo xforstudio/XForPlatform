@@ -1,0 +1,28 @@
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDNa/IG8LZfB1ba+BQHLIkZ1bo6uI1aelD6kZpJEosmTSsuV9KWhmCX1N2v2sYq+/C4tBaHdgWvsbYdorTa0Ev2wHmCd0GQ26dPRj4i+n906zskzWOyn8m5kl32f90DxhiZm0K+ZQr5X8if4q0MHKEqsLIpaX2fvQEpNht+aj3bnurjanG3gzj+FVkYs0O5fBnRQ44ckTTAa+NjMbJkk4iUXoV3Cu1m9rRioEkuvN+fMMaHiDntL+t9D/QWcWr2W2K+BB8Byr5oEWtKdAo3pM5M3Fo3noMi+UzZzrRhr8bIThoV0NJKvx4DVqMkIUEDxhPJ9NFslukliviTPyJyaZAApmSZrL6btARZ70eWm0Pd3WKP7Sftk4xQZ6v5P67NLhOhLCZj4H68nSlD8R5/iaHZnPSwPy/X2Uk76g41jJT4qlaZWcUT6KkaNPxWXnX2aIMFJlZuXszz+JEHCXyr9VsMwB6AxHU20FKt0zC/Iv7Ic71g4wyCDBGhTFvpC7szWt0= xforstudio@163.com
+
+$ git config --global user.name "xforliux"
+$ git config --global user.email "xforstudio@163.com"
+$ cd /C/WorkSpace/XFor/Projects
+$ git clone https://github.com/xforstudio/TestConsPlatform.git
+$ cd /C/WorkSpace/XFor/Projects/TestConsPlatform
+$ ls
+$ git add *
+$ git commit
+
+$ git remote add origin https://github.com/xforstudio/TestConsPlatform.git
+$ git push origin master
+$ git pull origin master
+
+$ git pull --rebase origin master
+$ git add -A
+$ git commit -m "chapter1"
+$ git push -u origin master
+
+强制pull
+$ git fetch --all
+$ git reset --hard origin/master
+$ git pull
+　　
+
+#XForPlatform
+$ git remote add origin https://github.com/xforstudio/XForPlatform.git

@@ -1,0 +1,13 @@
+安装PyInstaller
+这是因为默认安装的Pyinstaller是3.31版本 不支持最新出的Python3.7 可以安装pyinstaller 3.4版本 支持Python3.7
+pip install https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz
+
+打包
+cd C:\WorkSpace\XFor\Projects\TestConsPlatform\07-MISC\STE
+pyinstaller -F STE_Report.py
+
+
+
+python STE_Report.py 1 eyLmhJ/mgKfmgJ3nu7QiOjAuMCwi55CG5oCn5oCd57u0IjowLjEsIuWdh+ihoeWei+aAnee7tCI6MC4wfQ== QzpcV29ya1NwYWNlXFhGb3JcUHJvamVjdHNcVGVzdERhdGFcU1RFUmVwb3J0XzAwMDI=
+
+STE_Report.exe 1 eyLmhJ/mgKfmgJ3nu7QiOjAuMCwi55CG5oCn5oCd57u0IjowLjEsIuWdh+ihoeWei+aAnee7tCI6MC4wfQ== QzpcV29ya1NwYWNlXFhGb3JcUHJvamVjdHNcVGVzdERhdGFcU1RFUmVwb3J0XzAwMDI=
