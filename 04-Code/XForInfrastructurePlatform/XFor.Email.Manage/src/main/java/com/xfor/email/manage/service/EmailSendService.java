@@ -1,6 +1,7 @@
 package com.xfor.email.manage.service;
 
 import com.xfor.email.manage.config.EmailConfig;
+import com.xfor.infrastructure.core.email.model.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,5 +96,10 @@ public class EmailSendService {
         } catch (MessagingException e) {
             _logger.error("发送嵌入静态资源的邮件时发生异常！", e);
         }
+    }
+
+    //发送邮件
+    public void sendEmail(Email email) {
+        return;
     }
 }

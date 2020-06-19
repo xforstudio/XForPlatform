@@ -11,11 +11,18 @@ import org.springframework.stereotype.Component;
 public class RabbitMQConfig {
 
     //@Value("${xfor.email.mq.name}")
-    private String emailQueueName = "XFor.Email.MQ";
+    private String queueNameEmailCreate = "XFor.MQ.Email.Create";
+
+    private String queueNameEmailSend = "XFor.MQ.Email.Send";
 
     @Bean
-    public Queue Queue() {
-        return new Queue(this.emailQueueName);
+    public Queue queueEmailCreate() {
+        return new Queue(this.queueNameEmailCreate);
+    }
+
+    @Bean
+    public Queue queueEmailSend() {
+        return new Queue(this.queueNameEmailSend);
     }
 
 }
