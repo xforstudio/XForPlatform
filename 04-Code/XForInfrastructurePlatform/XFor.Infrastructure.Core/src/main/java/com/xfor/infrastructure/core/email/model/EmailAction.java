@@ -20,23 +20,27 @@ public class EmailAction extends BaseEntity {
         EmailAction emailAction = new EmailAction();
         emailAction.setSid(_newSID());
         emailAction.setEmailMessageSid(emailMessage.getSid());
-        emailAction.setSendState(EmailSendStateEnum.NotSend);
+        emailAction.setSendState(EmailSendStateEnum.SendNot);
         emailAction.setCreateTime(dateTimeProvider.getNow());
         emailAction.setModifyTime(dateTimeProvider.getNow());
         return emailAction;
     }
 
     @JsonProperty("Sid")
-    @TableId("SID")
+    @TableField("SID")
     private String sid;
 
     @JsonProperty("EmailMessageSid")
-    @TableId("EMAIL_MESSAGE_SID")
+    @TableField("EMAIL_MESSAGE_SID")
     private String emailMessageSid;
 
     @JsonProperty("SendState")
-    @TableId("SEND_STATE")
+    @TableField("SEND_STATE")
     private int sendState;
+
+    @JsonProperty("SendRetryCount")
+    @TableField("SEND_RETRY_COUNT")
+    private int sendRetryCount = 0;
 
     @JsonProperty("CreateTime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") // 日期格式自动化
@@ -47,4 +51,18 @@ public class EmailAction extends BaseEntity {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") // 日期格式自动化
     @TableField("MODIFY_TIME")
     private Date modifyTime;
+
+    public int increaseSendRetryCount() {
+        return ++this.sendRetryCount;
+    }
+
+    public void sendError(IDateTimeProvider dateTimeProvider) {
+        this.setSendState(EmailSendStateEnum.SendError);
+        this.setModifyTime(dateTimeProvider.getNow());
+    }
+
+    public void sendSuccessed(IDateTimeProvider dateTimeProvider) {
+        this.setSendState(EmailSendStateEnum.SendSuccessed);
+        this.setModifyTime(dateTimeProvider.getNow());
+    }
 }

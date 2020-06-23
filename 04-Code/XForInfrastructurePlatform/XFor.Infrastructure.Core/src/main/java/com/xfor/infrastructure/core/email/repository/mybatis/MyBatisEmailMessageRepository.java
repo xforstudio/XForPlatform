@@ -20,11 +20,22 @@ public class MyBatisEmailMessageRepository implements IEmailMessageRepository {
 
     @Override
     public EmailMessage getEmailMessageBySid(ServiceContext sctx, String sid) {
-        return null;
+        EmailMessage result = this.emailMessageMyBatisDAO.selectById(sid);
+        return result;
     }
 
     @Override
     public boolean saveEmailMessage(ServiceContext sctx, EmailMessage emailMessage) {
-        return false;
+        int result = this.emailMessageMyBatisDAO.updateById(emailMessage);
+        if(result <= 0) {
+            result = this.emailMessageMyBatisDAO.insert(emailMessage);
+        }
+        return result > 0;
+    }
+
+    @Override
+    public boolean removeEmailMessageBySid(ServiceContext sctx, String sid) {
+        int result = this.emailMessageMyBatisDAO.deleteById(sid);
+        return result > 0;
     }
 }

@@ -24,12 +24,10 @@ public class EmailSendListener {
     private static final Logger _logger = LoggerFactory.getLogger(EmailSendListener.class);
 
     @Autowired
-    private EmailSendService emailSendService;
+    private EmailManageService emailManageService;
 
     @RabbitHandler
     public void onReceiveMessage(String content) throws JsonProcessingException {
-        Email email = JsonUtil._stringToObject(content, Email.class);
-        //发送邮件
-        this.emailSendService.sendEmail(email);
+        this.emailManageService.onEmailSend(content);
     }
 }

@@ -1,10 +1,15 @@
 package com.xfor.infrastructure.core.email.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xfor.infrastructure.core.common.model.BaseEntity;
+import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  *
@@ -13,7 +18,14 @@ import lombok.Data;
 @TableName("EMAIL_TEMPLATE")
 public class EmailTemplate extends BaseEntity {
 
-    public static EmailTemplate _create(String code, String name, String memo, String content, String fileName, int engineType) {
+    public static EmailTemplate _create(
+            String code,
+            String name,
+            String memo,
+            String content,
+            String fileName,
+            int engineType,
+            IDateTimeProvider dateTimeProvider) {
         EmailTemplate emailTemplate = new EmailTemplate();
         emailTemplate.setSid(_newSID());
         emailTemplate.setCode(code);
@@ -22,6 +34,8 @@ public class EmailTemplate extends BaseEntity {
         emailTemplate.setContent(content);
         emailTemplate.setFileName(fileName);
         emailTemplate.setEngineType(engineType);
+        emailTemplate.setCreateTime(dateTimeProvider.getNow());
+        emailTemplate.setModifyTime(dateTimeProvider.getNow());
         return emailTemplate;
     }
 
@@ -30,28 +44,36 @@ public class EmailTemplate extends BaseEntity {
     private String sid;
 
     @JsonProperty("Code")
-    @TableId("CODE")
+    @TableField("CODE")
     private String code;
 
     @JsonProperty("Name")
-    @TableId("NAME")
+    @TableField("NAME")
     private String name;
 
     @JsonProperty("Memo")
-    @TableId("MEMO")
+    @TableField("MEMO")
     private String memo;
 
     @JsonProperty("Content")
-    @TableId("CONTENT")
+    @TableField("CONTENT")
     private String content;
 
     @JsonProperty("FileName")
-    @TableId("FILE_NAME")
+    @TableField("FILE_NAME")
     private String fileName;
 
     @JsonProperty("EngineType")
-    @TableId("ENGINE_TYPE")
+    @TableField("ENGINE_TYPE")
     private int engineType;
 
+    @JsonProperty("CreateTime")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") // 日期格式自动化
+    @TableField("CREATE_TIME")
+    private Date createTime;
 
+    @JsonProperty("ModifyTime")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") // 日期格式自动化
+    @TableField("MODIFY_TIME")
+    private Date modifyTime;
 }

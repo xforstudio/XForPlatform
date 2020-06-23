@@ -1,7 +1,12 @@
 package com.xfor.email.manage.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.xfor.email.manage.config.EmailConfig;
+import com.xfor.email.manage.config.RabbitMQConfig;
+import com.xfor.email.manage.manager.RabbitMQManager;
 import com.xfor.infrastructure.core.email.model.Email;
+import com.xfor.infrastructure.core.email.model.EmailMessage;
+import com.xfor.infrastructure.core.email.model.EmailSendException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +30,7 @@ public class EmailSendService {
     @Autowired
     private EmailConfig emailConfig;
 
+    //发送简单邮件
     public void sendSimpleMail(String to, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(emailConfig.getMailFrom());
@@ -39,8 +45,8 @@ public class EmailSendService {
         }
     }
 
-    //发送 html 格式邮件
-    public void sendHtmlMail(String to, String subject, String content) {
+    //发送Html格式邮件
+    public void sendMailWithHtml(String to, String subject, String content) {
         MimeMessage message = this.mailSender.createMimeMessage();
         try {
             //true表示需要创建一个multipart message
@@ -99,7 +105,8 @@ public class EmailSendService {
     }
 
     //发送邮件
-    public void sendEmail(Email email) {
+    public void sendEmail(EmailMessage emailMessage) throws EmailSendException {
         return;
     }
+
 }

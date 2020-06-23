@@ -25,19 +25,8 @@ public class EmailCreateListener {
     @Autowired
     private EmailManageService emailManageService;
 
-    @Autowired
-    private RabbitMQManager rabbitMQManager;
-
-    @Autowired
-    private RabbitMQConfig rabbitMQConfig;
-
     @RabbitHandler
     public void onReceiveMessage(String content) throws JsonProcessingException, EmailException {
-        //System.out.println("Receiver: " + fieldsContent);
-        EmailMessage fields = JsonUtil._stringToObject(content, EmailMessage.class);
-        //创建并保存Email业务数据对象
-        Email email = this.emailManageService.createEmail(fields);
-        //发送邮件发送消息
-        this.rabbitMQManager.sendMessage(this.rabbitMQConfig.getQueueNameEmailSend(), email);
+        this.emailManageService.onEmailCreate(content);
     }
 }

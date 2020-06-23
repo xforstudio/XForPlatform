@@ -5,6 +5,6 @@ package com.xfor.infrastructure.core.email.model;
  */
 public class EmailTemplateEngineEnum {
     public static final int None = 0;
-    public static final int Xslt = 0;
-    public static final int Thymeleaf = 0;
+    public static final int Xslt = 1;
+    public static final int Thymeleaf = 2;
 }

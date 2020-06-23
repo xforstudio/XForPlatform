@@ -13,4 +13,6 @@ public interface IEmailTemplateRepository {
     EmailTemplate getEmailTemplateBySid(ServiceContext sctx, String sid);
 
     boolean saveEmailTemplate(ServiceContext sctx, EmailTemplate emailTemplate);
+
+    boolean removeEmailTemplateBySid(ServiceContext sctx, String sid);
 }
