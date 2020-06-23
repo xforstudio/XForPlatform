@@ -23,7 +23,7 @@ public class EmailManageService extends BaseService {
     private IEmailMessageRepository emailMessageRepository;
 
     @Autowired
-    private IEmailActionRepository emailSendRepository;
+    private IEmailActionRepository emailActionRepository;
 
     @Autowired
     private IEmailTemplateRepository emailTemplateRepository;
@@ -42,37 +42,56 @@ public class EmailManageService extends BaseService {
                 fields.getTemplateId(),
                 fields.getTemplateData());
         EmailAction emailAction = EmailAction._create(emailMessage);
+        //保存数据
+        this.emailMessageRepository.saveEmailMessage(sctx, emailMessage);
+        this.emailActionRepository.saveEmailAction(sctx, emailAction);
+        //创建Email
         Email email = Email._create(emailMessage, emailAction);
         return email;
     }
 
     public boolean removeEmail(Email email) throws EmailException {
-        return false;
-    }
-
-    public boolean removeEmailByEmailMessageSid(String emailMessageSid) throws EmailException {
-        return false;
+        ServiceContext sctx = this.doGetServiceContext();
+        boolean result = false;
+        //删除EmailMessage
+        result = this.emailMessageRepository.removeEmailMessageBySid(sctx, email.getEmailMessage().getSid());
+        if (!result) {
+            return false;
+        }
+        result = this.emailActionRepository.removeEmailActionBySid(sctx, email.getEmailAction().getSid());
+        return result;
     }
 
     /* EmailMessage */
 
     public EmailMessage getEmailMessageBySid(String emailMessageSid) {
-        return null;
+        ServiceContext sctx = this.doGetServiceContext();
+        EmailMessage result = this.emailMessageRepository.getEmailMessageBySid(sctx, emailMessageSid);
+        return result;
     }
 
     /* EmailAction */
 
     public EmailAction getEmailActionBySid(String emailActionSid) {
-        return null;
+        ServiceContext sctx = this.doGetServiceContext();
+        EmailAction result = this.emailActionRepository.getEmailActionBySid(sctx, emailActionSid);
+        return result;
     }
 
     public EmailAction getEmailActionByEmailMessageSid(String emailMessageSid) {
-        return null;
+        ServiceContext sctx = this.doGetServiceContext();
+        EmailAction result = this.emailActionRepository.get(sctx, emailActionSid);
+        return result;
     }
 
     /* EmailTemplate */
 
     public EmailTemplate createEmailTemplate(EmailTemplate fields) throws EmailException {
+        ServiceContext sctx = this.doGetServiceContext();
+        EmailTemplate emailTemplate = EmailTemplate.
+
+        EmailAction result = this.emailTemplateRepository.saveEmailTemplate(sctx, emailActionSid);
+        return result;
         return null;
     }
 

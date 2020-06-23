@@ -15,4 +15,6 @@ public interface IEmailMessageRepository {
     EmailMessage getEmailMessageBySid(ServiceContext sctx, String sid);
 
     boolean saveEmailMessage(ServiceContext sctx, EmailMessage emailMessage);
+
+    boolean removeEmailMessageBySid(ServiceContext sctx, String sid);
 }
