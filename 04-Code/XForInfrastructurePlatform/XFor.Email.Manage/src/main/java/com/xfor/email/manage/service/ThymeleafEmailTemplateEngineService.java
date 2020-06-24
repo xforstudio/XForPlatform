@@ -39,9 +39,6 @@ public class ThymeleafEmailTemplateEngineService implements IEmailTemplateEngine
         String emailContent = templateEngine.process(emailMessage.getEmailTemplateCode(), context);
 //        context.setVariable("id", "006");
 //        String emailContent = templateEngine.process("emailTemplate", context);
-        //
-        EmailBody emailBody = new EmailBody();
-        emailBody.setHtmlContent(emailContent);
-        return emailBody;
+        return EmailBody._createFromHtmlContent(emailContent);
     }
 }

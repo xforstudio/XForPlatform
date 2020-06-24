@@ -19,6 +19,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.xml.transform.TransformerException;
+import java.io.IOException;
+
 /**
  *
  */
@@ -159,8 +162,11 @@ public class EmailManageService extends BaseService {
         ServiceContext sctx = this.doGetServiceContext();
         //尝试发送邮件
         try {
+            EmailTemplate emailTemplate = this.emailTemplateRepository.getEmailTemplateByCode(
+                    sctx,
+                    email.getEmailMessage().getEmailTemplateCode());
             //发送邮件
-            this.emailSendService.sendEmail(email.getEmailMessage());
+            this.emailSendService.sendEmail(email.getEmailMessage(), emailTemplate);
             //处理发送成功
             //设置状态
             email.getEmailAction().sendSuccessed(this.dateTimeProvider);
@@ -175,6 +181,10 @@ public class EmailManageService extends BaseService {
             this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
             //将数据放入"SendRetry"缓存队列
             this.redisManager.addListValue(this.redisConfig.getListKeyEmailSendRetry(), email);
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -187,8 +197,11 @@ public class EmailManageService extends BaseService {
         ServiceContext sctx = this.doGetServiceContext();
         //尝试发送邮件
         try {
+            EmailTemplate emailTemplate = this.emailTemplateRepository.getEmailTemplateByCode(
+                    sctx,
+                    email.getEmailMessage().getEmailTemplateCode());
             //发送邮件
-            this.emailSendService.sendEmail(email.getEmailMessage());
+            this.emailSendService.sendEmail(email.getEmailMessage(), emailTemplate);
             //处理发送成功
             //设置状态
             email.getEmailAction().sendSuccessed(this.dateTimeProvider);
@@ -209,6 +222,10 @@ public class EmailManageService extends BaseService {
                 //保存数据
                 this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
             }
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

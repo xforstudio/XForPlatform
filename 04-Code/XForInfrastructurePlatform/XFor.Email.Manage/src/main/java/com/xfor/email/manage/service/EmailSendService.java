@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.xfor.email.manage.config.EmailConfig;
 import com.xfor.email.manage.config.RabbitMQConfig;
 import com.xfor.email.manage.manager.RabbitMQManager;
-import com.xfor.infrastructure.core.email.model.Email;
-import com.xfor.infrastructure.core.email.model.EmailMessage;
-import com.xfor.infrastructure.core.email.model.EmailSendException;
+import com.xfor.infrastructure.core.email.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,9 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.xml.transform.TransformerException;
 import java.io.File;
+import java.io.IOException;
 
 @Component
 public class EmailSendService {
@@ -29,6 +29,8 @@ public class EmailSendService {
     private JavaMailSender mailSender;
     @Autowired
     private EmailConfig emailConfig;
+    @Autowired
+    private IEmailTemplateEngineService emailTemplateEngineService;
 
     //发送简单邮件
     public void sendSimpleMail(String to, String subject, String content) {
@@ -46,16 +48,15 @@ public class EmailSendService {
     }
 
     //发送Html格式邮件
-    public void sendMailWithHtml(String to, String subject, String content) {
+    public void sendMailWithHtml(String from, String to, String subject, String content) {
         MimeMessage message = this.mailSender.createMimeMessage();
         try {
             //true表示需要创建一个multipart message
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom(this.emailConfig.getMailFrom());
+            helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(content, true);
-
             this.mailSender.send(message);
             _logger.info("html邮件发送成功");
         } catch (MessagingException e) {
@@ -105,8 +106,13 @@ public class EmailSendService {
     }
 
     //发送邮件
-    public void sendEmail(EmailMessage emailMessage) throws EmailSendException {
-        return;
+    public void sendEmail(EmailMessage emailMessage, EmailTemplate emailTemplate) throws EmailSendException, IOException, TransformerException {
+        EmailBody emailBody = this.emailTemplateEngineService.getEmailBody(emailMessage, emailTemplate);
+        this.sendMailWithHtml(
+                emailMessage.getFrom(),
+                emailMessage.getTo(),
+                emailMessage.getSubject(),
+                emailBody.getHtmlContent());
     }
 
 }
