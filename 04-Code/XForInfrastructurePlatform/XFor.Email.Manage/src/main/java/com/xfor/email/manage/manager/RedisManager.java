@@ -402,6 +402,15 @@ public class RedisManager {
         }
     }
 
+    public Object popListFirst(String key) {
+        try {
+            return redisTemplate.opsForList().leftPop(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     /**
      * 获取list缓存的长度
      * @param key 键

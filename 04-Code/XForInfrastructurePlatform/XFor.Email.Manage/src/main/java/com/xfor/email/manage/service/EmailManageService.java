@@ -1,6 +1,7 @@
 package com.xfor.email.manage.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.xfor.email.manage.config.EmailConfig;
 import com.xfor.email.manage.config.RabbitMQConfig;
 import com.xfor.email.manage.config.RedisConfig;
 import com.xfor.email.manage.manager.RabbitMQManager;
@@ -37,6 +38,8 @@ public class EmailManageService extends BaseService {
     @Autowired
     private EmailSendService emailSendService;
     @Autowired
+    private EmailConfig emailConfig;
+    @Autowired
     private RabbitMQManager rabbitMQManager;
     @Autowired
     private RabbitMQConfig rabbitMQConfig;
@@ -56,6 +59,7 @@ public class EmailManageService extends BaseService {
         EmailMessage emailMessage = EmailMessage._create(
                 fields.getFrom(),
                 fields.getTo(),
+                fields.getSubject(),
                 fields.getContent(),
                 fields.getEmailTemplateCode(),
                 fields.getEmailTemplateData(),
@@ -164,13 +168,47 @@ public class EmailManageService extends BaseService {
             this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
         } catch (EmailSendException ex) {
             //处理发送失败
+
             //设置状态
             email.getEmailAction().sendError(this.dateTimeProvider);
             //保存数据
             this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
             //将数据放入"SendRetry"缓存队列
-            //TODO:将数据放入"SendRetry"缓存队列
-            //this.redisManager.addListValue()
+            this.redisManager.addListValue(this.redisConfig.getListKeyEmailSendRetry(), email);
+        }
+    }
+
+    public void retrySendEmails() {
+        //从Redis缓存中获取并移除队列头部元素
+        Email email = (Email)this.redisManager.popListFirst(this.redisConfig.getListKeyEmailSendRetry());
+        //增加Retry次数
+        email.getEmailAction().increaseSendRetryCount();
+        //
+        ServiceContext sctx = this.doGetServiceContext();
+        //尝试发送邮件
+        try {
+            //发送邮件
+            this.emailSendService.sendEmail(email.getEmailMessage());
+            //处理发送成功
+            //设置状态
+            email.getEmailAction().sendSuccessed(this.dateTimeProvider);
+            //保存数据
+            this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+        } catch (EmailSendException ex) {
+            //处理发送失败
+            if (email.getEmailAction().isSendRetryEnabled(this.emailConfig.getMailSendRetryCountMax())) {
+                //设置状态
+                email.getEmailAction().sendError(this.dateTimeProvider);
+                //保存数据
+                this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+                //将数据放入"SendRetry"缓存队列
+                this.redisManager.addListValue(this.redisConfig.getListKeyEmailSendRetry(), email);
+            } else {
+                //设置最终状态：发送失败
+                email.getEmailAction().sendFault(this.dateTimeProvider);
+                //保存数据
+                this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+            }
         }
     }
 }

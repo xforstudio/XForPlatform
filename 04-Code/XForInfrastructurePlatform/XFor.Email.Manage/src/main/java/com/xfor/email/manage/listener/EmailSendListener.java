@@ -14,6 +14,9 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 /**
  *
  */
@@ -25,9 +28,14 @@ public class EmailSendListener {
 
     @Autowired
     private EmailManageService emailManageService;
+    @Autowired
+    private DateFormat dateFormat;
 
     @RabbitHandler
     public void onReceiveMessage(String content) throws JsonProcessingException {
+        //响应"EmailSend"消息
+        _logger.info("开始EmailSendListener  " + this.dateFormat.format(new Date()));
         this.emailManageService.onEmailSend(content);
+        _logger.info("结束EmailSendListener  " + this.dateFormat.format(new Date()));
     }
 }

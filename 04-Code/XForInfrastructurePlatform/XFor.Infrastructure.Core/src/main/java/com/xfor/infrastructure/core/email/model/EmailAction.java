@@ -65,4 +65,16 @@ public class EmailAction extends BaseEntity {
         this.setSendState(EmailSendStateEnum.SendSuccessed);
         this.setModifyTime(dateTimeProvider.getNow());
     }
+
+    public void sendFault(IDateTimeProvider dateTimeProvider) {
+        this.setSendState(EmailSendStateEnum.SendFault);
+        this.setModifyTime(dateTimeProvider.getNow());
+    }
+
+    public boolean isSendRetryEnabled(int mailSendRetryCountMax) {
+        if (this.sendRetryCount > mailSendRetryCountMax) {
+            this.sendRetryCount = mailSendRetryCountMax;
+        }
+        return this.sendRetryCount < mailSendRetryCountMax;
+    }
 }

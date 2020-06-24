@@ -19,6 +19,7 @@ public class EmailMessage extends BaseEntity {
     public static EmailMessage _create(
             String from,
             String to,
+            String subject,
             String content,
             String emailTemplateCode,
             String emailTemplateData,
@@ -27,6 +28,7 @@ public class EmailMessage extends BaseEntity {
         emailMessage.setSid(_newSID());
         emailMessage.setFrom(from);
         emailMessage.setTo(to);
+        emailMessage.setSubject(subject);
         emailMessage.setContent(content);
         emailMessage.setEmailTemplateCode(emailTemplateCode);
         emailMessage.setEmailTemplateData(emailTemplateData);
@@ -45,6 +47,10 @@ public class EmailMessage extends BaseEntity {
     @JsonProperty("To")
     @TableField("TO")
     private String to;
+
+    @JsonProperty("Subject")
+    @TableField("SUBJECT")
+    private String subject;
 
     @JsonProperty("Content")
     @TableField("CONTENT")
