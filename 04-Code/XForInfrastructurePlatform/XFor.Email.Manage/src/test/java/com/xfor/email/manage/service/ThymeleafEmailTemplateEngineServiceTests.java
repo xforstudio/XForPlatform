@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -21,10 +22,10 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class XsltEmailTemplateEngineServiceTests {
+class ThymeleafEmailTemplateEngineServiceTests {
 
     @Autowired
-    private XsltEmailTemplateEngineService emailTemplateEngineService;
+    private ThymeleafEmailTemplateEngineService emailTemplateEngineService;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
 
@@ -39,30 +40,33 @@ class XsltEmailTemplateEngineServiceTests {
     @Test
     void getEmailBody() throws JsonProcessingException, FileNotFoundException, UnsupportedEncodingException {
         //数据
-        String filePath_templateData = "C:\\WorkSpace\\XFor\\Projects\\TestData\\XForPlatform\\XFor.Email.Manage\\Xslt\\TemplateData.xml";
-        String emailTemplateData = IOUtil._readAllText(filePath_templateData);;
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("NAME", "liux");
+        map.put("CODE", "FX10000001");
+        String emailTemplateData = JsonUtil._objectToString(map);
         //模板
-        String filePath_templateContent = "C:\\WorkSpace\\XFor\\Projects\\TestData\\XForPlatform\\XFor.Email.Manage\\Xslt\\TemplateContent.xsl";
-        String emailTemplateContent = IOUtil._readAllText(filePath_templateContent);
+        String filePath = "C:\\WorkSpace\\XFor\\Projects\\TestData\\XForPlatform\\XFor.Email.Manage\\Thymeleaf\\TemplateContent.html";
+        String emailTemplateContent = IOUtil._readAllText(filePath);
         //
         EmailMessage emailMessage = EmailMessage._create(
                 "597834341@qq.com",
                 "3606737347@qq.com",
-                "Xslt测试",
+                "Thymeleaf测试",
                 "",
-                "ET_XT_0001",
+                "ET_TH_0001",
                 emailTemplateData,
                 dateTimeProvider);
         EmailTemplate emailTemplate = EmailTemplate._create(
-                "ET_XT_0001",
-                "XT模板0001",
+                "ET_TH_0001",
+                "TH模板0001",
                 "",
                 emailTemplateContent,
-                "",
-                EmailTemplateEngineEnum.Xslt,
+                "template.html",
+                EmailTemplateEngineEnum.Thymeleaf,
                 this.dateTimeProvider);
+        //
         EmailBody emailBody = this.emailTemplateEngineService.getEmailBody(emailMessage, emailTemplate);
-        String filePath_html = "C:\\WorkSpace\\XFor\\Projects\\TestData\\XForPlatform\\XFor.Email.Manage\\Xslt\\Publish.html";
+        String filePath_html = "C:\\WorkSpace\\XFor\\Projects\\TestData\\XForPlatform\\XFor.Email.Manage\\Thymeleaf\\Publish.html";
         IOUtil._writeAllText(filePath_html, emailBody.getHtmlContent());
     }
 }
