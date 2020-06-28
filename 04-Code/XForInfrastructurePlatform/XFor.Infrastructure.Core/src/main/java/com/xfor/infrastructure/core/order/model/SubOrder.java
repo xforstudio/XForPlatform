@@ -10,26 +10,21 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 订单
+ * 子订单
  */
 @Data
-@TableName("ORDER")
-public class Order {
+@TableName("SUBORDER")
+public class SubOrder {
 
     @TableId("SID")
-    private String sid;  //订单唯一标识
+    private String sid;  //子订单唯一标识
     @TableField("CODE")
-    private String code;  //订单号
+    private String code;  //子订单号
     @TableField("CREATE_TIME")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
-    @TableField("STATE")
-    private int state = OrderStateEnum.None;  //订单状态
-    @TableId("PAYMENT_ORDER_SID")
-    private String paymentOrderCode;  //支付订单号
     @TableField("FINAL_PRICE")
-    private float finalPrice;  //最终价格
+    private float finalPrice;
 
     private List<OrderEntry> orderEntries;
-    private List<SubOrder> subOrders;
 }
