@@ -1,0 +1,63 @@
+node -v
+npm -v
+npm list -global
+npm config set prefix  "C:\Program Files\nodejs\node_global"
+npm config set cache  "C:\Program Files\nodejs\node_cache"
+
+
+npm config set registry=https://registry.npm.taobao.org
+npm config list
+C:\Users\Administrator\.npmrc
+
+npm config get registry
+
+
+npm install vue -g
+npm install vue-router -g
+npm install vue-cli –g
+npm i -g @vue/cli
+vue -V
+
+npm install -g webpack 
+
+vue init webpack tcp.web
+
+
+vue init webpack tcp.web
+cd tcp.web
+npm run dev
+
+
+    //'@vue/standard',
+npm install typescript -g
+
+npm install vue-class-component vue-property-decorator --save-dev 
+npm install stylus-loader css-loader style-loader --save-dev
+
+"stylus-loader": "^3.0.2",
+"stylus": "0.52.4",
+
+
+ error  in ./src/components/HelloWorld.vue?vue&type=script&lang=ts&
+
+Module parse failed: Unexpected character '@' (36:0)
+File was processed with these loaders:
+ * ./node_modules/cache-loader/dist/cjs.js
+ * ./node_modules/vue-loader/lib/index.js
+You may need an additional loader to handle the result of these loaders.
+| import { Component, Vue } from 'vue-property-decorator'
+|
+> @Component
+| export default class HelloWorld extends Vue {
+|   msg:string = 'Welcome to Your Vue.js App'
+
+ @ ./src/components/HelloWorld.vue?vue&type=script&lang=ts& 1:0-179 1:195-198 1:200-376 1:200-376
+ @ ./src/components/HelloWorld.vue
+ @ ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=script&lang=ts&
+ @ ./src/App.vue?vue&type=script&lang=ts&
+ @ ./src/App.vue
+ @ ./src/main.js
+ @ multi (webpack)-dev-server/client?http://192.168.92.128:8080/sockjs-node (webpack)/hot/dev-server.js ./src/main.js
+
+
+
