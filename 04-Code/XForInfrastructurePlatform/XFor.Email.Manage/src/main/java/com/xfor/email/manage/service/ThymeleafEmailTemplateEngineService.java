@@ -9,17 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import java.util.HashMap;
 
 /**
  *
  */
-@Component
+@Component("ThymeleafEmailTemplateEngineService")
 public class ThymeleafEmailTemplateEngineService implements IEmailTemplateEngineService {
 
     @Autowired
-    private TemplateEngine templateEngine;
+    private SpringTemplateEngine templateEngine;
 
     @Override
     public EmailBody getEmailBody(EmailMessage emailMessage, EmailTemplate emailTemplate) {
@@ -32,13 +33,9 @@ public class ThymeleafEmailTemplateEngineService implements IEmailTemplateEngine
         }
         //创建邮件正文
         Context context = new Context();
-        for (String key : map.keySet()) {
-            Object value = map.get(key);
-            context.setVariable(key, value);
-        }
-        String emailContent = templateEngine.process(emailMessage.getEmailTemplateCode(), context);
-//        context.setVariable("id", "006");
-//        String emailContent = templateEngine.process("emailTemplate", context);
+        context.setVariables(map);
+        //模板解析
+        String emailContent = templateEngine.process(emailTemplate.getContent(), context);
         return EmailBody._createFromHtmlContent(emailContent);
     }
 }

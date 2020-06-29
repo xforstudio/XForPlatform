@@ -103,4 +103,12 @@ public class IOUtil {
             }
         }
     }
+
+    public static void _ensureFileDelete(String fileName) {
+        File file = new File(fileName);
+        if (!file.isFile() || !file.exists()) {
+            return;
+        }
+        file.delete();
+    }
 }

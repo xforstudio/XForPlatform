@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  *
  */
-@Component
+@Component("XsltEmailTemplateEngineService")
 public class XsltEmailTemplateEngineService implements IEmailTemplateEngineService {
 
     @Override
@@ -23,8 +23,6 @@ public class XsltEmailTemplateEngineService implements IEmailTemplateEngineServi
         } catch (Exception ex) {
 
         }
-
-
         return null;
     }
 }

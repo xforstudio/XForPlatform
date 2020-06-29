@@ -67,6 +67,7 @@ class ThymeleafEmailTemplateEngineServiceTests {
         //
         EmailBody emailBody = this.emailTemplateEngineService.getEmailBody(emailMessage, emailTemplate);
         String filePath_html = "C:\\WorkSpace\\XFor\\Projects\\TestData\\XForPlatform\\XFor.Email.Manage\\Thymeleaf\\Publish.html";
+        IOUtil._ensureFileDelete(filePath_html);
         IOUtil._writeAllText(filePath_html, emailBody.getHtmlContent());
     }
 }
