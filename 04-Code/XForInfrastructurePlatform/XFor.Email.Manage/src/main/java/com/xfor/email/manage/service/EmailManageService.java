@@ -137,6 +137,47 @@ public class EmailManageService extends BaseService {
 
     /* EmailSend */
 
+    public void sendEmail(EmailMessage fields) throws EmailException {
+
+        //创建并保存Email业务数据对象
+        Email email = this.createEmail(fields);
+
+        ServiceContext sctx = this.doGetServiceContext();
+        //获取模板
+        EmailTemplate emailTemplate = this.emailTemplateRepository.getEmailTemplateByCode(
+                sctx,
+                email.getEmailMessage().getEmailTemplateCode());
+        //尝试发送邮件
+        try {
+
+            //发送邮件
+            this.emailSendService.sendEmail(email.getEmailMessage(), emailTemplate);
+            //处理发送成功
+            //设置状态
+            email.getEmailAction().sendSuccessed(this.dateTimeProvider);
+            //保存数据
+            this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+        } catch (EmailSendException ex) {
+            //处理发送失败
+
+            //设置状态
+            email.getEmailAction().sendError(this.dateTimeProvider);
+            //保存数据
+            this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+            //将数据放入"SendRetry"缓存队列
+            this.redisManager.addListValue(this.redisConfig.getListKeyEmailSendRetry(), email);
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendEmailAsync(EmailMessage fields) throws JsonProcessingException {
+        //发送"EmailCreate"消息
+        this.rabbitMQManager.sendMessage(this.rabbitMQConfig.getQueueNameEmailCreate(), fields);
+    }
+
     //处理"EmailCreate"消息
     public void onEmailCreate(String content) throws EmailException, JsonProcessingException {
         EmailMessage fields = JsonUtil._stringToObject(content, EmailMessage.class);
@@ -147,7 +188,7 @@ public class EmailManageService extends BaseService {
     public void onEmailCreate(EmailMessage fields) throws EmailException, JsonProcessingException {
         //创建并保存Email业务数据对象
         Email email = this.createEmail(fields);
-        //发送邮件发送消息
+        //发送"EmailSend"消息
         this.rabbitMQManager.sendMessage(this.rabbitMQConfig.getQueueNameEmailSend(), email);
     }
 
