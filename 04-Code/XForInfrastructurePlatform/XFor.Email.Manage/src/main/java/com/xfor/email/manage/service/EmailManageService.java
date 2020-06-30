@@ -88,6 +88,14 @@ public class EmailManageService extends BaseService {
         return result;
     }
 
+    public Email getEmailByEmailMessageSid(String emailMessageSid) {
+        ServiceContext sctx = this.doGetServiceContext();
+        EmailMessage emailMessage = this.emailMessageRepository.getEmailMessageBySid(sctx, emailMessageSid);
+        EmailAction emailAction = this.emailActionRepository.getEmailActionByEmailMessageSid(sctx, emailMessageSid);
+        Email email = Email._create(emailMessage, emailAction);
+        return email;
+    }
+
     /* EmailMessage */
 
     public EmailMessage getEmailMessageBySid(String emailMessageSid) {
@@ -164,8 +172,8 @@ public class EmailManageService extends BaseService {
             email.getEmailAction().sendError(this.dateTimeProvider);
             //保存数据
             this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
-            //将数据放入"SendRetry"缓存队列
-            this.redisManager.addListValue(this.redisConfig.getListKeyEmailSendRetry(), email);
+
+            //重试
         } catch (TransformerException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -267,6 +275,49 @@ public class EmailManageService extends BaseService {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void retrySendEmails(String emailMessageSID, int mailSendRetryCountMax) {
+        ServiceContext sctx = this.doGetServiceContext();
+        Email email = this.getEmailByEmailMessageSid(emailMessageSID);
+        if (email.getEmailAction().hasSendFinished()) {
+            return;
+        }
+        while (email.getEmailAction().increaseSendRetryCount() <= mailSendRetryCountMax) {
+            try {
+                EmailTemplate emailTemplate = this.emailTemplateRepository.getEmailTemplateByCode(
+                        sctx,
+                        email.getEmailMessage().getEmailTemplateCode());
+                //发送邮件
+                this.emailSendService.sendEmail(email.getEmailMessage(), emailTemplate);
+                //处理发送成功
+                //设置状态
+                email.getEmailAction().sendSuccessed(this.dateTimeProvider);
+                //保存数据
+                this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+                //
+                return;
+            } catch (EmailSendException ex) {
+                //处理发送失败
+                if (email.getEmailAction().isSendRetryEnabled(this.emailConfig.getMailSendRetryCountMax())) {
+                    //设置状态
+                    email.getEmailAction().sendError(this.dateTimeProvider);
+                    //保存数据
+                    this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+                } else {
+                    //设置最终状态：发送失败
+                    email.getEmailAction().sendFault(this.dateTimeProvider);
+                    //保存数据
+                    this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+                    //
+                    return;
+                }
+            } catch (TransformerException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

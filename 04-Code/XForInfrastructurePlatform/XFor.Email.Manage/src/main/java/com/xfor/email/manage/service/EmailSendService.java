@@ -109,12 +109,12 @@ public class EmailSendService {
 
     //发送邮件
     public void sendEmail(EmailMessage emailMessage, EmailTemplate emailTemplate) throws EmailSendException, IOException, TransformerException {
-        EmailBody emailBody = this.emailTemplateEngineService.getEmailBody(emailMessage, emailTemplate);
-        this.sendMailWithHtml(
-                emailMessage.getFrom(),
-                emailMessage.getTo(),
-                emailMessage.getSubject(),
-                emailBody.getHtmlContent());
+//        EmailBody emailBody = this.emailTemplateEngineService.getEmailBody(emailMessage, emailTemplate);
+//        this.sendMailWithHtml(
+//                emailMessage.getFrom(),
+//                emailMessage.getTo(),
+//                emailMessage.getSubject(),
+//                emailBody.getHtmlContent());
     }
 
 }

@@ -27,7 +27,7 @@ public class EmailAction extends BaseEntity {
     }
 
     @JsonProperty("Sid")
-    @TableField("SID")
+    @TableId("SID")
     private String sid;
 
     @JsonProperty("EmailMessageSid")
@@ -76,5 +76,10 @@ public class EmailAction extends BaseEntity {
             this.sendRetryCount = mailSendRetryCountMax;
         }
         return this.sendRetryCount < mailSendRetryCountMax;
+    }
+
+    public boolean hasSendFinished() {
+        return this.sendState == EmailSendStateEnum.SendFault
+                || this.sendState == EmailSendStateEnum.SendSuccessed;
     }
 }

@@ -41,19 +41,19 @@ public class EmailMessage extends BaseEntity {
     private String sid;
 
     @JsonProperty("From")
-    @TableField("FROM")
+    @TableField("EMAIL_FROM")
     private String from;
 
     @JsonProperty("To")
-    @TableField("TO")
+    @TableField("EMAIL_TO")
     private String to;
 
     @JsonProperty("Subject")
-    @TableField("SUBJECT")
+    @TableField("EMAIL_SUBJECT")
     private String subject;
 
     @JsonProperty("Content")
-    @TableField("CONTENT")
+    @TableField("EMAIL_CONTENT")
     private String content;
 
     @JsonProperty("EmailTemplateCode")
