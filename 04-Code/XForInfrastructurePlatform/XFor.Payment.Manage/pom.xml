@@ -17,6 +17,8 @@
 
     <properties>
         <java.version>14</java.version>
+        <com.egzosn.pay.starter.version>0.0.4</com.egzosn.pay.starter.version>
+        <com.egzosn.pay.version>2.13.2</com.egzosn.pay.version>
     </properties>
 
     <dependencies>
@@ -70,6 +72,48 @@
             <artifactId>xfor-infrastructure-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
+        </dependency>
+
+        <!--第三方支付-->
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-spring-boot-starter</artifactId>
+            <version>${com.egzosn.pay.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-ali</artifactId>
+            <version>${com.egzosn.pay.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-wx</artifactId>
+            <version>${com.egzosn.pay.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-union</artifactId>
+            <version>${com.egzosn.pay.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-payoneer</artifactId>
+            <version>${com.egzosn.pay.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-paypal</artifactId>
+            <version>${com.egzosn.pay.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-wx-youdian</artifactId>
+            <version>${com.egzosn.pay.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-fuiou</artifactId>
+            <version>${com.egzosn.pay.version}</version>
         </dependency>
     </dependencies>
 
