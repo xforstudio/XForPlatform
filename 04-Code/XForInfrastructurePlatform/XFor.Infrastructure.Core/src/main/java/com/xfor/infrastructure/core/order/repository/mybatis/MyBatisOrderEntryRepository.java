@@ -1,5 +1,6 @@
 package com.xfor.infrastructure.core.order.repository.mybatis;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xfor.infrastructure.core.common.service.ServiceContext;
 import com.xfor.infrastructure.core.order.model.OrderEntry;
 import com.xfor.infrastructure.core.order.repository.IOrderEntryRepository;
@@ -20,34 +21,40 @@ public class MyBatisOrderEntryRepository implements IOrderEntryRepository {
     public MyBatisOrderEntryRepository() {
     }
 
-
     @Override
     public OrderEntry getOrderEntryBySid(ServiceContext sctx, String sid) {
-        return null;
+        OrderEntry result = this.orderEntryMyBatisDAO.selectById(sid);
+        return result;
     }
 
     @Override
     public List<OrderEntry> getOrderEntriesByOrderSid(ServiceContext sctx, String orderSid) {
-        return null;
+        QueryWrapper<OrderEntry> wrapper = new QueryWrapper<>();
+        wrapper.eq("ORDER_SID", orderSid);
+        List<OrderEntry> result = this.orderEntryMyBatisDAO.selectList(wrapper);
+        return result;
     }
 
     @Override
     public boolean saveOrderEntry(ServiceContext sctx, OrderEntry orderEntry) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrderEntries(ServiceContext sctx, List<OrderEntry> orderEntries) {
-        return false;
+        int result = this.orderEntryMyBatisDAO.updateById(orderEntry);
+        if(result <= 0) {
+            result = this.orderEntryMyBatisDAO.insert(orderEntry);
+        }
+        return result > 0;
     }
 
     @Override
     public boolean removeOrderEntryBySid(ServiceContext sctx, String sid) {
-        return false;
+        int result = this.orderEntryMyBatisDAO.deleteById(sid);
+        return result > 0;
     }
 
     @Override
     public boolean removeOrderEntriesByOrderSid(ServiceContext sctx, String orderSid) {
-        return false;
+        QueryWrapper<OrderEntry> wrapper = new QueryWrapper<>();
+        wrapper.eq("ORDER_SID", orderSid);
+        int result = this.orderEntryMyBatisDAO.delete(wrapper);
+        return result > 0;
     }
 }

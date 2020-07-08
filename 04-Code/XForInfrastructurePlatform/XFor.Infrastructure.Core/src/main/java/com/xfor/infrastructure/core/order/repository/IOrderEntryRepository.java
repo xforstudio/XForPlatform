@@ -18,8 +18,6 @@ public interface IOrderEntryRepository {
 
     boolean saveOrderEntry(ServiceContext sctx, OrderEntry orderEntry);
 
-    boolean saveOrderEntries(ServiceContext sctx, List<OrderEntry> orderEntries);
-
     boolean removeOrderEntryBySid(ServiceContext sctx, String sid);
 
     boolean removeOrderEntriesByOrderSid(ServiceContext sctx, String orderSid);
