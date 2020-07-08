@@ -34,6 +34,7 @@
       <module name="XFor.Payment.Manage" target="13" />
       <module name="XFor.Product.Manage" target="13" />
       <module name="XFor.Sms.Manage" target="13" />
+      <module name="XFor.Store.Manage" target="14" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -47,6 +48,7 @@
       <module name="XFor.Payment.Manage" options="" />
       <module name="XFor.Product.Manage" options="" />
       <module name="XFor.Sms.Manage" options="-parameters" />
+      <module name="XFor.Store.Manage" options="-parameters" />
       <module name="xfor-email-manage" options="" />
       <module name="xfor-file-manage" options="" />
       <module name="xfor-infrastructure-core" options="-parameters" />
