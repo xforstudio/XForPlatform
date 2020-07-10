@@ -17,7 +17,7 @@ public class OrderEntry {
     @TableField("ORDER_SID")
     private String orderSID;  //订单标识
     @TableField("PRODUCT_SID")
-    private String productCode;  //商品代码
+    private String productSid;  //商品唯一标识
     @TableField("PRODUCT_PRICE")
     private float productPrice;  //商品价格
     @TableField("PRODUCT_QUANTITY")

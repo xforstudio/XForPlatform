@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.xfor.infrastructure.core.common.model.BaseEntity;
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import com.xfor.infrastructure.core.common.model.SID;
 import lombok.Data;
@@ -17,11 +18,7 @@ import java.util.List;
  */
 @Data
 @TableName("PRODUCT")
-public class Product {
-
-    public static String _newSID() {
-        return SID._newSID();
-    }
+public class Product extends BaseEntity {
 
     public static Product _create(String productStoreSid, String code, String name, String memo,
                                   float price, int saleState, IDateTimeProvider dateTimeProvider) {
