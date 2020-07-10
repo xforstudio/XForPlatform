@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
+import com.xfor.infrastructure.core.common.util.RandomUtil;
 import com.xfor.infrastructure.core.product.model.Product;
 import lombok.Data;
 
@@ -17,9 +18,10 @@ import java.util.Random;
 public class StoreCartEntry {
 
     public static String _newId() {
-        Random ra =new Random();
-        int number = ra.nextInt(9999999) + 1;
-        String id = String.format("%04d", number);
+//        Random ra =new Random();
+//        int number = ra.nextInt(9999999) + 1;
+//        String id = String.format("%04d", number);
+        String id = RandomUtil._nextIntWithFormat(8, "%08d");
         return id;
     }
 

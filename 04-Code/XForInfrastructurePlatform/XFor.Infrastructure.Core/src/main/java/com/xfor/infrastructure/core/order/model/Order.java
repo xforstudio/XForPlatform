@@ -5,8 +5,13 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.xfor.infrastructure.core.common.model.BaseEntity;
+import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
+import com.xfor.infrastructure.core.common.util.RandomUtil;
+import com.xfor.infrastructure.core.product.model.Product;
 import lombok.Data;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,12 +21,22 @@ import java.util.List;
  */
 @Data
 @TableName("ORDER")
-public class Order {
+public class Order extends BaseEntity {
 
-    public static String _newCode
+    public static String _newCode(IDateTimeProvider dateTimeProvider) {
+        SimpleDateFormat dateFormat =new SimpleDateFormat("yyyyMMddHHmmss");
+        String prefix = dateFormat.format(dateTimeProvider.getNow());
+        String suffix = RandomUtil._nextIntWithFormat(6, "%06d");
+        String result = prefix + suffix;
+        return result;
+    }
 
-    public static Order _create() {
-
+    public static Order _create(String code, IDateTimeProvider dateTimeProvider) {
+        Order order = new Order();
+        order.setSid(_newSID());
+        order.setCode(code);
+        order.setCreateTime(dateTimeProvider.getNow());
+        return order;
     }
 
     @JsonProperty("Sid")
@@ -42,7 +57,7 @@ public class Order {
     private int state = OrderStateEnum.None;  //订单状态
 
     @JsonProperty("PaymentOrderCode")
-    @TableId("PAYMENT_ORDER_CODE")
+    @TableField("PAYMENT_ORDER_CODE")
     private String paymentOrderCode;  //支付订单号
 
     @JsonProperty("FinalPrice")
@@ -60,4 +75,36 @@ public class Order {
      */
     @JsonProperty("SubOrders")
     private List<SubOrder> subOrders = new ArrayList<>();
+
+    /**
+     * 
+     * @param orderEntrySid
+     * @return
+     */
+    public OrderEntry findOrderEntryBySid(String orderEntrySid) {
+
+    }
+
+    /**
+     * 创建、添加订单项
+     * @param product
+     * @param productQuantity
+     * @return
+     */
+    public OrderEntry createOrderEntry(Product product, float productQuantity) {
+        OrderEntry orderEntry = OrderEntry._create(
+                this.getSid(),
+                product.getSid(),
+                product.getPrice(),
+                productQuantity);
+        return orderEntry;
+    }
+
+    public OrderEntry removeOrderEntry(String orderEntrySid) {
+        OrderEntry orderEntry = this.findOrderEntryBySid(orderEntrySid);
+        if (orderEntry != null) {
+            this.getOrderEntries().remove(orderEntry);
+        }
+        return orderEntry;
+    }
 }
