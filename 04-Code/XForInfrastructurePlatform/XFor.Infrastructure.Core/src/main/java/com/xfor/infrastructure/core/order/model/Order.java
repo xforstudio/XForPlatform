@@ -82,7 +82,12 @@ public class Order extends BaseEntity {
      * @return
      */
     public OrderEntry findOrderEntryBySid(String orderEntrySid) {
-
+        for (OrderEntry orderEntry : this.getOrderEntries()) {
+            if (orderEntry.equalsSid(orderEntrySid)) {
+                return orderEntry;
+            }
+        }
+        return null;
     }
 
     /**

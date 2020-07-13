@@ -8,17 +8,19 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="XFor.Infrastructure.Core" />
-        <module name="xfor-infrastructure-core" />
-        <module name="XFor.Lab" />
         <module name="XFor.Finance.Manage" />
+        <module name="XFor.Lab" />
         <module name="xfor-lab" />
+        <module name="xfor-infrastructure-core" />
         <module name="XFor.Sms.Manage" />
+        <module name="xfor-finance-manage" />
         <module name="xfor-sms-manage" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="xfor-email-manage" target="13" />
       <module name="xfor-file-manage" target="13" />
+      <module name="xfor-finance-manage" target="14" />
       <module name="xfor-infrastructure-core" target="13" />
       <module name="xfor-lab" target="13" />
       <module name="xfor-order-manage" target="13" />
@@ -37,7 +39,7 @@
       <module name="XFor.Payment.Manage" target="13" />
       <module name="XFor.Product.Manage" target="13" />
       <module name="XFor.Sms.Manage" target="13" />
-      <module name="XFor.Store.Manage" target="14" />
+      <module name="XFor.Store.Manage" target="13" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -52,9 +54,10 @@
       <module name="XFor.Payment.Manage" options="" />
       <module name="XFor.Product.Manage" options="" />
       <module name="XFor.Sms.Manage" options="-parameters" />
-      <module name="XFor.Store.Manage" options="-parameters" />
+      <module name="XFor.Store.Manage" options="" />
       <module name="xfor-email-manage" options="" />
       <module name="xfor-file-manage" options="" />
+      <module name="xfor-finance-manage" options="-parameters" />
       <module name="xfor-infrastructure-core" options="-parameters" />
       <module name="xfor-lab" options="-parameters" />
       <module name="xfor-product-manage" options="" />

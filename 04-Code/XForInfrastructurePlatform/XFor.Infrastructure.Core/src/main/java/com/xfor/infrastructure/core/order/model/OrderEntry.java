@@ -58,5 +58,13 @@ public class OrderEntry extends BaseEntity {
      */
     public float calcFinalPrice() {
         float result = this.getProductPrice() * this.getProductQuantity();
+        return result;
+    }
+
+    public boolean equalsSid(String sid) {
+        if (this.getSid() == null) {
+            return sid == null;
+        }
+        return this.getSid().equals(sid);
     }
 }
