@@ -10,6 +10,7 @@
         <module name="XFor.Infrastructure.Core" />
         <module name="xfor-infrastructure-core" />
         <module name="XFor.Lab" />
+        <module name="XFor.Finance.Manage" />
         <module name="xfor-lab" />
         <module name="XFor.Sms.Manage" />
         <module name="xfor-sms-manage" />
@@ -25,8 +26,10 @@
       <module name="xfor-payment-manage" target="13" />
       <module name="xfor-product-manage" target="13" />
       <module name="xfor-sms-manage" target="13" />
+      <module name="xfor-store-manage" target="13" />
       <module name="XFor.Email.Manage" target="13" />
       <module name="XFor.File.Manage" target="13" />
+      <module name="XFor.Finance.Manage" target="14" />
       <module name="XFor.Infrastructure.Core" target="13" />
       <module name="XFor.Lab" target="13" />
       <module name="XFor.Order.Manage" target="13" />
@@ -41,6 +44,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="XFor.Email.Manage" options="" />
       <module name="XFor.File.Manage" options="" />
+      <module name="XFor.Finance.Manage" options="-parameters" />
       <module name="XFor.Infrastructure.Core" options="-parameters" />
       <module name="XFor.Lab" options="-parameters" />
       <module name="XFor.Order.Manage" options="" />
