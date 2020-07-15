@@ -8,11 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="XFor.Infrastructure.Core" />
+        <module name="xfor-infrastructure-core" />
         <module name="XFor.Lab" />
         <module name="xfor-lab" />
-        <module name="xfor-infrastructure-core" />
         <module name="XFor.Sms.Manage" />
-        <module name="xfor-finance-manage" />
         <module name="xfor-sms-manage" />
       </profile>
     </annotationProcessing>
@@ -56,7 +55,7 @@
       <module name="XFor.Store.Manage" options="" />
       <module name="xfor-email-manage" options="" />
       <module name="xfor-file-manage" options="" />
-      <module name="xfor-finance-manage" options="-parameters" />
+      <module name="xfor-finance-manage" options="" />
       <module name="xfor-infrastructure-core" options="-parameters" />
       <module name="xfor-lab" options="-parameters" />
       <module name="xfor-product-manage" options="" />

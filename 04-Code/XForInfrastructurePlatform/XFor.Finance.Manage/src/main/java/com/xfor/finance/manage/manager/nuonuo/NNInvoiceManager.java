@@ -64,162 +64,177 @@ public class NNInvoiceManager {
     /* 极速开票 */
 
     //获取企业下待开票列表接口：nuonuo.speedBilling.querySpeedBilling
-    public String querySpeedBilling(NNQuerySpeedBillingContent content) throws JsonProcessingException {
+    public NNQuerySpeedBillingResult querySpeedBilling(NNQuerySpeedBillingContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.speedBilling.querySpeedBilling";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNQuerySpeedBillingResult result = JsonUtil._stringToObject(result_json, NNQuerySpeedBillingResult.class);
+        return result;
     }
 
     /* 发票开具 */
 
     //红字专用发票信息表申请接口：nuonuo.ElectronInvoice.InvoiceRedApply
-    public String invoiceRedApply(NNInvoiceRedApplyContent content) throws JsonProcessingException {
+    public NNInvoiceRedApplyResult invoiceRedApply(NNInvoiceRedApplyContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.ElectronInvoice.InvoiceRedApply";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
             this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNInvoiceRedApplyResult result = JsonUtil._stringToObject(result_json, NNInvoiceRedApplyResult.class);
+        return result;
     }
 
     //红字专用发票信息表下载接口：nuonuo.ElectronInvoice.downloadInvoiceRedApply
-    public String downloadInvoiceRedApply(NNDownloadInvoiceRedApplyContent content) throws JsonProcessingException {
+    public NNDownloadInvoiceRedApplyResult downloadInvoiceRedApply(NNDownloadInvoiceRedApplyContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.ElectronInvoice.downloadInvoiceRedApply";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNDownloadInvoiceRedApplyResult result = JsonUtil._stringToObject(result_json, NNDownloadInvoiceRedApplyResult.class);
+        return result;
     }
 
     /* 发票查询 */
 
     //企业开票量查询接口：nuonuo.electronInvoice.queryInvoiceQuantity
-    public String queryInvoiceQuantity(NNQueryInvoiceQuantityContent content) throws JsonProcessingException {
+    public NNQueryInvoiceQuantityResult queryInvoiceQuantity(NNQueryInvoiceQuantityContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.electronInvoice.queryInvoiceQuantity";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNQueryInvoiceQuantityResult result = JsonUtil._stringToObject(result_json, NNQueryInvoiceQuantityResult.class);
+        return result;
     }
 
     //获取电子发票PDF地址接口：nuonuo.ElectronInvoice.getPDF
-    public String getPDF(NNGetPDFContent content) throws JsonProcessingException {
+    public NNGetPDFResult getPDF(NNGetPDFContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.electronInvoice.getPDF";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNGetPDFResult result = JsonUtil._stringToObject(result_json, NNGetPDFResult.class);
+        return result;
     }
 
     //开票结果查询接口：nuonuo.ElectronInvoice.queryInvoiceResult
-    public String queryInvoiceResult(NNQueryInvoiceResultContent content) throws JsonProcessingException {
+    public NNQueryInvoiceResultResult queryInvoiceResult(NNQueryInvoiceResultContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.electronInvoice.queryInvoiceResult";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNQueryInvoiceResultResult result = JsonUtil._stringToObject(result_json, NNQueryInvoiceResultResult.class);
+        return result;
     }
 
     //红字专用发票信息表查询接口：nuonuo.ElectronInvoice.InvoiceRedQuery
-    public String invoiceRedQuery(NNInvoiceRedQueryContent content) throws JsonProcessingException {
+    public NNInvoiceRedQueryResult invoiceRedQuery(NNInvoiceRedQueryContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.electronInvoice.InvoiceRedQuery";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNInvoiceRedQueryResult result = JsonUtil._stringToObject(result_json, NNInvoiceRedQueryResult.class);
+        return result;
     }
 
     //发票列表查询接口：nuonuo.ElectronInvoice.queryInvoiceList
-    public String queryInvoiceList(NNQueryInvoiceListContent content) throws JsonProcessingException {
+    public NNQueryInvoiceListResult queryInvoiceList(NNQueryInvoiceListContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.electronInvoice.queryInvoiceList";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNQueryInvoiceListResult result = JsonUtil._stringToObject(result_json, NNQueryInvoiceListResult.class);
+        return result;
     }
 
     //发票重新交付接口：nuonuo.ElectronInvoice.deliveryInvoice
-    public String deliveryInvoice(NNDeliveryInvoiceContent content) throws JsonProcessingException {
+    public NNDeliveryInvoiceResult deliveryInvoice(NNDeliveryInvoiceContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.electronInvoice.deliveryInvoice";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNDeliveryInvoiceResult result = JsonUtil._stringToObject(result_json, NNDeliveryInvoiceResult.class);
+        return result;
     }
 
     /* 发票作废 */
 
     //发票作废接口：nuonuo.electronInvoice.invoiceCancellation
-    public String invoiceCancellation(NNInvoiceCancellationContent content) throws JsonProcessingException {
+    public NNInvoiceCancellationResult invoiceCancellation(NNInvoiceCancellationContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.electronInvoice.invoiceCancellation";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNInvoiceCancellationResult result = JsonUtil._stringToObject(result_json, NNInvoiceCancellationResult.class);
+        return result;
     }
 
     /* 工单管理 */
 
     //创建工单接口：nuonuo.ElectronInvoice.createNewWorkOrder
-    public String createNewWorkOrder(NNCreateNewWorkOrderContent content) throws JsonProcessingException {
+    public NNCreateNewWorkOrderResult createNewWorkOrder(NNCreateNewWorkOrderContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.electronInvoice.createNewWorkOrder";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNCreateNewWorkOrderResult result = JsonUtil._stringToObject(result_json, NNCreateNewWorkOrderResult.class);
+        return result;
     }
 
     //查询工单状态以及信息接口：nuonuo.ElectronInvoice.getNewWorkOrderDetailByWork
-    public String getNewWorkOrderDetailByWork(NNGetNewWorkOrderDetailByWorkContent content) throws JsonProcessingException {
+    public NNGetNewWorkOrderDetailByWorkResult getNewWorkOrderDetailByWork(NNGetNewWorkOrderDetailByWorkContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.electronInvoice.getNewWorkOrderDetailByWork";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNGetNewWorkOrderDetailByWorkResult result = JsonUtil._stringToObject(result_json, NNGetNewWorkOrderDetailByWorkResult.class);
+        return result;
     }
 
     /* 企业信息查询 */
 
     //企业发票余量查询接口：nuonuo.ElectronInvoice.getInvoiceStock
-    public String getInvoiceStock(NNGetInvoiceStockContent content) throws JsonProcessingException {
+    public NNGetInvoiceStockResult getInvoiceStock(NNGetInvoiceStockContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.electronInvoice.getInvoiceStock";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNGetInvoiceStockResult result = JsonUtil._stringToObject(result_json, NNGetInvoiceStockResult.class);
+        return result;
     }
 
     //企业报税信息查询接口：nuonuo.ElectronInvoice.getReportTax
-    public String getReportTax(NNGetReportTaxContent content) throws JsonProcessingException {
+    public NNGetReportTaxResult getReportTax(NNGetReportTaxContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.electronInvoice.getReportTax";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNGetReportTaxResult result = JsonUtil._stringToObject(result_json, NNGetReportTaxResult.class);
+        return result;
     }
 
     //客户端在线状态检测接口：nuonuo.ElectronInvoice.GetClientStatus
-    public String GetClientStatus(NNGetClientStatusContent content) throws JsonProcessingException {
+    public NNGetClientStatusResult GetClientStatus(NNGetClientStatusContent content) throws JsonProcessingException {
         NNOpenSDK sdk = NNOpenSDK.getIntance();
         String method = "nuonuo.ElectronInvoice.GetClientStatus";
         String content_json = JsonUtil._objectToString(content);
         String result_json = sdk.sendPostSyncRequest(this.getSdkUrl(), _createSenid(), this.getAppKey(),
                 this.getAppSecret(), this.getToken(), this.getTaxnum(), method, content_json);
-        return result_json;
+        NNGetClientStatusResult result = JsonUtil._stringToObject(result_json, NNGetClientStatusResult.class);
+        return result;
     }
 }
