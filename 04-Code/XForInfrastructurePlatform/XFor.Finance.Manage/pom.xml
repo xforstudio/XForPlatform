@@ -12,7 +12,8 @@
     <artifactId>xfor-finance-manage</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>xfor-finance-manage</name>
-    <description>Demo project for Spring Boot</description>
+    <description></description>
+    <packaging>pom</packaging>
 
     <properties>
         <java.version>14</java.version>
@@ -59,6 +60,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- 诺诺开放平台 -->
+        <dependency>
+            <groupId>com.nuonuo</groupId>
+            <artifactId>open-sdk</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
     </dependencies>
 
     <build>

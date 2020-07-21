@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.wavefront:wavefront-spring-boot-starter:2.0.0-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/wavefront/wavefront-spring-boot-starter/2.0.0-SNAPSHOT/wavefront-spring-boot-starter-2.0.0-20200707.113444-24.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/wavefront/wavefront-spring-boot-starter/2.0.0-SNAPSHOT/wavefront-spring-boot-starter-2.0.0-20200717.080150-27.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/wavefront/wavefront-spring-boot-starter/2.0.0-SNAPSHOT/wavefront-spring-boot-starter-2.0.0-20200707.113444-24-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/wavefront/wavefront-spring-boot-starter/2.0.0-SNAPSHOT/wavefront-spring-boot-starter-2.0.0-20200717.080150-27-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/wavefront/wavefront-spring-boot-starter/2.0.0-SNAPSHOT/wavefront-spring-boot-starter-2.0.0-20200707.113444-24-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/wavefront/wavefront-spring-boot-starter/2.0.0-SNAPSHOT/wavefront-spring-boot-starter-2.0.0-20200717.080150-27-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

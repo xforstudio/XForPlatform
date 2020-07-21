@@ -31,7 +31,7 @@
       <module name="xfor-store-manage" target="13" />
       <module name="XFor.Email.Manage" target="13" />
       <module name="XFor.File.Manage" target="13" />
-      <module name="XFor.Finance.Manage" target="14" />
+      <module name="XFor.Finance.Manage" target="13" />
       <module name="XFor.Infrastructure.Core" target="13" />
       <module name="XFor.Lab" target="13" />
       <module name="XFor.Order.Manage" target="13" />
