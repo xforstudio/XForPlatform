@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="XFor.Infrastructure.Core" />
-        <module name="XFor.Finance.Manage" />
         <module name="XFor.Lab" />
         <module name="xfor-lab" />
         <module name="xfor-infrastructure-core" />
@@ -46,7 +45,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="XFor.Email.Manage" options="" />
       <module name="XFor.File.Manage" options="" />
-      <module name="XFor.Finance.Manage" options="-parameters" />
+      <module name="XFor.Finance.Manage" options="" />
       <module name="XFor.Infrastructure.Core" options="-parameters" />
       <module name="XFor.Lab" options="-parameters" />
       <module name="XFor.Order.Manage" options="" />
