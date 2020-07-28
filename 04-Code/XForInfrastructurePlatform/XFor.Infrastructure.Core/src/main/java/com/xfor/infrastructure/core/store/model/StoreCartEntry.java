@@ -18,9 +18,6 @@ import java.util.Random;
 public class StoreCartEntry {
 
     public static String _newId() {
-//        Random ra =new Random();
-//        int number = ra.nextInt(9999999) + 1;
-//        String id = String.format("%04d", number);
         String id = RandomUtil._nextIntWithFormat(8, "%08d");
         return id;
     }
@@ -41,6 +38,10 @@ public class StoreCartEntry {
     @JsonProperty("Id")
     private String id;
 
+    @JsonProperty("StoreSid")
+    @TableField("STORE_SID")
+    private String storeSid;  //商店唯一标识
+
     @JsonProperty("ProductSid")
     private String productSid;  //商品唯一标识
 
@@ -48,9 +49,21 @@ public class StoreCartEntry {
     private float productPrice;  //商品价格
 
     @JsonProperty("ProductQuantity")
-    private float productQuantity;  //商品数量
+    private int productQuantity;  //商品数量
 
     @JsonProperty("CreateTime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+    public int increaseQuantity() {
+        this.productQuantity += 1;
+        return this.productQuantity;
+    }
+
+    public int decreaseQuantity() {
+        if (this.productQuantity > 0) {
+            this.productQuantity -= 1;
+        }
+        return this.productQuantity;
+    }
 }

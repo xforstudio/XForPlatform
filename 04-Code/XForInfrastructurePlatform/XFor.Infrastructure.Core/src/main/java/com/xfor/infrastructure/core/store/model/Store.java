@@ -58,6 +58,9 @@ public class Store extends BaseEntity {
         super();
     }
 
+    public void validate() {
+    }
+
     public void regist() {
         this.setState(StoreStateEnum.Registered);
     }

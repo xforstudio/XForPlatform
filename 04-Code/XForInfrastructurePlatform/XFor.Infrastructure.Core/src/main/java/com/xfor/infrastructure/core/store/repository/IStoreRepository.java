@@ -13,11 +13,17 @@ import java.util.List;
 @Component
 public interface IStoreRepository {
 
-    Store getStoreBySid(ServiceContext sctx, String sid);
+    Store findStoreBySid(ServiceContext sctx, String sid);
 
-    Store getStoreByCode(ServiceContext sctx, String code);
+    Store findStoreByCode(ServiceContext sctx, String code);
 
-    List<Store> getStoreByFilter(ServiceContext sctx, String filter);
+    List<Store> findStoreByFilter(ServiceContext sctx, String filter);
+
+    int findStoreCountBySid(ServiceContext sctx, String sid);
+
+    int findStoreCountByCode(ServiceContext sctx, String code);
+
+    int findStoreCountByName(ServiceContext sctx, String name);
 
     boolean saveStore(ServiceContext sctx, Store order);
 

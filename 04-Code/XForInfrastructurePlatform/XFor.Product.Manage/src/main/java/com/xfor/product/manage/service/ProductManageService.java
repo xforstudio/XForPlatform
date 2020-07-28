@@ -31,7 +31,7 @@ public class ProductManageService extends BaseService {
     }
 
     protected boolean doExistsProductByName(ServiceContext sctx, Product product) {
-        int count = this.productRepository.getProductCountByCode(sctx, product.getProductStoreSid(), product.getName());
+        int count = this.productRepository.getProductCountByName(sctx, product.getProductStoreSid(), product.getName());
         return count > 0;
     }
 

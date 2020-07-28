@@ -19,13 +19,13 @@ public class MyBatisStoreRepository implements IStoreRepository {
     private IStoreMyBatisDAO storeMyBatisDAO;
 
     @Override
-    public Store getStoreBySid(ServiceContext sctx, String sid) {
+    public Store findStoreBySid(ServiceContext sctx, String sid) {
         Store result = this.storeMyBatisDAO.selectById(sid);
         return result;
     }
 
     @Override
-    public Store getStoreByCode(ServiceContext sctx, String code) {
+    public Store findStoreByCode(ServiceContext sctx, String code) {
         QueryWrapper<Store> wrapper = new QueryWrapper<>();
         wrapper.eq("CODE", code);
         Store result = this.storeMyBatisDAO.selectOne(wrapper);
@@ -33,10 +33,34 @@ public class MyBatisStoreRepository implements IStoreRepository {
     }
 
     @Override
-    public List<Store> getStoreByFilter(ServiceContext sctx, String filter) {
+    public List<Store> findStoreByFilter(ServiceContext sctx, String filter) {
         QueryWrapper<Store> wrapper = new QueryWrapper<>();
         wrapper.like("CODE", filter).or().like("NAME", filter).or().like("MEMO", filter);
         List<Store> result = this.storeMyBatisDAO.selectList(wrapper);
+        return result;
+    }
+
+    @Override
+    public int findStoreCountBySid(ServiceContext sctx, String sid) {
+        QueryWrapper<Store> wrapper = new QueryWrapper<>();
+        wrapper.eq("SID", sid);
+        int result = this.storeMyBatisDAO.selectCount(wrapper);
+        return result;
+    }
+
+    @Override
+    public int findStoreCountByCode(ServiceContext sctx, String code) {
+        QueryWrapper<Store> wrapper = new QueryWrapper<>();
+        wrapper.eq("CODE", code);
+        int result = this.storeMyBatisDAO.selectCount(wrapper);
+        return result;
+    }
+
+    @Override
+    public int findStoreCountByName(ServiceContext sctx, String name) {
+        QueryWrapper<Store> wrapper = new QueryWrapper<>();
+        wrapper.eq("NAME", name);
+        int result = this.storeMyBatisDAO.selectCount(wrapper);
         return result;
     }
 
@@ -51,6 +75,7 @@ public class MyBatisStoreRepository implements IStoreRepository {
 
     @Override
     public boolean removeStoreBySid(ServiceContext sctx, String sid) {
-        return false;
+        int result = this.storeMyBatisDAO.deleteById(sid);
+        return result > 0;
     }
 }
