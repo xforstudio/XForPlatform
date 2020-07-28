@@ -2,6 +2,9 @@ package com.xfor.finance.manage.manager.nuonuo;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NNInvoiceRedApplyContent {
 
     @Data
@@ -24,6 +27,20 @@ public class NNInvoiceRedApplyContent {
         private String taxExcludedPrice;  //0.88
         private String goodsName;  //商品名称qqq
     }
+
+    private String buyerTaxNo;  //914419001234567890
+    private String taxExcludedAmount;  //-0.88
+    private List<InvoiceRedApplyDetail> invoiceRedApplyDetails = new ArrayList<>();  //
+    private String sellerName;  //移动测试盘
+    private String oriInvoiceNumber;  //46829224
+    private String buyerName;  //诺诺网
+    private String sellerTaxNo;  //150301199811285326
+    private String applyRemark;  //0000000100
+    private String oriInvoiceCode;  //5000201530
+    private String productOilFlag;  //0
+    private String invoiceLine;  //s
+    private String taxAmount;  //-0.12
+    private String billNo;  //661545611111111233232323
 
     //        String content = "{
 //  \"buyerTaxNo\": \"914419001234567890\",

@@ -1,6 +1,13 @@
 package com.xfor.finance.manage.manager.nuonuo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NNQueryInvoiceResultContent {
+
+    private String isOfferInvoiceDetail;  //1
+    private List<String> orderNos = new ArrayList<>();
+    private List<String> serialNos = new ArrayList<>();  //[13188093020920901044]
 
     //        String content = "{
 //  \"isOfferInvoiceDetail\": \"1\",
@@ -9,7 +16,4 @@ public class NNQueryInvoiceResultContent {
 //    \"13188093020920901044\"
 //  ]
 //    }";
-//    String url = "https://sdk.nuonuo.com/open/v1/services"; // SDK请求地址
-//    String senid = UUID.randomUUID().toString().replace("-", ""); // 唯一标识，由企业自己生成32位随机码
-//    String result = sdk.sendPostSyncRequest(url, senid, appKey, appSecret, token, taxnum, method, content);
 }
