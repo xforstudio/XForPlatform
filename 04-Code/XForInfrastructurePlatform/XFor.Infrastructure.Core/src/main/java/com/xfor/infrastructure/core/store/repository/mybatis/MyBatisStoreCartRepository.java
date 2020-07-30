@@ -20,6 +20,7 @@ public class MyBatisStoreCartRepository implements IStoreCartRepository {
     @Override
     public StoreCart findStoreCartBySid(ServiceContext sctx, String sid) {
         StoreCart result = this.storeCartMyBatisDAO.selectById(sid);
+        result.ConvertFromEntity();
         return result;
     }
 
@@ -28,11 +29,13 @@ public class MyBatisStoreCartRepository implements IStoreCartRepository {
         QueryWrapper<StoreCart> wrapper = new QueryWrapper<>();
         wrapper.eq("ACCOUNT_SID", accountSid);
         StoreCart result = this.storeCartMyBatisDAO.selectOne(wrapper);
+        result.ConvertFromEntity();
         return result;
     }
 
     @Override
     public boolean saveStoreCart(ServiceContext sctx, StoreCart storeCart) {
+        storeCart.ConvertToEntity();
         int result = this.storeCartMyBatisDAO.updateById(storeCart);
         if(result <= 0) {
             result = this.storeCartMyBatisDAO.insert(storeCart);

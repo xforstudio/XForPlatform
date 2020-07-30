@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.xfor.infrastructure.core.common.model.BaseEntity;
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
+import com.xfor.infrastructure.core.common.util.JsonUtil;
+import com.xfor.infrastructure.core.common.util.StringUtil;
 import com.xfor.infrastructure.core.product.provider.IProductProvider;
 import com.xfor.infrastructure.core.product.model.Product;
 import lombok.Data;
@@ -29,6 +32,22 @@ public class StoreCart extends BaseEntity {
         return storeCart;
     }
 
+    public static String _saveToJson(StoreCart storeCart) throws JsonProcessingException {
+        if (storeCart == null || storeCart.getStoreCartEntries() == null || storeCart.getStoreCartEntries().size() == 0) {
+            return null;
+        }
+        String content = JsonUtil._objectToString(storeCart);
+        return content;
+    }
+
+    public static StoreCart _loadFromJson(String content) throws JsonProcessingException {
+        if (StringUtil._isNullOrWhiteSpace(content)) {
+            return null;
+        }
+        StoreCart result = JsonUtil._stringToObject(content, StoreCart.class);
+        return result;
+    }
+
     @JsonProperty("Sid")
     @TableId("SID")
     private String sid;  //购物车唯一标识
@@ -37,8 +56,27 @@ public class StoreCart extends BaseEntity {
     @TableField("ACCOUNT_SID")
     private String accountSid;  //账户唯一标识
 
+    @TableField("CONTENT")
+    private String content;
+
     @JsonProperty("StoreCartEntries")
-    private List<StoreCartEntry> storeCartEntries = new ArrayList<>();
+    private ArrayList<StoreCartEntry> storeCartEntries = new ArrayList<>();
+
+    public void ConvertToEntity() {
+        try {
+            this.content = _saveToJson(this);
+        } catch (Exception ex) {
+            this.content = null;
+        }
+    }
+
+    public void ConvertFromEntity() {
+        try {
+            this.storeCartEntries = _loadFromJson(this.content).storeCartEntries;
+        } catch(Exception ex) {
+            this.storeCartEntries = new ArrayList<>();
+        }
+    }
 
     public StoreCartEntry findEntryById(String entryId) {
         for (StoreCartEntry entry : this.getStoreCartEntries()) {
