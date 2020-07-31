@@ -47,6 +47,10 @@ public class Order extends BaseEntity {
     @TableField("CODE")
     private String code;  //订单号
 
+    @JsonProperty("AccountSid")
+    @TableField("ACCOUNT_SID")
+    private String accountSid;  //账号标识
+
     @JsonProperty("CreateTime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField("CREATE_TIME")
