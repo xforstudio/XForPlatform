@@ -25,7 +25,7 @@ public class StoreCartService extends BaseService {
     @Autowired
     private IDateTimeProvider dateTimeProvider;
 
-    protected StoreCart dofindWithCreateStoreCart(ServiceContext sctx, String accountSid) {
+    protected StoreCart doFindWithCreateStoreCart(ServiceContext sctx, String accountSid) {
         StoreCart storeCart = this.storeCartRepository.findStoreCartByAccountSid(sctx, accountSid);
         if (storeCart != null) {
             return storeCart;
@@ -35,23 +35,23 @@ public class StoreCartService extends BaseService {
         return storeCart;
     }
 
-    public List<StoreCartEntry> getStoreCartEntryByStoreSid(String accountSid, String storeSid) {
+    public List<StoreCartEntry> getStoreCartEntriesByStoreSid(String accountSid, String storeSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        StoreCart storeCart = this.dofindWithCreateStoreCart(sctx, accountSid);
+        StoreCart storeCart = this.doFindWithCreateStoreCart(sctx, accountSid);
         List<StoreCartEntry> result = storeCart.findEntriesByStoreSid(accountSid);
         return result;
     }
 
-    public List<StoreCartEntry> getStoreCartEntryByAll(String accountSid) {
+    public List<StoreCartEntry> getStoreCartEntriesByAll(String accountSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        StoreCart storeCart = this.dofindWithCreateStoreCart(sctx, accountSid);
+        StoreCart storeCart = this.doFindWithCreateStoreCart(sctx, accountSid);
         List<StoreCartEntry> result = storeCart.getStoreCartEntries();
         return result;
     }
 
     public int increaseProduct(String accountSid, String storeSid, String productSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        StoreCart storeCart = this.dofindWithCreateStoreCart(sctx, accountSid);
+        StoreCart storeCart = this.doFindWithCreateStoreCart(sctx, accountSid);
         int result = storeCart.increaseProductQuantity(
                 storeSid,
                 productSid,
@@ -62,20 +62,20 @@ public class StoreCartService extends BaseService {
 
     public int decreaseProduct(String accountSid, String storeSid, String productSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        StoreCart storeCart = this.dofindWithCreateStoreCart(sctx, accountSid);
+        StoreCart storeCart = this.doFindWithCreateStoreCart(sctx, accountSid);
         int result = storeCart.decreaseProductQuantity(storeSid, productSid);
         return result;
     }
 
     public void removeProductsByStoreSid(String accountSid, String storeSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        StoreCart storeCart = this.dofindWithCreateStoreCart(sctx, accountSid);
+        StoreCart storeCart = this.doFindWithCreateStoreCart(sctx, accountSid);
         storeCart.removeEntriesByStoreSid(storeSid);
     }
 
     public void removeProductsByAll(String accountSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        StoreCart storeCart = this.dofindWithCreateStoreCart(sctx, accountSid);
+        StoreCart storeCart = this.doFindWithCreateStoreCart(sctx, accountSid);
         storeCart.clear();
     }
 }

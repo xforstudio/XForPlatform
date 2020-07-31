@@ -73,6 +73,33 @@ public class StoreManageService extends BaseService {
     }
 
     /**
+     * 保存商店信息
+     * @param fields
+     * @return
+     */
+    public Store saveStore(Store fields) throws StoreException {
+        ServiceContext sctx = this.doGetServiceContext();
+        Store store = this.storeRepository.findStoreBySid(sctx, fields.getSid());
+        if (store == null) {
+            throw new StoreNotFoundException();
+        }
+        store.setName(fields.getName());
+        store.setMemo(fields.getMemo());
+        store.validate();
+        //检查数据库
+        boolean result = false;
+        result = this.doExistsStoreByName(sctx, store);
+        if (result) {
+            throw new StoreExistedException("商店名称", store.getName());
+        }
+        result = this.storeRepository.saveStore(sctx, store);
+        if (!result) {
+            throw new StoreException("保存商品信息失败");
+        }
+        return store;
+    }
+
+    /**
      * 打开商店
      * @param storeSid
      * @return
@@ -84,6 +111,7 @@ public class StoreManageService extends BaseService {
             throw new StoreNotFoundException("商品标识", storeSid);
         }
         store.open();
+        this.storeRepository.saveStore(sctx, store);
         return store;
     }
 
@@ -99,6 +127,7 @@ public class StoreManageService extends BaseService {
             throw new StoreNotFoundException("商品标识", storeSid);
         }
         store.close();
+        this.storeRepository.saveStore(sctx, store);
         return store;
     }
 
@@ -114,6 +143,7 @@ public class StoreManageService extends BaseService {
             throw new StoreNotFoundException("商品标识", storeSid);
         }
         store.cancel();
+        this.storeRepository.saveStore(sctx, store);
         return store;
     }
 }
