@@ -135,7 +135,7 @@ public class StoreCart extends BaseEntity {
         Product product = productProvider.getProductBySid(productSid);
         entry = StoreCartEntry._createFromProduct(product, 1, dateTimeProvider);
         this.storeCartEntries.add(entry);
-        return entry.getProductQuantity();
+        return entry.getProductSaleEntry().getQuantity();
     }
 
     /**
@@ -168,7 +168,7 @@ public class StoreCart extends BaseEntity {
     public float getFinalPrice() {
         float finalPrice = 0;
         for (StoreCartEntry entry : this.getStoreCartEntries()) {
-            finalPrice += entry.getProductPrice();
+            finalPrice += entry.getProductSaleEntry().getFinalTotalPrice();
         }
         return finalPrice;
     }
@@ -182,7 +182,7 @@ public class StoreCart extends BaseEntity {
             if (entry.getStoreSid() != storeSid) {
                 continue;
             }
-            finalPrice += entry.getProductPrice();
+            finalPrice += entry.getProductSaleEntry().getFinalTotalPrice();
         }
         return finalPrice;
     }
@@ -197,7 +197,7 @@ public class StoreCart extends BaseEntity {
             if (!result.containsKey(entry.getStoreSid())) {
                 result.put(entry.getStoreSid(), 0F);
             }
-            float price = result.get(entry.getStoreSid()) + entry.getProductPrice();
+            float price = result.get(entry.getStoreSid()) + entry.getProductSaleEntry().getFinalTotalPrice();
             result.replace(entry.getStoreSid(), price);
         }
         return result;

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import com.xfor.infrastructure.core.common.util.RandomUtil;
 import com.xfor.infrastructure.core.product.model.Product;
+import com.xfor.infrastructure.core.product.model.ProductSaleEntry;
 import lombok.Data;
 
 import java.util.Date;
@@ -29,8 +30,7 @@ public class StoreCartEntry {
         StoreCartEntry storeCartEntry = new StoreCartEntry();
         storeCartEntry.setId(_newId());
         storeCartEntry.setProductSid(product.getSid());
-        storeCartEntry.setProductPrice(product.getPrice());
-        storeCartEntry.setProductQuantity(productQuantity);
+        storeCartEntry.setProductSaleEntry(ProductSaleEntry._create(product, productQuantity));
         storeCartEntry.setCreateTime(dateTimeProvider.getNow());
         return storeCartEntry;
     }
@@ -39,31 +39,23 @@ public class StoreCartEntry {
     private String id;
 
     @JsonProperty("StoreSid")
-    @TableField("STORE_SID")
     private String storeSid;  //商店唯一标识
 
     @JsonProperty("ProductSid")
     private String productSid;  //商品唯一标识
 
-    @JsonProperty("ProductPrice")
-    private float productPrice;  //商品价格
-
-    @JsonProperty("ProductQuantity")
-    private int productQuantity;  //商品数量
+    @JsonProperty("ProductSaleEntry")
+    private ProductSaleEntry productSaleEntry;  //商品出售项
 
     @JsonProperty("CreateTime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     public int increaseQuantity() {
-        this.productQuantity += 1;
-        return this.productQuantity;
+        return this.productSaleEntry.increaseQuantity();
     }
 
     public int decreaseQuantity() {
-        if (this.productQuantity > 0) {
-            this.productQuantity -= 1;
-        }
-        return this.productQuantity;
+        return this.productSaleEntry.decreaseQuantity();
     }
 }
