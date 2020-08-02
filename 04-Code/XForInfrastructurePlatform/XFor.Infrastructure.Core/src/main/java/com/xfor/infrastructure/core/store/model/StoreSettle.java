@@ -2,6 +2,7 @@ package com.xfor.infrastructure.core.store.model;
 
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import com.xfor.infrastructure.core.order.model.Order;
+import com.xfor.infrastructure.core.order.model.OrderEntry;
 import com.xfor.infrastructure.core.product.model.Product;
 import lombok.Data;
 
@@ -25,13 +26,25 @@ public class StoreSettle {
         this.modifyTime = dateTimeProvider.getNow();
     }
 
-    //创建订单
-    public Order createOrder(List<StoreCartEntry> storeCartEntries, IDateTimeProvider dateTimeProvider) {
+    protected OrderEntry doMakeOrderEntry(StoreCartEntry storeCartEntry) {
         return null;
     }
 
-    //创建订单
-    public Order createOrder(List<Product> products) {
+    //结算
+    public Order settle(List<StoreCartEntry> storeCartEntries, IDateTimeProvider dateTimeProvider) {
+        Order order = Order._create(this.getAccountSid(), dateTimeProvider);
+
+
+        return null;
+    }
+
+    //结算
+    public Order 结算(List<Product> products) {
+        return null;
+    }
+
+    //提交订单
+    public Order confirmOrder(Order fields) {
         return null;
     }
 }

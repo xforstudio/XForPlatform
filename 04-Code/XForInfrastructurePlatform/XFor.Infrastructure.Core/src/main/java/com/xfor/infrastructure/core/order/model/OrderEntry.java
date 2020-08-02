@@ -17,14 +17,14 @@ public class OrderEntry extends BaseEntity {
     public static OrderEntry _create(
             String orderSID,
             String productSid,
-            float productPrice,
-            float productQuantity) {
+            int quantity,
+            float finalTotalPrice) {
         OrderEntry orderEntry = new OrderEntry();
         orderEntry.setSid(_newSID());
         orderEntry.setOrderSID(orderSID);
         orderEntry.setProductSid(productSid);
-        orderEntry.setProductPrice(productPrice);
-        orderEntry.setProductQuantity(productQuantity);
+        orderEntry.setQuantity(quantity);
+        orderEntry.setFinalTotalPrice(finalTotalPrice);
         return orderEntry;
     }
 
@@ -40,31 +40,21 @@ public class OrderEntry extends BaseEntity {
     @TableField("PRODUCT_SID")
     private String productSid;  //商品唯一标识
 
-    @JsonProperty("ProductPrice")
-    @TableField("PRODUCT_PRICE")
-    private float productPrice;  //商品价格
+    @JsonProperty("Quantity")
+    @TableField("QUANTITY")
+    private int quantity;  //数量
 
-    @JsonProperty("ProductQuantity")
-    @TableField("PRODUCT_QUANTITY")
-    private float productQuantity;  //商品数量
+    @JsonProperty("FinalTotalPrice")
+    @TableField("FINAL_TOTAL_PRICE")
+    private float finalTotalPrice;  //最终合计价格
 
-    @JsonProperty("FinalPrice")
-    @TableField("FINAL_PRICE")
-    private float finalPrice;  //最终价格
+//    /**
+//     * 计算最终价格
+//     * @return
+//     */
+//    public float calcFinalPrice() {
+//        float result = this.getProductPrice() * this.getProductQuantity();
+//        return result;
+//    }
 
-    /**
-     * 计算最终价格
-     * @return
-     */
-    public float calcFinalPrice() {
-        float result = this.getProductPrice() * this.getProductQuantity();
-        return result;
-    }
-
-    public boolean equalsSid(String sid) {
-        if (this.getSid() == null) {
-            return sid == null;
-        }
-        return this.getSid().equals(sid);
-    }
 }

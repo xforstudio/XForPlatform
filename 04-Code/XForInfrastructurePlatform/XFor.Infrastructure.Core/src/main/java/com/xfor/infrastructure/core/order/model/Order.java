@@ -31,10 +31,10 @@ public class Order extends BaseEntity {
         return result;
     }
 
-    public static Order _create(String code, IDateTimeProvider dateTimeProvider) {
+    public static Order _create(String accountSid, IDateTimeProvider dateTimeProvider) {
         Order order = new Order();
         order.setSid(_newSID());
-        order.setCode(code);
+        order.setAccountSid(accountSid);
         order.setCreateTime(dateTimeProvider.getNow());
         return order;
     }
@@ -100,12 +100,23 @@ public class Order extends BaseEntity {
      * @param productQuantity
      * @return
      */
-    public OrderEntry createOrderEntry(Product product, float productQuantity) {
+    public OrderEntry createOrderEntry(Product product, int quantity) {
         OrderEntry orderEntry = OrderEntry._create(
                 this.getSid(),
                 product.getSid(),
-                product.getPrice(),
-                productQuantity);
+                quantity,
+                product.getPrice() * quantity
+                );
+        return orderEntry;
+    }
+
+    public OrderEntry createOrderEntry(String productSid, int quantity, float finalTotalPrice) {
+        OrderEntry orderEntry = OrderEntry._create(
+                this.getSid(),
+                productSid,
+                quantity,
+                finalTotalPrice
+        );
         return orderEntry;
     }
 
