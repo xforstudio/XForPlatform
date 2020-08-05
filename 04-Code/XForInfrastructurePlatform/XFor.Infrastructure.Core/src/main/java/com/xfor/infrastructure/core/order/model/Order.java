@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xfor.infrastructure.core.common.model.BaseEntity;
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
+import com.xfor.infrastructure.core.common.model.SID;
 import com.xfor.infrastructure.core.common.util.RandomUtil;
 import com.xfor.infrastructure.core.product.model.Product;
 import lombok.Data;
@@ -35,6 +36,15 @@ public class Order extends BaseEntity {
         Order order = new Order();
         order.setSid(_newSID());
         order.setAccountSid(accountSid);
+        order.setCreateTime(dateTimeProvider.getNow());
+        return order;
+    }
+
+    public static Order _create(String accountSid, String code, IDateTimeProvider dateTimeProvider) {
+        Order order = new Order();
+        order.setSid(_newSID());
+        order.setAccountSid(accountSid);
+        order.setCode(code);
         order.setCreateTime(dateTimeProvider.getNow());
         return order;
     }
@@ -87,7 +97,7 @@ public class Order extends BaseEntity {
      */
     public OrderEntry findOrderEntryBySid(String orderEntrySid) {
         for (OrderEntry orderEntry : this.getOrderEntries()) {
-            if (orderEntry.equalsSid(orderEntrySid)) {
+            if (SID._equalsSid(orderEntry.getSid(), orderEntrySid)) {
                 return orderEntry;
             }
         }

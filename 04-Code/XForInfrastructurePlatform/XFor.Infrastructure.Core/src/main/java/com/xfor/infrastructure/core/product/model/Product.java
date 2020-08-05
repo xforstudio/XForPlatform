@@ -85,6 +85,10 @@ public class Product extends BaseEntity {
     @TableField("PRODUCT_STORE_SID")
     private String productStoreSid;
 
+    @JsonProperty("StoreSid")
+    @TableField("STORE_SID")
+    private String storeSid;  //商店标识
+
     public Product() {
     }
 

@@ -9,7 +9,6 @@ import com.xfor.infrastructure.core.common.model.BaseEntity;
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import com.xfor.infrastructure.core.common.util.JsonUtil;
 import com.xfor.infrastructure.core.common.util.StringUtil;
-import com.xfor.infrastructure.core.product.provider.IProductProvider;
 import com.xfor.infrastructure.core.product.model.Product;
 import lombok.Data;
 
@@ -124,15 +123,13 @@ public class StoreCart extends BaseEntity {
      */
     public int increaseProductQuantity(
             String storeSid,
-            String productSid,
-            IProductProvider productProvider,
+            Product product,
             IDateTimeProvider dateTimeProvider) {
-        StoreCartEntry entry = this.findEntryByProductSid(storeSid, productSid);
+        StoreCartEntry entry = this.findEntryByProductSid(storeSid, product.getSid());
         if (entry != null) {
             int result = entry.increaseQuantity();
             return result;
         }
-        Product product = productProvider.getProductBySid(productSid);
         entry = StoreCartEntry._createFromProduct(product, 1, dateTimeProvider);
         this.storeCartEntries.add(entry);
         return entry.getProductSaleEntry().getQuantity();
@@ -199,6 +196,18 @@ public class StoreCart extends BaseEntity {
             }
             float price = result.get(entry.getStoreSid()) + entry.getProductSaleEntry().getFinalTotalPrice();
             result.replace(entry.getStoreSid(), price);
+        }
+        return result;
+    }
+
+    public StoreCart selectEntries(List<String> storeCartEntryIds) throws StoreException {
+        StoreCart result = StoreCart._create(this.getAccountSid());
+        for (String storeCartEntryId : storeCartEntryIds) {
+            StoreCartEntry entry = this.findEntryById(storeCartEntryId);
+            if (entry == null) {
+                throw new StoreException("购物车项不存在");
+            }
+            result.getStoreCartEntries().add(entry);
         }
         return result;
     }
