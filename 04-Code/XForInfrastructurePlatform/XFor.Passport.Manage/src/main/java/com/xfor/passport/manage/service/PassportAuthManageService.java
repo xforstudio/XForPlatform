@@ -5,35 +5,12 @@ import com.xfor.infrastructure.core.common.service.ServiceContext;
 import com.xfor.infrastructure.core.passport.repository.IPassportAuthCategoryRepository;
 import com.xfor.infrastructure.core.passport.repository.IPassportAuthRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
-public class PassportAuthManageService extends BaseService {
+@Component
+public interface PassportAuthManageService {
 
-    @Autowired
-    private IPassportAuthRepository passportAuthRepository;
-    @Autowired
-    private IPassportAuthCategoryRepository passportAuthCategoryRepository;
+    String getLoginTokenByPassportAuthCode(String passportAuthCode, String categoryID);
 
-    public PassportAuthManageService() {
-        super();
-    }
-
-    public String getLoginTokenByPassportAuthCode(String passportAuthCode, String categoryID) {
-        ServiceContext sctx = this.doGetServiceContext();
-        String result = this.passportAuthRepository.getLoginTokenByPassportAuthCode(
-                sctx,
-                passportAuthCode,
-                categoryID);
-        return result;
-    }
-
-    public String getPassportAuthCodeByLoginToken(String loginToken, String categoryID) {
-        ServiceContext sctx = this.doGetServiceContext();
-        String result = this.passportAuthRepository.getPassportAuthCodeByLoginToken(
-                sctx,
-                loginToken,
-                categoryID);
-        return result;
-    }
+    String getPassportAuthCodeByLoginToken(String loginToken, String categoryID);
 }

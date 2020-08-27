@@ -1,4 +1,4 @@
-package com.xfor.file.manage.manager;
+package com.xfor.file.manage.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

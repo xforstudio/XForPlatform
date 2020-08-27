@@ -1,6 +1,7 @@
 package com.xfor.email.manage.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.xfor.email.manage.service.impl.ThymeleafEmailTemplateEngineServiceImpl;
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import com.xfor.infrastructure.core.common.util.IOUtil;
 import com.xfor.infrastructure.core.common.util.JsonUtil;
@@ -14,18 +15,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
-class ThymeleafEmailTemplateEngineServiceTests {
+class ThymeleafEmailTemplateEngineServiceImplTests {
 
     @Autowired
-    private ThymeleafEmailTemplateEngineService emailTemplateEngineService;
+    private ThymeleafEmailTemplateEngineServiceImpl emailTemplateEngineService;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
 

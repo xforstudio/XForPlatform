@@ -1,19 +1,17 @@
-package com.xfor.email.manage.service;
+package com.xfor.email.manage.service.impl;
 
+import com.xfor.email.manage.service.EmailTemplateEngineService;
 import com.xfor.infrastructure.core.common.util.XsltUtil;
 import com.xfor.infrastructure.core.email.model.EmailBody;
 import com.xfor.infrastructure.core.email.model.EmailMessage;
 import com.xfor.infrastructure.core.email.model.EmailTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.xml.transform.TransformerException;
-import java.io.IOException;
-
 /**
  *
  */
 @Component("XsltEmailTemplateEngineService")
-public class XsltEmailTemplateEngineService implements IEmailTemplateEngineService {
+public class XsltEmailTemplateEngineServiceImpl implements EmailTemplateEngineService {
 
     @Override
     public EmailBody getEmailBody(EmailMessage emailMessage, EmailTemplate emailTemplate) {

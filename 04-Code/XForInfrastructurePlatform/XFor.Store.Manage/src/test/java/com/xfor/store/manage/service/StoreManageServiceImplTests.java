@@ -4,7 +4,7 @@ import com.xfor.infrastructure.core.common.service.ServiceContext;
 import com.xfor.infrastructure.core.store.model.Store;
 import com.xfor.infrastructure.core.store.model.StoreException;
 import com.xfor.infrastructure.core.store.model.StoreNotFoundException;
-import com.xfor.infrastructure.core.store.model.StoreStateEnum;
+import com.xfor.store.manage.service.impl.StoreManageServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,13 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
-class StoreManageServiceTests {
+class StoreManageServiceImplTests {
 
     @Autowired
-    private StoreManageService storeManageService;
+    private StoreManageServiceImpl storeManageServiceImpl;
 
 
     protected ServiceContext doGetServiceContext() {
@@ -40,7 +38,7 @@ class StoreManageServiceTests {
         fields.setName("Name0001");
         fields.setMemo("Memo0001");
         //
-        Store store = this.storeManageService.createStore(fields);
+        Store store = this.storeManageServiceImpl.createStore(fields);
         Assert.notNull(store, "");
     }
 
@@ -51,28 +49,28 @@ class StoreManageServiceTests {
         fields.setName("Name0002");
         fields.setMemo("Memo0002");
         //
-        Store store = this.storeManageService.saveStore(fields);
+        Store store = this.storeManageServiceImpl.saveStore(fields);
         Assert.notNull(store, "");
     }
 
     @Test
     void openStore() throws StoreNotFoundException {
         String storeSid = "2F360426FCB24C8385AA03CA7FD30A30";
-        Store store = this.storeManageService.openStore(storeSid);
+        Store store = this.storeManageServiceImpl.openStore(storeSid);
         Assert.notNull(store, "");
     }
 
     @Test
     void closeStore() throws StoreNotFoundException {
         String storeSid = "2F360426FCB24C8385AA03CA7FD30A30";
-        Store store = this.storeManageService.closeStore(storeSid);
+        Store store = this.storeManageServiceImpl.closeStore(storeSid);
         Assert.notNull(store, "");
     }
 
     @Test
     void cancelStore() throws StoreNotFoundException {
         String storeSid = "2F360426FCB24C8385AA03CA7FD30A30";
-        Store store = this.storeManageService.cancelStore(storeSid);
+        Store store = this.storeManageServiceImpl.cancelStore(storeSid);
         Assert.notNull(store, "");
     }
 }

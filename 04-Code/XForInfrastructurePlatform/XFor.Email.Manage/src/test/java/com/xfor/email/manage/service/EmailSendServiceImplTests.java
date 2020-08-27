@@ -1,5 +1,6 @@
 package com.xfor.email.manage.service;
 
+import com.xfor.email.manage.service.impl.EmailSendServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
-class EmailSendServiceTests {
+class EmailSendServiceImplTests {
 
     @Autowired
-    private EmailSendService emailSendService;
+    private EmailSendServiceImpl emailSendService;
 
     @BeforeEach
     void setUp() {

@@ -1,13 +1,13 @@
-package com.xfor.email.manage.service;
+package com.xfor.email.manage.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.xfor.email.manage.service.EmailTemplateEngineService;
 import com.xfor.infrastructure.core.common.util.JsonUtil;
 import com.xfor.infrastructure.core.email.model.EmailBody;
 import com.xfor.infrastructure.core.email.model.EmailMessage;
 import com.xfor.infrastructure.core.email.model.EmailTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -17,7 +17,7 @@ import java.util.HashMap;
  *
  */
 @Component("ThymeleafEmailTemplateEngineService")
-public class ThymeleafEmailTemplateEngineService implements IEmailTemplateEngineService {
+public class ThymeleafEmailTemplateEngineServiceImpl implements EmailTemplateEngineService {
 
     @Autowired
     private SpringTemplateEngine templateEngine;

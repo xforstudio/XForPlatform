@@ -1,9 +1,9 @@
 package com.xfor.email.manage.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.xfor.email.manage.service.impl.XsltEmailTemplateEngineServiceImpl;
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import com.xfor.infrastructure.core.common.util.IOUtil;
-import com.xfor.infrastructure.core.common.util.JsonUtil;
 import com.xfor.infrastructure.core.email.model.EmailBody;
 import com.xfor.infrastructure.core.email.model.EmailMessage;
 import com.xfor.infrastructure.core.email.model.EmailTemplate;
@@ -16,15 +16,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class XsltEmailTemplateEngineServiceTests {
+class XsltEmailTemplateEngineServiceImplTests {
 
     @Autowired
-    private XsltEmailTemplateEngineService emailTemplateEngineService;
+    private XsltEmailTemplateEngineServiceImpl emailTemplateEngineService;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
 

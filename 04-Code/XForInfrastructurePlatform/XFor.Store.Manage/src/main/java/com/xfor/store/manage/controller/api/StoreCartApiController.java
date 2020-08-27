@@ -2,8 +2,6 @@ package com.xfor.store.manage.controller.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xfor.infrastructure.core.common.service.ServiceContext;
-import com.xfor.infrastructure.core.store.model.StoreCart;
 import com.xfor.infrastructure.core.store.model.StoreCartEntry;
 import com.xfor.store.manage.service.StoreCartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,7 @@ public class StoreCartApiController {
         Map<String, Object> params = new ObjectMapper().readValue(requestBody, Map.class);
         String accountSid = params.get("accountSid").toString();
         String storeSid = params.get("storeSid").toString();
-        List<StoreCartEntry> result = this.storeCartService.getStoreCartEntriesByStoreSid(accountSid, storeSid);
+        List<StoreCartEntry> result = this.storeCartService.listStoreCartEntriesByStoreSid(accountSid, storeSid);
         return result;
     }
 
@@ -35,7 +33,7 @@ public class StoreCartApiController {
     public List<StoreCartEntry> getStoreCartEntriesByAll(@RequestBody String requestBody) throws JsonProcessingException {
         Map<String, Object> params = new ObjectMapper().readValue(requestBody, Map.class);
         String accountSid = params.get("accountSid").toString();
-        List<StoreCartEntry> result = this.storeCartService.getStoreCartEntriesByAll(accountSid);
+        List<StoreCartEntry> result = this.storeCartService.listStoreCartEntriesByAll(accountSid);
         return result;
     }
 

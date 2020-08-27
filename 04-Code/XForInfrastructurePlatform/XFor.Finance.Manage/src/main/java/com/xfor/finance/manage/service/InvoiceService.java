@@ -6,5 +6,5 @@ import org.springframework.stereotype.Component;
  * 发票服务接口
  */
 @Component
-public interface IInvoiceService {
+public interface InvoiceService {
 }

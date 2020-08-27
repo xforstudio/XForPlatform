@@ -13,7 +13,7 @@ import java.io.IOException;
  * 邮件模板引擎服务
  */
 @Component
-public interface IEmailTemplateEngineService {
+public interface EmailTemplateEngineService {
 
     //获取邮件主体内容
     EmailBody getEmailBody(EmailMessage emailMessage, EmailTemplate emailTemplate) throws IOException, TransformerException;

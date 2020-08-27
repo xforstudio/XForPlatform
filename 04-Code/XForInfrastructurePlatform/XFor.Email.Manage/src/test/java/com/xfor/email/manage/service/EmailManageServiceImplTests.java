@@ -1,6 +1,7 @@
 package com.xfor.email.manage.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.xfor.email.manage.service.impl.EmailManageServiceImpl;
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import com.xfor.infrastructure.core.common.util.IOUtil;
 import com.xfor.infrastructure.core.common.util.JsonUtil;
@@ -15,13 +16,11 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
-class EmailManageServiceTests {
+class EmailManageServiceImplTests {
 
     @Autowired
-    private EmailManageService emailManageService;
+    private EmailManageServiceImpl emailManageService;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
 
