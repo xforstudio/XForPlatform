@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 @SpringBootTest
-class StoreManageServiceImplTests {
+class StoreManageServiceImplTest {
 
     @Autowired
     private StoreManageServiceImpl storeManageServiceImpl;

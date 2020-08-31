@@ -10,7 +10,7 @@ import org.springframework.util.Assert;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class RedisManagerTests {
+class RedisManagerTest {
 
     @Autowired
     private RedisManager redisManager;

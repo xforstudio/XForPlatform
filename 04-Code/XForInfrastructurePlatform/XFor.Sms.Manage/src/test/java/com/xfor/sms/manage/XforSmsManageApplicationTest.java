@@ -1,10 +1,10 @@
-package com.xfor.email.manage;
+package com.xfor.sms.manage;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class XforEmailManageApplicationTests {
+class XforSmsManageApplicationTest {
 
     @Test
     void contextLoads() {

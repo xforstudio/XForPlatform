@@ -13,7 +13,7 @@ import org.springframework.util.Assert;
 import java.util.HashMap;
 import java.util.Map;
 
-class ProductManageApiControllerTests {
+class ProductManageApiControllerTest {
 
     private String rootUrl = "http://127.0.0.1:8731/ProductManageApi";
 

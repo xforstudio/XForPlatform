@@ -16,7 +16,7 @@ import java.io.UnsupportedEncodingException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class FileTransferServiceTests {
+class FileTransferServiceTest {
 
     @Autowired
     private FileTransferService fileTransferService;

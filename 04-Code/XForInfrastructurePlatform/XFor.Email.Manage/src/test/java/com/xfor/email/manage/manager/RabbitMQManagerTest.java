@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 @SpringBootTest
-class RabbitMQManagerTests {
+class RabbitMQManagerTest {
 
     @Autowired
     private RabbitMQManager rabbitMQManager;

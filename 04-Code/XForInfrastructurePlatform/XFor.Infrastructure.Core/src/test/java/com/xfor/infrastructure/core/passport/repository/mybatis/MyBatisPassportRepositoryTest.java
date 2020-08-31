@@ -13,7 +13,7 @@ import org.springframework.util.Assert;
 import javax.annotation.security.RunAs;
 
 @SpringBootTest
-public class MyBatisPassportRepositoryTests {
+public class MyBatisPassportRepositoryTest {
 
     @Autowired
     private MyBatisPassportRepository passportRepository;

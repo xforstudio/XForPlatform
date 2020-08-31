@@ -1,10 +1,10 @@
-package com.xfor.infrastructure.core;
+package com.xfor.order.manage;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class XforInfrastructureCoreApplicationTests {
+class XforOrderManageApplicationTest {
 
     @Test
     void contextLoads() {

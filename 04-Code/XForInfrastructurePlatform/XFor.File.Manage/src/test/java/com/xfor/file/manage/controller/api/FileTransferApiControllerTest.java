@@ -25,7 +25,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class FileTransferApiControllerTests {
+class FileTransferApiControllerTest {
 
     private String rootUrl = "http://127.0.0.1:8731/FileTransferApi";
 

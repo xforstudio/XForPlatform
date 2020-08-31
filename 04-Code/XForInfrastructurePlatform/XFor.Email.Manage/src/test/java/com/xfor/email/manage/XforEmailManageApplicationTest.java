@@ -1,10 +1,10 @@
-package com.xfor.order.manage;
+package com.xfor.email.manage;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class XforOrderManageApplicationTests {
+class XforEmailManageApplicationTest {
 
     @Test
     void contextLoads() {

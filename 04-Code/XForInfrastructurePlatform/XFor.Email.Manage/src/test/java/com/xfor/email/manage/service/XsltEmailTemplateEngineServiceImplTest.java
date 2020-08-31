@@ -18,7 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
 @SpringBootTest
-class XsltEmailTemplateEngineServiceImplTests {
+class XsltEmailTemplateEngineServiceImplTest {
 
     @Autowired
     private XsltEmailTemplateEngineServiceImpl emailTemplateEngineService;

@@ -17,7 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 @SpringBootTest
-class EmailManageServiceImplTests {
+class EmailManageServiceImplTest {
 
     @Autowired
     private EmailManageServiceImpl emailManageService;

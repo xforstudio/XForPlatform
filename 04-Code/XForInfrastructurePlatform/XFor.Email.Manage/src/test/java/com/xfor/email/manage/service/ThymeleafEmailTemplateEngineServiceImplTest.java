@@ -20,7 +20,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
 @SpringBootTest
-class ThymeleafEmailTemplateEngineServiceImplTests {
+class ThymeleafEmailTemplateEngineServiceImplTest {
 
     @Autowired
     private ThymeleafEmailTemplateEngineServiceImpl emailTemplateEngineService;

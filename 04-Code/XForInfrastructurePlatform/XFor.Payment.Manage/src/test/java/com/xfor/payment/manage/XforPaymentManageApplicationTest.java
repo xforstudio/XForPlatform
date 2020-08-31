@@ -1,10 +1,10 @@
-package com.xfor.passport.manage;
+package com.xfor.payment.manage;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class XforPassportManageApplicationTests {
+class XforPaymentManageApplicationTest {
 
     @Test
     void contextLoads() {

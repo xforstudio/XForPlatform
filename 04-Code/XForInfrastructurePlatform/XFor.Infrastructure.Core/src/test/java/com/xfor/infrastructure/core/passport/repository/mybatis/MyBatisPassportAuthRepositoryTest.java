@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class MyBatisPassportAuthRepositoryTests {
+class MyBatisPassportAuthRepositoryTest {
 
     @Autowired
     private MyBatisPassportAuthRepository passportAuthRepository;
