@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class StoreManageServiceImpl extends BaseService implements StoreManageService {
 
     @Autowired
-    private StoreDAO storeRepository;
+    private StoreDAO storeDAO;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
 
@@ -45,7 +45,7 @@ public class StoreManageServiceImpl extends BaseService implements StoreManageSe
         if (result) {
             throw new StoreExistedException("商店名称", store.getName());
         }
-        result = this.storeRepository.saveStore(sctx, store);
+        result = this.storeDAO.saveStore(sctx, store);
         if (!result) {
             throw new StoreException("保存商品信息失败");
         }
@@ -55,7 +55,7 @@ public class StoreManageServiceImpl extends BaseService implements StoreManageSe
     @Override
     public Store saveStore(Store fields) throws StoreException {
         ServiceContext sctx = this.doGetServiceContext();
-        Store store = this.storeRepository.findStoreBySid(sctx, fields.getSid());
+        Store store = this.storeDAO.findStoreBySid(sctx, fields.getSid());
         if (store == null) {
             throw new StoreNotFoundException();
         }
@@ -68,7 +68,7 @@ public class StoreManageServiceImpl extends BaseService implements StoreManageSe
         if (result) {
             throw new StoreExistedException("商店名称", store.getName());
         }
-        result = this.storeRepository.saveStore(sctx, store);
+        result = this.storeDAO.saveStore(sctx, store);
         if (!result) {
             throw new StoreException("保存商品信息失败");
         }
@@ -78,51 +78,51 @@ public class StoreManageServiceImpl extends BaseService implements StoreManageSe
     @Override
     public Store openStore(String storeSid) throws StoreNotFoundException {
         ServiceContext sctx = this.doGetServiceContext();
-        Store store = this.storeRepository.findStoreBySid(sctx, storeSid);
+        Store store = this.storeDAO.findStoreBySid(sctx, storeSid);
         if (store == null) {
             throw new StoreNotFoundException("商品标识", storeSid);
         }
         store.open();
-        this.storeRepository.saveStore(sctx, store);
+        this.storeDAO.saveStore(sctx, store);
         return store;
     }
 
     @Override
     public Store closeStore(String storeSid) throws StoreNotFoundException {
         ServiceContext sctx = this.doGetServiceContext();
-        Store store = this.storeRepository.findStoreBySid(sctx, storeSid);
+        Store store = this.storeDAO.findStoreBySid(sctx, storeSid);
         if (store == null) {
             throw new StoreNotFoundException("商品标识", storeSid);
         }
         store.close();
-        this.storeRepository.saveStore(sctx, store);
+        this.storeDAO.saveStore(sctx, store);
         return store;
     }
 
     @Override
     public Store cancelStore(String storeSid) throws StoreNotFoundException {
         ServiceContext sctx = this.doGetServiceContext();
-        Store store = this.storeRepository.findStoreBySid(sctx, storeSid);
+        Store store = this.storeDAO.findStoreBySid(sctx, storeSid);
         if (store == null) {
             throw new StoreNotFoundException("商品标识", storeSid);
         }
         store.cancel();
-        this.storeRepository.saveStore(sctx, store);
+        this.storeDAO.saveStore(sctx, store);
         return store;
     }
 
     protected boolean doExistsStoreBySid(ServiceContext sctx, Store store) {
-        int count = this.storeRepository.findStoreCountBySid(sctx, store.getCode());
+        int count = this.storeDAO.findStoreCountBySid(sctx, store.getCode());
         return count > 0;
     }
 
     protected boolean doExistsStoreByCode(ServiceContext sctx, Store store) {
-        int count = this.storeRepository.findStoreCountByCode(sctx, store.getCode());
+        int count = this.storeDAO.findStoreCountByCode(sctx, store.getCode());
         return count > 0;
     }
 
     protected boolean doExistsStoreByName(ServiceContext sctx, Store store) {
-        int count = this.storeRepository.findStoreCountByName(sctx, store.getName());
+        int count = this.storeDAO.findStoreCountByName(sctx, store.getName());
         return count > 0;
     }
 }

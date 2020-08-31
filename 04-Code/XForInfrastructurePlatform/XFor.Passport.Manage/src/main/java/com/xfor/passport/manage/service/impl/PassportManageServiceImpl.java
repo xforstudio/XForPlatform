@@ -16,13 +16,13 @@ import org.springframework.stereotype.Component;
 public class PassportManageServiceImpl extends BaseService implements PassportManageService {
 
     @Autowired
-    private PassportDAO passportRepository;
+    private PassportDAO passportDAO;
     @Autowired
-    private PassportAuthDAO passportAuthRepository;
+    private PassportAuthDAO passportAuthDAO;
     @Autowired
-    private PassportAuthCategoryDAO passportAuthCategoryRepository;
+    private PassportAuthCategoryDAO passportAuthCategoryDAO;
     @Autowired
-    private PassportIDDAO passportIDRepository;
+    private PassportIDDAO passportIDDAO;
     @Autowired
     private ISmsService smsService;
     @Autowired
@@ -36,14 +36,14 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
     @Override
     public boolean isLoginTokenValid(String loginToken) {
         ServiceContext sctx = this.doGetServiceContext();
-        Boolean isValid = this.passportRepository.existsLoginToken(sctx, loginToken);
+        Boolean isValid = this.passportDAO.existsLoginToken(sctx, loginToken);
         return isValid;
     }
 
     @Override
     public void verifyLoginToken(String loginToken) throws PassportException {
         ServiceContext sctx = this.doGetServiceContext();
-        Boolean isValid = this.passportRepository.existsLoginToken(sctx, loginToken);
+        Boolean isValid = this.passportDAO.existsLoginToken(sctx, loginToken);
         if (!isValid) {
             throw new PassportException("会话标识无效");
         }
@@ -60,7 +60,7 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
             throws PassportException {
         ServiceContext sctx = this.doGetServiceContext();
         //获取Passport
-        Passport passport = this.passportRepository.getPassportByCredential(sctx, credential);
+        Passport passport = this.passportDAO.getPassportByCredential(sctx, credential);
         if (passport == null) {
             throw new PassportException("通行证不存在");
         }
@@ -71,7 +71,7 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
         //登录
         PassportLoginSession loginSession = passport.login(this.dateTimeProvider);
         //保存通行证
-        this.passportRepository.savePassport(sctx, passport);
+        this.passportDAO.savePassport(sctx, passport);
         //
         return loginSession;
     }
@@ -87,14 +87,14 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
             throw new PassportException("验证码无效");
         }
         //获取通行证
-        Passport passport = this.passportRepository.getPassportByMobile(sctx, mobile);
+        Passport passport = this.passportDAO.getPassportByMobile(sctx, mobile);
         if (passport == null) {
             throw new PassportException("通行证不存在");
         }
         //登录
         PassportLoginSession loginSession = passport.login(this.dateTimeProvider);
         //保存通行证
-        this.passportRepository.savePassport(sctx, passport);
+        this.passportDAO.savePassport(sctx, passport);
         //
         return loginSession;
     }
@@ -105,14 +105,14 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
             throws PassportException {
         ServiceContext sctx = this.doGetServiceContext();
         //获取通行证
-        Passport passport = this.passportRepository.getPassportByLoginToken(sctx, loginToken);
+        Passport passport = this.passportDAO.getPassportByLoginToken(sctx, loginToken);
         if (passport == null) {
             throw new PassportException("登录会话标识无效");
         }
         //登出
         passport.logout(loginToken);
         //保存通行证
-        this.passportRepository.savePassport(sctx, passport);
+        this.passportDAO.savePassport(sctx, passport);
     }
 
     //发送短信验证码
@@ -130,14 +130,14 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
         passportRegist.validate();
         //业务验证（手机）
         if (passportRegist.isMobileSet()) {
-            boolean existsMobile = this.passportRepository.existsMobile(sctx, passportRegist.getMobile());
+            boolean existsMobile = this.passportDAO.existsMobile(sctx, passportRegist.getMobile());
             if (existsMobile) {
                 throw new PassportException("手机号已存在");
             }
         }
         //业务验证（邮箱）
         if (passportRegist.isEmailSet()) {
-            boolean existsEmail = this.passportRepository.existsEmail(sctx, passportRegist.getEmail());
+            boolean existsEmail = this.passportDAO.existsEmail(sctx, passportRegist.getEmail());
             if (existsEmail) {
                 throw new PassportException("邮箱已存在");
             }
@@ -145,7 +145,7 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
         //创建通行证
         Passport passport = passportRegist.createPassport(this.dateTimeProvider);
         //保存通行证
-        this.passportRepository.savePassport(sctx, passport);
+        this.passportDAO.savePassport(sctx, passport);
     }
 
     //重置密码（手机认证）
@@ -160,14 +160,14 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
         //
         ServiceContext sctx = this.doGetServiceContext();
         //获取通行证
-        Passport passport = this.passportRepository.getPassportByMobile(sctx, mobile);
+        Passport passport = this.passportDAO.getPassportByMobile(sctx, mobile);
         if (passport == null) {
             throw new PassportException("通行证不存在");
         }
         //设置密码
         passport.setPassword(newPwd, this.dateTimeProvider);
         //保存通行证
-        this.passportRepository.savePassport(sctx, passport);
+        this.passportDAO.savePassport(sctx, passport);
     }
 
     //重置密码（邮箱认证）
@@ -182,14 +182,14 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
         //
         ServiceContext sctx = this.doGetServiceContext();
         //获取通行证
-        Passport passport = this.passportRepository.getPassportByEmail(sctx, email);
+        Passport passport = this.passportDAO.getPassportByEmail(sctx, email);
         if (passport == null) {
             throw new PassportException("通行证不存在");
         }
         //设置密码
         passport.setPassword(newPwd, this.dateTimeProvider);
         //保存通行证
-        this.passportRepository.savePassport(sctx, passport);
+        this.passportDAO.savePassport(sctx, passport);
     }
 
     //发送重置密码短信验证码
@@ -208,7 +208,7 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
     public Passport getPassportByPassportSID(String passportSID) {
         ServiceContext sctx = this.doGetServiceContext();
         //获取通行证
-        Passport passport = this.passportRepository.getPassportBySID(sctx, passportSID);
+        Passport passport = this.passportDAO.getPassportBySID(sctx, passportSID);
         return passport;
     }
 
@@ -216,7 +216,7 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
     public String getPassportSIDByLoginToken(String loginToken) {
         ServiceContext sctx = this.doGetServiceContext();
         //获取通行证
-        Passport passport = this.passportRepository.getPassportByLoginToken(sctx, loginToken);
+        Passport passport = this.passportDAO.getPassportByLoginToken(sctx, loginToken);
         return passport != null ? passport.getSID() : null;
     }
 
@@ -224,7 +224,7 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
     public Passport getPassportByLoginToken(String loginToken) {
         ServiceContext sctx = this.doGetServiceContext();
         //获取通行证
-        Passport passport = this.passportRepository.getPassportByLoginToken(sctx, loginToken);
+        Passport passport = this.passportDAO.getPassportByLoginToken(sctx, loginToken);
         return passport;
     }
 
@@ -233,14 +233,14 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
     public void setPassportUser(PassportUser passportUser) throws PassportException {
         ServiceContext sctx = this.doGetServiceContext();
         //获取通行证
-        Passport passport = this.passportRepository.getPassportBySID(sctx, passportUser.getPassportSID());
+        Passport passport = this.passportDAO.getPassportBySID(sctx, passportUser.getPassportSID());
         if (passport == null) {
             throw new PassportException("通行证不存在");
         }
         //设置用户信息
         passport.setPassportUser(passportUser, this.dateTimeProvider);
         //保存通行证
-        this.passportRepository.savePassport(sctx, passport);
+        this.passportDAO.savePassport(sctx, passport);
     }
 
     //设置用户名
@@ -249,19 +249,19 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
             throws PassportException {
         ServiceContext sctx = this.doGetServiceContext();
         //验证用户名
-        boolean existsUsername = this.passportRepository.existsUsername(sctx, passportCredential.getUsername());
+        boolean existsUsername = this.passportDAO.existsUsername(sctx, passportCredential.getUsername());
         if (existsUsername) {
             throw new PassportException("用户名已存在");
         }
         //获取通行证
-        Passport passport = this.passportRepository.getPassportBySID(sctx, passportCredential.getPassportSID());
+        Passport passport = this.passportDAO.getPassportBySID(sctx, passportCredential.getPassportSID());
         if (passport == null) {
             throw new PassportException("通行证不存在");
         }
         //设置用户名
         passport.setUsername(passportCredential.getUsername(), this.dateTimeProvider);
         //保存通行证
-        this.passportRepository.savePassport(sctx, passport);
+        this.passportDAO.savePassport(sctx, passport);
     }
 
     //设置手机
@@ -276,14 +276,14 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
         //
         ServiceContext sctx = this.doGetServiceContext();
         //获取通行证
-        Passport passport = this.passportRepository.getPassportBySID(sctx, passportCredential.getPassportSID());
+        Passport passport = this.passportDAO.getPassportBySID(sctx, passportCredential.getPassportSID());
         if (passport == null) {
             throw new PassportException("通行证不存在");
         }
         //设置手机
         passport.setMobile(passportCredential.getMobile(), PassportCheckStateEnum.Checked, this.dateTimeProvider);
         //保存通行证
-        this.passportRepository.savePassport(sctx, passport);
+        this.passportDAO.savePassport(sctx, passport);
     }
 
     //发送设置手机短信验证码
@@ -304,14 +304,14 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
         //
         ServiceContext sctx = this.doGetServiceContext();
         //获取通行证
-        Passport passport = this.passportRepository.getPassportBySID(sctx, passportCredential.getPassportSID());
+        Passport passport = this.passportDAO.getPassportBySID(sctx, passportCredential.getPassportSID());
         if (passport == null) {
             throw new PassportException("通行证不存在");
         }
         //设置邮箱
         passport.setEmail(passportCredential.getEmail(), PassportCheckStateEnum.Checked, this.dateTimeProvider);
         //保存通行证
-        this.passportRepository.savePassport(sctx, passport);
+        this.passportDAO.savePassport(sctx, passport);
     }
 
     //发送设置邮箱邮件验证码
@@ -325,17 +325,17 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
     public void setPassword(String passportSID, String pwdNew) {
         ServiceContext sctx = this.doGetServiceContext();
         //获取通行证
-        Passport passport = this.passportRepository.getPassportBySID(sctx, passportSID);
+        Passport passport = this.passportDAO.getPassportBySID(sctx, passportSID);
         //设置新密码
         passport.setPassword(pwdNew, this.dateTimeProvider);
         //保存通行证
-        this.passportRepository.savePassport(sctx, passport);
+        this.passportDAO.savePassport(sctx, passport);
     }
 
     @Override
     public String getLoginTokenByPassportAuthCode(String passportAuthCode, String categoryID) {
         ServiceContext sctx = this.doGetServiceContext();
-        String result = this.passportAuthRepository.getLoginTokenByPassportAuthCode(
+        String result = this.passportAuthDAO.getLoginTokenByPassportAuthCode(
                 sctx,
                 passportAuthCode,
                 categoryID);
@@ -345,7 +345,7 @@ public class PassportManageServiceImpl extends BaseService implements PassportMa
     @Override
     public String getPassportAuthCodeByLoginToken(String loginToken, String categoryID) {
         ServiceContext sctx = this.doGetServiceContext();
-        String result = this.passportAuthRepository.getPassportAuthCodeByLoginToken(
+        String result = this.passportAuthDAO.getPassportAuthCodeByLoginToken(
                 sctx,
                 loginToken,
                 categoryID);

@@ -32,11 +32,11 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
     private static final Logger _logger = LoggerFactory.getLogger(EmailManageServiceImpl.class);
 
     @Autowired
-    private EmailMessageDAO emailMessageRepository;
+    private EmailMessageDAO emailMessageDAO;
     @Autowired
-    private EmailActionDAO emailActionRepository;
+    private EmailActionDAO emailActionDAO;
     @Autowired
-    private EmailTemplateDAO emailTemplateRepository;
+    private EmailTemplateDAO emailTemplateDAO;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
     @Autowired
@@ -51,10 +51,6 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
     private RedisManager redisManager;
     @Autowired
     private RedisConfig redisConfig;
-
-
-    public EmailManageServiceImpl() {
-    }
 
     /* Email */
 
@@ -71,8 +67,8 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
                 this.dateTimeProvider);
         EmailAction emailAction = EmailAction._create(emailMessage, this.dateTimeProvider);
         //保存数据
-        this.emailMessageRepository.saveEmailMessage(sctx, emailMessage);
-        this.emailActionRepository.saveEmailAction(sctx, emailAction);
+        this.emailMessageDAO.saveEmailMessage(sctx, emailMessage);
+        this.emailActionDAO.saveEmailAction(sctx, emailAction);
         //创建Email
         Email email = Email._create(emailMessage, emailAction);
         return email;
@@ -83,19 +79,19 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
         ServiceContext sctx = this.doGetServiceContext();
         boolean result = false;
         //删除EmailMessage
-        result = this.emailMessageRepository.removeEmailMessageBySid(sctx, email.getEmailMessage().getSid());
+        result = this.emailMessageDAO.removeEmailMessageBySid(sctx, email.getEmailMessage().getSid());
         if (!result) {
             return false;
         }
-        result = this.emailActionRepository.removeEmailActionBySid(sctx, email.getEmailAction().getSid());
+        result = this.emailActionDAO.removeEmailActionBySid(sctx, email.getEmailAction().getSid());
         return result;
     }
 
     @Override
     public Email getEmailByEmailMessageSid(String emailMessageSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        EmailMessage emailMessage = this.emailMessageRepository.getEmailMessageBySid(sctx, emailMessageSid);
-        EmailAction emailAction = this.emailActionRepository.getEmailActionByEmailMessageSid(sctx, emailMessageSid);
+        EmailMessage emailMessage = this.emailMessageDAO.getEmailMessageBySid(sctx, emailMessageSid);
+        EmailAction emailAction = this.emailActionDAO.getEmailActionByEmailMessageSid(sctx, emailMessageSid);
         Email email = Email._create(emailMessage, emailAction);
         return email;
     }
@@ -105,7 +101,7 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
     @Override
     public EmailMessage getEmailMessageBySid(String emailMessageSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        EmailMessage result = this.emailMessageRepository.getEmailMessageBySid(sctx, emailMessageSid);
+        EmailMessage result = this.emailMessageDAO.getEmailMessageBySid(sctx, emailMessageSid);
         return result;
     }
 
@@ -114,14 +110,14 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
     @Override
     public EmailAction getEmailActionBySid(String emailActionSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        EmailAction result = this.emailActionRepository.getEmailActionBySid(sctx, emailActionSid);
+        EmailAction result = this.emailActionDAO.getEmailActionBySid(sctx, emailActionSid);
         return result;
     }
 
     @Override
     public EmailAction getEmailActionByEmailMessageSid(String emailMessageSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        EmailAction result = this.emailActionRepository.getEmailActionByEmailMessageSid(sctx, emailMessageSid);
+        EmailAction result = this.emailActionDAO.getEmailActionByEmailMessageSid(sctx, emailMessageSid);
         return result;
     }
 
@@ -138,7 +134,7 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
                 fields.getFileName(),
                 fields.getEngineType(),
                 this.dateTimeProvider);
-        boolean result = this.emailTemplateRepository.saveEmailTemplate(sctx, emailTemplate);
+        boolean result = this.emailTemplateDAO.saveEmailTemplate(sctx, emailTemplate);
         if (!result) {
             throw new EmailException("保存邮件模板失败");
         }
@@ -148,7 +144,7 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
     @Override
     public EmailTemplate getEmailTemplateBySid(String emailTemplateSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        EmailTemplate result = this.emailTemplateRepository.getEmailTemplateBySid(sctx, emailTemplateSid);
+        EmailTemplate result = this.emailTemplateDAO.getEmailTemplateBySid(sctx, emailTemplateSid);
         return result;
     }
 
@@ -162,7 +158,7 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
 
         ServiceContext sctx = this.doGetServiceContext();
         //获取模板
-        EmailTemplate emailTemplate = this.emailTemplateRepository.getEmailTemplateByCode(
+        EmailTemplate emailTemplate = this.emailTemplateDAO.getEmailTemplateByCode(
                 sctx,
                 email.getEmailMessage().getEmailTemplateCode());
         //尝试发送邮件
@@ -174,14 +170,14 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
             //设置状态
             email.getEmailAction().sendSuccessed(this.dateTimeProvider);
             //保存数据
-            this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+            this.emailActionDAO.saveEmailAction(sctx, email.getEmailAction());
         } catch (EmailSendException ex) {
             //处理发送失败
 
             //设置状态
             email.getEmailAction().sendError(this.dateTimeProvider);
             //保存数据
-            this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+            this.emailActionDAO.saveEmailAction(sctx, email.getEmailAction());
 
             //重试
         } catch (TransformerException e) {
@@ -226,7 +222,7 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
         ServiceContext sctx = this.doGetServiceContext();
         //尝试发送邮件
         try {
-            EmailTemplate emailTemplate = this.emailTemplateRepository.getEmailTemplateByCode(
+            EmailTemplate emailTemplate = this.emailTemplateDAO.getEmailTemplateByCode(
                     sctx,
                     email.getEmailMessage().getEmailTemplateCode());
             //发送邮件
@@ -235,14 +231,14 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
             //设置状态
             email.getEmailAction().sendSuccessed(this.dateTimeProvider);
             //保存数据
-            this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+            this.emailActionDAO.saveEmailAction(sctx, email.getEmailAction());
         } catch (EmailSendException ex) {
             //处理发送失败
 
             //设置状态
             email.getEmailAction().sendError(this.dateTimeProvider);
             //保存数据
-            this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+            this.emailActionDAO.saveEmailAction(sctx, email.getEmailAction());
             //将数据放入"SendRetry"缓存队列
             this.redisManager.addListValue(this.redisConfig.getListKeyEmailSendRetry(), email);
         } catch (TransformerException e) {
@@ -262,7 +258,7 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
         ServiceContext sctx = this.doGetServiceContext();
         //尝试发送邮件
         try {
-            EmailTemplate emailTemplate = this.emailTemplateRepository.getEmailTemplateByCode(
+            EmailTemplate emailTemplate = this.emailTemplateDAO.getEmailTemplateByCode(
                     sctx,
                     email.getEmailMessage().getEmailTemplateCode());
             //发送邮件
@@ -271,21 +267,21 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
             //设置状态
             email.getEmailAction().sendSuccessed(this.dateTimeProvider);
             //保存数据
-            this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+            this.emailActionDAO.saveEmailAction(sctx, email.getEmailAction());
         } catch (EmailSendException ex) {
             //处理发送失败
             if (email.getEmailAction().isSendRetryEnabled(this.emailConfig.getMailSendRetryCountMax())) {
                 //设置状态
                 email.getEmailAction().sendError(this.dateTimeProvider);
                 //保存数据
-                this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+                this.emailActionDAO.saveEmailAction(sctx, email.getEmailAction());
                 //将数据放入"SendRetry"缓存队列
                 this.redisManager.addListValue(this.redisConfig.getListKeyEmailSendRetry(), email);
             } else {
                 //设置最终状态：发送失败
                 email.getEmailAction().sendFault(this.dateTimeProvider);
                 //保存数据
-                this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+                this.emailActionDAO.saveEmailAction(sctx, email.getEmailAction());
             }
         } catch (TransformerException e) {
             e.printStackTrace();
@@ -303,7 +299,7 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
         }
         while (email.getEmailAction().increaseSendRetryCount() <= mailSendRetryCountMax) {
             try {
-                EmailTemplate emailTemplate = this.emailTemplateRepository.getEmailTemplateByCode(
+                EmailTemplate emailTemplate = this.emailTemplateDAO.getEmailTemplateByCode(
                         sctx,
                         email.getEmailMessage().getEmailTemplateCode());
                 //发送邮件
@@ -312,7 +308,7 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
                 //设置状态
                 email.getEmailAction().sendSuccessed(this.dateTimeProvider);
                 //保存数据
-                this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+                this.emailActionDAO.saveEmailAction(sctx, email.getEmailAction());
                 //
                 return;
             } catch (EmailSendException ex) {
@@ -321,12 +317,12 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
                     //设置状态
                     email.getEmailAction().sendError(this.dateTimeProvider);
                     //保存数据
-                    this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+                    this.emailActionDAO.saveEmailAction(sctx, email.getEmailAction());
                 } else {
                     //设置最终状态：发送失败
                     email.getEmailAction().sendFault(this.dateTimeProvider);
                     //保存数据
-                    this.emailActionRepository.saveEmailAction(sctx, email.getEmailAction());
+                    this.emailActionDAO.saveEmailAction(sctx, email.getEmailAction());
                     //
                     return;
                 }

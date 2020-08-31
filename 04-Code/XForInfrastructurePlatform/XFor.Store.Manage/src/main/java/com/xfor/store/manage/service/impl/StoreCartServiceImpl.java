@@ -21,9 +21,9 @@ import java.util.List;
 public class StoreCartServiceImpl extends BaseService implements StoreCartService {
 
     @Autowired
-    private StoreCartDAO storeCartRepository;
+    private StoreCartDAO storeCartDAO;
     @Autowired
-    private ProductDAO productRepository;
+    private ProductDAO productDAO;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
 
@@ -47,7 +47,7 @@ public class StoreCartServiceImpl extends BaseService implements StoreCartServic
     public int increaseProduct(String accountSid, String storeSid, String productSid) {
         ServiceContext sctx = this.doGetServiceContext();
         StoreCart storeCart = this.doFindWithCreateStoreCart(sctx, accountSid);
-        Product product = this.productRepository.getProductBySid(sctx, productSid);
+        Product product = this.productDAO.getProductBySid(sctx, productSid);
         int result = storeCart.increaseProductQuantity(
                 storeSid,
                 product,
@@ -78,12 +78,12 @@ public class StoreCartServiceImpl extends BaseService implements StoreCartServic
     }
 
     protected StoreCart doFindWithCreateStoreCart(ServiceContext sctx, String accountSid) {
-        StoreCart storeCart = this.storeCartRepository.findStoreCartByAccountSid(sctx, accountSid);
+        StoreCart storeCart = this.storeCartDAO.findStoreCartByAccountSid(sctx, accountSid);
         if (storeCart != null) {
             return storeCart;
         }
         storeCart = StoreCart._create(accountSid);
-        this.storeCartRepository.saveStoreCart(sctx, storeCart);
+        this.storeCartDAO.saveStoreCart(sctx, storeCart);
         return storeCart;
     }
 }

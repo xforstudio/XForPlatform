@@ -16,7 +16,7 @@ import java.util.List;
 public class ProductManageServiceImpl extends BaseService implements ProductManageService {
 
     @Autowired
-    private ProductDAO productRepository;
+    private ProductDAO productDAO;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
 
@@ -43,7 +43,7 @@ public class ProductManageServiceImpl extends BaseService implements ProductMana
         if (result) {
             throw new ProductException("商品名称【" + product.getName() + "】已存在");
         }
-        result = this.productRepository.saveProduct(sctx, product);
+        result = this.productDAO.saveProduct(sctx, product);
         if (!result) {
             throw new ProductException("保存商品信息失败");
         }
@@ -53,7 +53,7 @@ public class ProductManageServiceImpl extends BaseService implements ProductMana
     @Override
     public Product saveProduct(Product fields) throws ProductException {
         ServiceContext sctx = this.doGetServiceContext();
-        Product product = this.productRepository.getProductBySid(sctx, fields.getSid());
+        Product product = this.productDAO.getProductBySid(sctx, fields.getSid());
         if (product == null) {
             throw new ProductException("商品信息不存在");
         }
@@ -65,7 +65,7 @@ public class ProductManageServiceImpl extends BaseService implements ProductMana
         product.setSaleState(fields.getSaleState());
         product.validate();
         //保存
-        boolean result = this.productRepository.saveProduct(sctx, product);
+        boolean result = this.productDAO.saveProduct(sctx, product);
         if (!result) {
             throw new ProductException("保存商品信息失败");
         }
@@ -75,21 +75,21 @@ public class ProductManageServiceImpl extends BaseService implements ProductMana
     @Override
     public boolean removeProductBySid(String productSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        boolean result = this.productRepository.deleteProductBySid(sctx, productSid);
+        boolean result = this.productDAO.deleteProductBySid(sctx, productSid);
         return result;
     }
 
     @Override
     public Product getProductBySid(String productSid) {
         ServiceContext sctx = this.doGetServiceContext();
-        Product result = this.productRepository.getProductBySid(sctx, productSid);
+        Product result = this.productDAO.getProductBySid(sctx, productSid);
         return result;
     }
 
     @Override
     public List<Product> getProductsByFilter(String productStoreSid, String filter) {
         ServiceContext sctx = this.doGetServiceContext();
-        List<Product> result = this.productRepository.getProductsByFilter(sctx, productStoreSid, filter);
+        List<Product> result = this.productDAO.getProductsByFilter(sctx, productStoreSid, filter);
         return result;
     }
 
@@ -103,12 +103,12 @@ public class ProductManageServiceImpl extends BaseService implements ProductMana
 
 
     protected boolean doExistsProductByCode(ServiceContext sctx, Product product) {
-        int count = this.productRepository.getProductCountByCode(sctx, product.getProductStoreSid(), product.getCode());
+        int count = this.productDAO.getProductCountByCode(sctx, product.getProductStoreSid(), product.getCode());
         return count > 0;
     }
 
     protected boolean doExistsProductByName(ServiceContext sctx, Product product) {
-        int count = this.productRepository.getProductCountByName(sctx, product.getProductStoreSid(), product.getName());
+        int count = this.productDAO.getProductCountByName(sctx, product.getProductStoreSid(), product.getName());
         return count > 0;
     }
 }

@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 public class PaymentManageServiceImpl extends BaseService implements PaymentManageService {
 
     @Autowired
-    private PaymentOrderDAO paymentOrderRepository;
+    private PaymentOrderDAO paymentOrderDAO;
     @Autowired
-    private PaymentMethodDAO paymentMethodRepository;
+    private PaymentMethodDAO paymentMethodDAO;
     @Autowired
-    private PaymentHandleDAO paymentHandleRepository;
+    private PaymentHandleDAO paymentHandleDAO;
 
 }
 

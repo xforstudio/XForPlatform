@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 public class PassportAuthManageServiceImpl extends BaseService implements PassportAuthManageService {
 
     @Autowired
-    private PassportAuthDAO passportAuthRepository;
+    private PassportAuthDAO passportAuthDAO;
     @Autowired
-    private PassportAuthCategoryDAO passportAuthCategoryRepository;
+    private PassportAuthCategoryDAO passportAuthCategoryDAO;
 
     @Override
     public String getLoginTokenByPassportAuthCode(String passportAuthCode, String categoryID) {
         ServiceContext sctx = this.doGetServiceContext();
-        String result = this.passportAuthRepository.getLoginTokenByPassportAuthCode(
+        String result = this.passportAuthDAO.getLoginTokenByPassportAuthCode(
                 sctx,
                 passportAuthCode,
                 categoryID);
@@ -29,7 +29,7 @@ public class PassportAuthManageServiceImpl extends BaseService implements Passpo
     @Override
     public String getPassportAuthCodeByLoginToken(String loginToken, String categoryID) {
         ServiceContext sctx = this.doGetServiceContext();
-        String result = this.passportAuthRepository.getPassportAuthCodeByLoginToken(
+        String result = this.passportAuthDAO.getPassportAuthCodeByLoginToken(
                 sctx,
                 loginToken,
                 categoryID);
