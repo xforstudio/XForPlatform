@@ -2,20 +2,19 @@ package com.xfor.passport.manage.service.impl;
 
 import com.xfor.infrastructure.core.common.service.BaseService;
 import com.xfor.infrastructure.core.common.service.ServiceContext;
-import com.xfor.infrastructure.core.passport.repository.IPassportAuthCategoryRepository;
-import com.xfor.infrastructure.core.passport.repository.IPassportAuthRepository;
+import com.xfor.infrastructure.core.passport.dao.PassportAuthCategoryDAO;
+import com.xfor.infrastructure.core.passport.dao.PassportAuthDAO;
 import com.xfor.passport.manage.service.PassportAuthManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public class PassportAuthManageServiceImpl extends BaseService implements PassportAuthManageService {
 
     @Autowired
-    private IPassportAuthRepository passportAuthRepository;
+    private PassportAuthDAO passportAuthRepository;
     @Autowired
-    private IPassportAuthCategoryRepository passportAuthCategoryRepository;
+    private PassportAuthCategoryDAO passportAuthCategoryRepository;
 
     @Override
     public String getLoginTokenByPassportAuthCode(String passportAuthCode, String categoryID) {

@@ -3,10 +3,8 @@ package com.xfor.store.manage.service.impl;
 import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import com.xfor.infrastructure.core.common.service.BaseService;
 import com.xfor.infrastructure.core.common.service.ServiceContext;
-import com.xfor.infrastructure.core.product.model.Product;
-import com.xfor.infrastructure.core.product.model.ProductException;
 import com.xfor.infrastructure.core.store.model.*;
-import com.xfor.infrastructure.core.store.repository.IStoreRepository;
+import com.xfor.infrastructure.core.store.dao.StoreDAO;
 import com.xfor.store.manage.service.StoreManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class StoreManageServiceImpl extends BaseService implements StoreManageService {
 
     @Autowired
-    private IStoreRepository storeRepository;
+    private StoreDAO storeRepository;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
 

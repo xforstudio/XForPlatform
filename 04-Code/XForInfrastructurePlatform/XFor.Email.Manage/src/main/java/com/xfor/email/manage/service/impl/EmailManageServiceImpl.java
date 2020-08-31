@@ -12,9 +12,9 @@ import com.xfor.infrastructure.core.common.service.BaseService;
 import com.xfor.infrastructure.core.common.service.ServiceContext;
 import com.xfor.infrastructure.core.common.util.JsonUtil;
 import com.xfor.infrastructure.core.email.model.*;
-import com.xfor.infrastructure.core.email.repository.IEmailMessageRepository;
-import com.xfor.infrastructure.core.email.repository.IEmailActionRepository;
-import com.xfor.infrastructure.core.email.repository.IEmailTemplateRepository;
+import com.xfor.infrastructure.core.email.dao.EmailMessageDAO;
+import com.xfor.infrastructure.core.email.dao.EmailActionDAO;
+import com.xfor.infrastructure.core.email.dao.EmailTemplateDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +32,11 @@ public class EmailManageServiceImpl extends BaseService implements EmailManageSe
     private static final Logger _logger = LoggerFactory.getLogger(EmailManageServiceImpl.class);
 
     @Autowired
-    private IEmailMessageRepository emailMessageRepository;
+    private EmailMessageDAO emailMessageRepository;
     @Autowired
-    private IEmailActionRepository emailActionRepository;
+    private EmailActionDAO emailActionRepository;
     @Autowired
-    private IEmailTemplateRepository emailTemplateRepository;
+    private EmailTemplateDAO emailTemplateRepository;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
     @Autowired

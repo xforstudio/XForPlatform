@@ -4,26 +4,25 @@ import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
 import com.xfor.infrastructure.core.common.model.TextCaptcha;
 import com.xfor.infrastructure.core.common.service.*;
 import com.xfor.infrastructure.core.passport.model.*;
-import com.xfor.infrastructure.core.passport.repository.IPassportAuthCategoryRepository;
-import com.xfor.infrastructure.core.passport.repository.IPassportAuthRepository;
-import com.xfor.infrastructure.core.passport.repository.IPassportIDRepository;
-import com.xfor.infrastructure.core.passport.repository.IPassportRepository;
+import com.xfor.infrastructure.core.passport.dao.PassportAuthCategoryDAO;
+import com.xfor.infrastructure.core.passport.dao.PassportAuthDAO;
+import com.xfor.infrastructure.core.passport.dao.PassportIDDAO;
+import com.xfor.infrastructure.core.passport.dao.PassportDAO;
 import com.xfor.passport.manage.service.PassportManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public class PassportManageServiceImpl extends BaseService implements PassportManageService {
 
     @Autowired
-    private IPassportRepository passportRepository;
+    private PassportDAO passportRepository;
     @Autowired
-    private IPassportAuthRepository passportAuthRepository;
+    private PassportAuthDAO passportAuthRepository;
     @Autowired
-    private IPassportAuthCategoryRepository passportAuthCategoryRepository;
+    private PassportAuthCategoryDAO passportAuthCategoryRepository;
     @Autowired
-    private IPassportIDRepository passportIDRepository;
+    private PassportIDDAO passportIDRepository;
     @Autowired
     private ISmsService smsService;
     @Autowired

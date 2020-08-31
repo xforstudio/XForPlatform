@@ -1,16 +1,7 @@
 package com.xfor.passport.manage.service;
 
-import com.xfor.infrastructure.core.common.model.IDateTimeProvider;
-import com.xfor.infrastructure.core.common.model.TextCaptcha;
-import com.xfor.infrastructure.core.common.service.*;
 import com.xfor.infrastructure.core.passport.model.*;
-import com.xfor.infrastructure.core.passport.repository.IPassportAuthCategoryRepository;
-import com.xfor.infrastructure.core.passport.repository.IPassportAuthRepository;
-import com.xfor.infrastructure.core.passport.repository.IPassportIDRepository;
-import com.xfor.infrastructure.core.passport.repository.IPassportRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public interface PassportManageService {

@@ -5,7 +5,7 @@ import com.xfor.infrastructure.core.common.service.BaseService;
 import com.xfor.infrastructure.core.common.service.ServiceContext;
 import com.xfor.infrastructure.core.product.model.Product;
 import com.xfor.infrastructure.core.product.model.ProductException;
-import com.xfor.infrastructure.core.product.repository.IProductRepository;
+import com.xfor.infrastructure.core.product.dao.ProductDAO;
 import com.xfor.product.manage.service.ProductManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ProductManageServiceImpl extends BaseService implements ProductManageService {
 
     @Autowired
-    private IProductRepository productRepository;
+    private ProductDAO productRepository;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
 

@@ -6,11 +6,11 @@ import com.xfor.infrastructure.core.order.model.Order;
 import com.xfor.infrastructure.core.order.model.OrderEntry;
 import com.xfor.infrastructure.core.product.model.Product;
 import com.xfor.infrastructure.core.product.model.ProductException;
-import com.xfor.infrastructure.core.product.repository.IProductRepository;
+import com.xfor.infrastructure.core.product.dao.ProductDAO;
 import com.xfor.infrastructure.core.store.model.StoreCart;
 import com.xfor.infrastructure.core.store.model.StoreCartEntry;
 import com.xfor.infrastructure.core.store.model.StoreException;
-import com.xfor.infrastructure.core.store.repository.IStoreCartRepository;
+import com.xfor.infrastructure.core.store.dao.StoreCartDAO;
 import com.xfor.store.manage.service.StoreCashierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,9 +24,9 @@ import java.util.List;
 public class StoreCashierServiceImpl extends BaseService implements StoreCashierService {
 
     @Autowired
-    private IStoreCartRepository storeCartRepository;
+    private StoreCartDAO storeCartRepository;
     @Autowired
-    private IProductRepository productRepository;
+    private ProductDAO productRepository;
     @Autowired
     private IDateTimeProvider dateTimeProvider;
 
